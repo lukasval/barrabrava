@@ -20,6 +20,12 @@ Juego mobile multiplayer online ambientado en la cultura de barras bravas argent
 - [ ] Sistema de clubes reales de AFA (Primera División mínimo)
 - [ ] Personaje propio (pibe) con sistema de skills asignables desde pool compartido
 - [ ] Roles tácticos para pibes reclutados: trompada, aguantador, corredor, vigía, líder, pirotécnico, abogado, barrabrava viejo
+- [ ] Sistema de Carrera dentro de la barra: escalera de puestos (trapito → vendedor → patovica → trompada → mano derecha → capo de facción → líder de barra)
+- [ ] Turno de Barra en día de partido: consume Energía, genera pozo grupal + prestigio personal
+- [ ] Profesión libre en días sin partido: trapito, vendedor (chori/paty/entradas/merch/bengalas), remisero, etc. — genera plata personal para cosméticos
+- [ ] Recursos por trabajo: Plata (personal), Aguante (grupal), Reputación (escalada), Visto Bueno Cana (anti-heat)
+- [ ] Mesa Chica: top 5-10 jugadores de la barra. Vota decisiones grupales junto al Líder (uso del pozo, targets, alianzas)
+- [ ] Skills de profesión: desbloqueables según horas trabajadas en cada rubro
 - [ ] "Cancha" / base híbrida: estructura propia + reputación de barra
 - [ ] Recursos: Aguante (principal), Trapos/Banderas (especial), Reputación de Barrio (territorial), Moneda Premium (cosméticos)
 - [ ] Sistema de combate: ventanas calendarizadas según fixture AFA real, free-for-all con feudos dinámicos por temporada
