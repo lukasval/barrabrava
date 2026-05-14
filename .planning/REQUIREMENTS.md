@@ -221,16 +221,20 @@
 
 ## Traceability
 
-(Vacío — se completa al crear ROADMAP.md)
-
-| REQ-ID | Phase | Status |
-|--------|-------|--------|
-| (TBD post-roadmap) | | |
+| REQ-ID Range | Phase | Phase Name |
+|--------------|-------|------------|
+| TEC-01..10, ONB-01..04, CLB-01..02, PRV-01..05 | Phase 1 | Foundation |
+| CLB-03..05, SEA-01..02, CMB-01, DAY-03 | Phase 2 | Heartbeat AFA |
+| AGT-01..05, PIB-01..07, JER-01..04, ONB-05..06 | Phase 3 | Core Loop Laboral |
+| CMB-01..10, PIB-08, HEA-01..05, AIB-01..05 | Phase 4 | Combate Estratégico |
+| MAP-01..05, SOC-01..06, DAY-01..02, JER-05..07, MOD-01..06 | Phase 5 | Mundo Social |
+| MON-01..07, SEA-03..07 | Phase 6 | Monetización + Seasons |
+| (refuerzo TEC-09..10 + balance + store + legal) | Phase 7 | Polish + Soft Launch |
 
 **Coverage v1:**
 - Total v1 requirements: ~95
-- Mapped to phases: TBD
-- Unmapped: TBD ⚠️
+- Mapped to phases: 100%
+- Unmapped: 0 ✓
 
 ---
 
