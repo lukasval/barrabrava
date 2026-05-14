@@ -17,19 +17,54 @@ Juego mobile multiplayer online ambientado en la cultura de barras bravas argent
 ### Active
 
 - [ ] Mobile-first (iOS + Android), online multiplayer
-- [ ] Sistema de clubes reales de AFA (Primera División mínimo)
+- [ ] Sistema de clubes reales de AFA: **5 divisiones** — Primera División + Primera Nacional + B Metropolitana + Federal A + C Metropolitana (~130 clubes). Excluye Regional Amateur (demasiados). Identidades paramétricas (no comisión por club).
+- [ ] Fixture data multi-fuente: API-Football para Primera + Nacional; scraping AFA o feed manual para B Metro, Federal A, C Metro
 - [ ] Personaje propio (pibe) con sistema de skills asignables desde pool compartido
 - [ ] Roles tácticos para pibes reclutados: trompada, aguantador, corredor, vigía, líder, pirotécnico, abogado, barrabrava viejo
-- [ ] Sistema de Carrera dentro de la barra: escalera de puestos (trapito → vendedor → patovica → trompada → mano derecha → capo de facción → líder de barra)
+- [ ] **Eje 1 — Sistema Laboral (qué hacés)**: trabajos que TODOS hacen, incluido el líder. Trapito, vendedor (chori/paty/entradas/merch/bengalas), patovica, remisero, etc. El líder tiene tareas propias específicas (negociar dirigentes, conseguir entradas, hablar con cana). Genera plata personal y/o pozo grupal según tipo de trabajo.
+- [ ] **Eje 2 — Jerarquía Política (qué mandás)**: posición de poder dentro de la barra. Niveles: Pibe → Soldado → Capo de Facción → Mesa Chica → Líder de Barra. Determina qué decisiones podés tomar y qué recursos administrás.
+- [ ] **Eje 3 — Facciones Internas (dónde estás parado)**: sub-grupos dentro de la misma barra (ej. "Zona Sur" vs "Zona Norte"). Pueden tener líderes propios, enemistades internas, voto de censura al líder, golpes de estado, traiciones (alianzas con facciones de otros clubes).
 - [ ] Turno de Barra en día de partido: consume Energía, genera pozo grupal + prestigio personal
-- [ ] Profesión libre en días sin partido: trapito, vendedor (chori/paty/entradas/merch/bengalas), remisero, etc. — genera plata personal para cosméticos
-- [ ] Recursos por trabajo: Plata (personal), Aguante (grupal), Reputación (escalada), Visto Bueno Cana (anti-heat)
-- [ ] Mesa Chica: top 5-10 jugadores de la barra. Vota decisiones grupales junto al Líder (uso del pozo, targets, alianzas)
+- [ ] Profesión libre en días sin partido: genera plata personal para cosméticos
+- [ ] Recursos por trabajo: Plata (personal), Aguante (grupal), Reputación (política), Visto Bueno Cana (anti-heat)
+- [ ] Mesa Chica: top jugadores de la barra. Vota decisiones grupales junto al Líder (uso del pozo, targets, alianzas). Composición incluye representantes de facciones.
 - [ ] Skills de profesión: desbloqueables según horas trabajadas en cada rubro
+- [ ] Drama emergente entre facciones: voto de censura, golpe de estado, traición (alianza secreta con barra rival), divisiones públicas en el feed
+- [ ] **Barras IA (pilar v1, no opcional)**: pibes IA que pueblan todas las barras desde el día 1. Atacan, defienden, suben jerarquía, ocupan facciones, generan feed. Indistinguibles de jugadores reales a primera vista. Resuelve first-day population problem + mantiene densidad en clubes chicos (divisiones bajas). Reemplazables por jugadores reales cuando aparecen.
 - [ ] "Cancha" / base híbrida: estructura propia + reputación de barra
 - [ ] Recursos: Aguante (principal), Trapos/Banderas (especial), Reputación de Barrio (territorial), Moneda Premium (cosméticos)
 - [ ] Sistema de combate: ventanas calendarizadas según fixture AFA real, free-for-all con feudos dinámicos por temporada
 - [ ] Emboscadas planificables: elegir ubicación, hora, composición, intel de vigías
+- [ ] **Sistema de combate estratégico (no RPS, no azar dominante)**: 6 decisiones interactuantes pre-ataque — intel pre-raid (trade-off resources), composición squad (cubrir frentes tácticos), ubicación (modifiers fijos por barrio), timing dentro de ventana de partido, formación (frontal/pinza/emboscada/señuelo/hit-and-run, no cíclica), contingencia escape
+- [ ] Defensor pre-configura: trampas, posiciones pibes por frente, plan retirada, llamado auxilio (push a facción para refuerzo en tiempo real)
+- [ ] Resolución determinística por frentes tácticos: cada frente se evalúa con modifiers visibles, ratio frentes ganados/perdidos escala outcome. Azar ±10% solo como sabor (cana inesperada, lluvia, etc.)
+- [ ] Contraintel: vigía rival puede detectar reconocimiento y devolver intel falsa. 2 vigías reduce probabilidad de engaño. Mind games entre hardcore.
+- [ ] Cronista del Aguante (LLM-generated narrative feed): crónica semanal auto-generada por club, historia personal del pibe, eventos editoriales estilo Olé chamuyero. Modelo barato (Haiku) genera 90%.
+- [ ] Progresión visible del pibe: avatar cambia con rango (rifado, tatuajes, cicatrices, mejor ropa). Hitos con cinematic (primer trapo, primer golpe estado, primer Superclásico).
+- [ ] **Aguantadero geográfico**: HQ de barra en barrio real (Avellaneda, La Boca, Núñez, etc.). Visible para todos, blanco de raid.
+- [ ] **Outfit identitario**: pibe tiene ropa visible (gorra, campera, mochila, zapatillas, jean). Cosmetic monetization directa. Outfit identifica facción interna.
+- [ ] **Loadout por raid**: bengalas (+daño área, +heat), palos (+cuerpo a cuerpo), capucha (-ID cana), bombo (+recibimiento, target obvio), pelotas (efecto cómico viral), manos vacías (0 heat, escape rápido). Multiplica decisiones tácticas.
+- [ ] **Pibes con personalidad emergente**: 1-2 traits aleatorios por pibe (Cabezón, Pies de plomo, Camorrero, Buchón, Pichón, Cordobés, etc.). Narrativa gratis, cada barra única.
+- [ ] **Seasonal modifiers rotativos**: cada temporada AFA tiene gimmick que cambia reglas (Temporada del fuego = bengalas 2x; Temporada cana brava = heat 1.5x; etc.). Live ops sin reescribir el juego.
+- [ ] **Daily mini-puzzle táctico**: 1 minuto, situación preseteada, elegí mejor jugada. Habit-forming barato, cero infra extra.
+
+### Active (post-MVP, v1.1)
+
+- [ ] Citaciones cara a cara entre barras (combate agendado con countdown público)
+- [ ] Top Boys públicos: top 5 pibes de cada barra con perfil visible, target en la espalda
+- [ ] Reputación pública de barra: perfil con Aguante / Respeto / Notoriedad / Trapos / historial
+- [ ] Metagame comunitario tipo Helldivers: objetivos semanales globales por club (tomar zona X), todos contribuyen, todos reciben recompensa
+- [ ] Emotes socialmente cargados anti-club: cantitos provocativos como cosméticos virales
+- [ ] Mecánica de topo / traición: pibe Buchón puede filtrar info, mini-juego de identificarlo dentro de la facción
+
+### Active (v2 / futuro)
+
+- [ ] Viajes de visitante: caravanas a estadio rival con riesgo de emboscada en ruta
+- [ ] Persecuciones policiales activas: mini-eventos post-raid (correr / esconder / sobornar / entregarse)
+- [ ] Arco narrativo de temporada (LLM-generado): historia central por season, eventos progresan el arco
+- [ ] Caravanas de logística: pibes mueven trapos/recursos entre aguantaderos, interceptables = sub-juego de robo
+- [ ] Diplomacia visible (líder + Mesa Chica): pactos públicos de no agresión, alianzas temporales, traiciones con penalización
+- [ ] Última Fecha mega-event: 24hs caóticas de free-for-all sin ventanas en última jornada AFA real
 - [ ] Sistema de daño escalado: rasguñazo → paliza → robo bombo → robo trapo (golpe máximo)
 - [ ] Robo de trapo: humillación pública en feed + pérdida temporal hasta recuperación
 - [ ] Riesgo real de perder pibes (permadeath si caen sin rescate de abogado)
@@ -54,6 +89,7 @@ Juego mobile multiplayer online ambientado en la cultura de barras bravas argent
 - Pay-to-win (stats compradas) — rompe Core Value y la economía competitiva
 - Chat de voz libre — moderación inviable solo dev, riesgo de toxicidad/odio
 - Clubes del exterior en v1 — foco AFA primero, Libertadores/Sudamericana en futuro
+- Regional Amateur — demasiados clubes, fixture data inviable
 - Modo offline / single-player — todo el valor está en el multiplayer + realidad sincronizada
 - Web/Desktop en v1 — mobile only hasta validar mercado
 - Sistema de equipos cruzados entre clubes (alianzas permanentes Boca+River) — rompe lore
