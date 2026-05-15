@@ -24,21 +24,13 @@ jobs:
           mkdir -p ~/.config/godot/
           mv /root/.local/share/godot/export_templates/4.3.stable \
              ~/.local/share/godot/export_templates/4.3.stable
-          # Write editor_settings with Android JDK + SDK + debug keystore paths.
+          # Install editor_settings with Android JDK + SDK + debug keystore paths.
           # HOME=/github/home in GH Actions container (not /root), so pre-heat
           # generates a fresh editor_settings WITHOUT the barichello-baked Android
-          # paths. We inject minimal required fields here so headless export can
-          # find java_sdk, android_sdk, and debug_keystore.
-          cat > ~/.config/godot/editor_settings-4.tres <<'EOF'
-          [gd_resource type="EditorSettings" format=3]
-
-          [resource]
-          export/android/java_sdk_path = "/usr/lib/jvm/java-17-openjdk-amd64"
-          export/android/android_sdk_path = "/usr/lib/android-sdk"
-          export/android/debug_keystore = "/root/debug.keystore"
-          export/android/debug_keystore_user = "androiddebugkey"
-          export/android/debug_keystore_pass = "android"
-          EOF
+          # paths. We copy a tracked template that has the 5 required fields.
+          cp .github/ci-editor-settings.tres ~/.config/godot/editor_settings-4.tres
+          # Verify content (no indentation issues from heredoc)
+          head -10 ~/.config/godot/editor_settings-4.tres
 
       - name: Import project (pre-heat)
         run: godot --headless --editor --quit || true
