@@ -19,7 +19,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-NakamaClient="*res://scripts/autoloads/NakamaClient.gd"
+Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
+NakamaService="*res://scripts/autoloads/NakamaService.gd"
 AuthManager="*res://scripts/autoloads/AuthManager.gd"
 AppTheme="*res://scripts/autoloads/AppTheme.gd"
 
@@ -30,10 +31,6 @@ window/size/viewport_height=1920
 window/handheld/orientation=1
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/com.heroiclabs.nakama/plugin.cfg")
 
 [gui]
 

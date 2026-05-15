@@ -18,7 +18,7 @@ func _ready() -> void:
 	await _try_restore_session()
 
 func login(email: String, password: String) -> Dictionary:
-	var result = await NakamaClient.client.authenticate_email_async(email, password, false, "")
+	var result = await NakamaService.client.authenticate_email_async(email, password, false, "")
 	if result.is_exception():
 		return {"ok": false, "error": str(result.get_exception().message)}
 	session = result
@@ -27,7 +27,7 @@ func login(email: String, password: String) -> Dictionary:
 	return {"ok": true}
 
 func register(email: String, password: String) -> Dictionary:
-	var result = await NakamaClient.client.authenticate_email_async(email, password, true, "")
+	var result = await NakamaService.client.authenticate_email_async(email, password, true, "")
 	if result.is_exception():
 		return {"ok": false, "error": str(result.get_exception().message)}
 	session = result
@@ -62,12 +62,12 @@ func _try_restore_session() -> void:
 	var refresh = cfg.get_value("auth", "refresh_token", "")
 	if token == "":
 		return
-	var restored = NakamaClient.client.restore_session(token)
+	var restored = NakamaService.client.restore_session(token)
 	if restored.expired:
 		if refresh == "":
 			print("[AuthManager] session expired, no refresh token")
 			return
-		var refreshed = await NakamaClient.client.session_refresh_async(restored, refresh)
+		var refreshed = await NakamaService.client.session_refresh_async(restored, refresh)
 		if refreshed.is_exception():
 			print("[AuthManager] refresh failed: %s" % refreshed.get_exception().message)
 			return
