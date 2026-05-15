@@ -1,0 +1,98 @@
+[gd_resource type="Theme" load_steps=8 format=3]
+
+[ext_resource type="FontFile" path="res://assets/fonts/Nunito-Regular.ttf" id="font_regular"]
+[ext_resource type="FontFile" path="res://assets/fonts/Nunito-Bold.ttf" id="font_bold"]
+
+[sub_resource type="StyleBoxFlat" id="style_button_normal"]
+bg_color = Color(0.839, 0.157, 0.157, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 16.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxFlat" id="style_button_pressed"]
+bg_color = Color(0.706, 0.130, 0.130, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 16.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxFlat" id="style_lineedit_normal"]
+bg_color = Color(0.176, 0.176, 0.176, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.239, 0.239, 0.239, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxFlat" id="style_lineedit_focus"]
+bg_color = Color(0.176, 0.176, 0.176, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.839, 0.157, 0.157, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxFlat" id="style_panel_card"]
+bg_color = Color(0.176, 0.176, 0.176, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+
+[resource]
+default_font = ExtResource("font_regular")
+default_font_size = 16
+
+Button/colors/font_color = Color(0.961, 0.961, 0.961, 1)
+Button/colors/font_pressed_color = Color(0.961, 0.961, 0.961, 1)
+Button/colors/font_hover_color = Color(0.961, 0.961, 0.961, 1)
+Button/colors/font_disabled_color = Color(0.961, 0.961, 0.961, 0.4)
+Button/font_sizes/font_size = 14
+Button/fonts/font = ExtResource("font_bold")
+Button/styles/normal = SubResource("style_button_normal")
+Button/styles/pressed = SubResource("style_button_pressed")
+Button/styles/hover = SubResource("style_button_normal")
+Button/styles/disabled = SubResource("style_button_normal")
+
+Label/colors/font_color = Color(0.961, 0.961, 0.961, 1)
+Label/font_sizes/font_size = 16
+Label/fonts/font = ExtResource("font_regular")
+
+LineEdit/colors/font_color = Color(0.961, 0.961, 0.961, 1)
+LineEdit/colors/font_placeholder_color = Color(0.627, 0.627, 0.627, 1)
+LineEdit/colors/caret_color = Color(0.839, 0.157, 0.157, 1)
+LineEdit/font_sizes/font_size = 16
+LineEdit/fonts/font = ExtResource("font_regular")
+LineEdit/styles/normal = SubResource("style_lineedit_normal")
+LineEdit/styles/focus = SubResource("style_lineedit_focus")
+
+PanelContainer/styles/panel = SubResource("style_panel_card")
