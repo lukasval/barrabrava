@@ -6,13 +6,13 @@
 <domain>
 ## Phase Boundary
 
-Infraestructura técnica completa + onboarding del jugador. Al final de esta fase: la app buildea para iOS y Android desde GitHub Actions, el jugador puede crear una cuenta, elegir su club de entre ~130 clubes con identidades paramétricas, crear su pibe, y llegar a la home screen. Nakama corre en Railway São Paulo. Los datos persisten en Postgres. Privacy policy accesible en español.
+Infraestructura técnica completa + onboarding del jugador. Al final de esta fase: la app buildea para Android desde GitHub Actions (iOS deferred a Phase 7 — ver DEFERRED-IOS-CI.md), el jugador puede crear una cuenta, elegir su club de entre ~130 clubes con identidades paramétricas, crear su pibe, y llegar a la home screen. Nakama corre en Railway (región disponible — São Paulo no existe en Railway). Los datos persisten en Postgres. Privacy policy accesible en español.
 
 **Scope exacto:**
 - Setup de proyecto Godot 4.3 + estructura de directorios
-- Nakama 3.x en Railway São Paulo + schema Postgres inicial
-- CI/CD con GitHub Actions (debug builds APK + IPA)
-- Auth: registro y login email+password
+- Nakama 3.x en Railway (región LATAM disponible) + schema Postgres inicial
+- CI/CD con GitHub Actions (debug builds APK — iOS deferred a Phase 7)
+- Auth: registro y login email+password + recuperación de contraseña
 - Club picker: 130 clubes con identidades paramétricas (seed completo, 5 divisiones AFA)
 - Creación de pibe: nombre + stats base fijos + avatar placeholder
 - Tutorial breve post-creación → Home screen
@@ -28,7 +28,7 @@ Infraestructura técnica completa + onboarding del jugador. Al final de esta fas
 ### Autenticación
 - **D-01:** Registro y login exclusivamente con email + password. Sin OAuth social, sin guest mode en Phase 1.
 - **D-02:** Sesión manejada con token de sesión Nakama persistido localmente (SecureStorage o similar). Re-login automático si el token es válido; refresh automático si expiró.
-- **D-03:** Password recovery vía email de reseteo usando el sistema built-in de Nakama. Requiere configurar SMTP (SendGrid o similar).
+- **D-03:** Password recovery vía email de reseteo usando el sistema built-in de Nakama. Requiere configurar SMTP (SendGrid o similar). **UI entry point:** AuthScreen incluye link "¿Olvidaste tu contraseña?" que navega a ForgotPasswordScreen — usuario ingresa email, app llama RPC `request_password_reset`, recibe email con link al HTML hosted en GitHub Pages (Plan 05).
 - **D-04:** Pre-login: pantalla simple (splash/loading → login/registro). Sin landing page elaborada.
 
 ### Identidades Paramétricas de Clubes
@@ -45,15 +45,15 @@ Infraestructura técnica completa + onboarding del jugador. Al final de esta fas
 - **D-13:** El tutorial breve post-creación es una pantalla de bienvenida orientativa (no el tutorial completo "primera salida" que es Phase 3 ONB-05/06). Introduce el concepto de barra, aguante, y qué puede hacer el jugador.
 
 ### CI/CD y Infraestructura
-- **D-14:** CI/CD en Phase 1 produce **debug builds** (APK para Android + IPA sin firmar para iOS) que compilan sin error. No se requieren provisioning profiles ni certificados de distribución en Phase 1.
-- **D-15:** Nakama se despliega en **Railway São Paulo desde Phase 1** (no Docker local). El entorno de desarrollo apunta a Railway desde el día 1. Evita divergencia dev/prod.
+- **D-14:** CI/CD en Phase 1 produce **debug builds**. **TEC-08 scope revisado (2026-05-15):** Phase 1 entrega solo APK Android desde GitHub Actions. iOS IPA se difiere a Phase 7 (Polish + Launch) — ver `DEFERRED-IOS-CI.md`. Razones: macOS runner cost ~10x Linux, Fastlane (que pertenece a iOS setup) ya estaba diferido a Phase 7 en Claude's Discretion, builds iOS Phase 1 se hacen manualmente en Mac del dev. No se requieren provisioning profiles ni certificados de distribución en Phase 1.
+- **D-15 (revisado 2026-05-15):** Nakama se despliega en **Railway desde Phase 1** (no Docker local). RESEARCH.md confirmó que Railway NO tiene región São Paulo — se usa la región disponible más cercana a Argentina como placeholder. `fly.toml` se prepara con `primary_region = "gru"` para migración futura a Fly.io (que sí tiene São Paulo). El entorno de desarrollo apunta a Railway desde el día 1. Evita divergencia dev/prod. **Intent original preservado** (latencia baja LATAM + transferencia internacional declarable AAIP).
 - **D-16:** Branch strategy: `main` = producción (deploy Railway automático), `develop` = staging. PRs a `main` triggerean CI check.
 
 ### Claude's Discretion
 - Fastlane setup: diferir a Phase 7 (Polish + Launch). Phase 1 usa solo GitHub Actions con Godot export CLI.
 - Schema exacto de stats del pibe (nombres de atributos, rango de valores): Claude define lo más lógico para el sistema de combate futuro.
 - Cantidad exacta de arquetipos de forma de escudo (6-8 sugeridos).
-- SMTP provider para email reset (SendGrid o Resend son razonables).
+- SMTP provider para email reset (SendGrid o Resend son razonables) — **decidido en RESEARCH: Resend** (SendGrid killed free tier May 2025).
 - Estructura exacta del JSON seed de clubes: Claude define el schema más apropiado.
 
 </decisions>
@@ -76,6 +76,9 @@ Infraestructura técnica completa + onboarding del jugador. Al final de esta fas
 
 ### Roadmap
 - `.planning/ROADMAP.md` — Phase 1 goal, success criteria, outputs esperados.
+
+### Phase 1 deferrals (decisions log)
+- `.planning/phases/01-foundation/DEFERRED-IOS-CI.md` — iOS CI workflow deferred to Phase 7.
 
 No hay specs/ADRs externos — requirements completamente capturados arriba.
 
@@ -109,6 +112,7 @@ No hay specs/ADRs externos — requirements completamente capturados arriba.
 <deferred>
 ## Deferred Ideas
 
+- **iOS CI workflow** → Phase 7 (ver DEFERRED-IOS-CI.md, decisión 2026-05-15)
 - **Fastlane setup completo** (submission a App Store / Play Store) → Phase 7 (Polish + Launch)
 - **FCM push notifications operativas** → Phase 2 (Heartbeat AFA)
 - **Sistema de facciones completo** → Phase 3 (Core Loop Laboral) y Phase 5 (Mundo Social)
@@ -123,3 +127,4 @@ No hay specs/ADRs externos — requirements completamente capturados arriba.
 
 *Phase: 1-Foundation*
 *Context gathered: 2026-05-14*
+*D-14, D-15 revised: 2026-05-15 (TEC-08 iOS scope deferred to Phase 7; Railway has no São Paulo region)*
