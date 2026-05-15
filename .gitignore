@@ -1,0 +1,33 @@
+# Godot 4+ specific
+.godot/
+/android/
+/export/
+.import/
+*.translation
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Nakama TypeScript runtime (build outputs)
+nakama/build/
+nakama/node_modules/
+
+# Secrets (never commit)
+.env
+.env.local
+*.pem
+*.keystore
+
+# Build outputs
+build/
+*.apk
+*.aab
+*.ipa
+*.dSYM

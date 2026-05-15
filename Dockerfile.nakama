@@ -1,0 +1,9 @@
+FROM heroiclabs/nakama:3.21.0
+
+# Copy TypeScript runtime build output (will be built in Plan 03)
+# For Wave 0, no runtime modules — Nakama starts with empty runtime
+# COPY nakama/build/ /nakama/data/modules/
+
+EXPOSE 7350 7351
+
+# Use Nakama default entrypoint (Railway sets start command via dashboard)
