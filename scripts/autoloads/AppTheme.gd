@@ -41,3 +41,13 @@ func _ready() -> void:
 	safe_area_top = max(0, rect.position.y)
 	safe_area_bottom = max(34, screen_size.y - rect.position.y - rect.size.y)
 	print("[AppTheme] safe_area top=%d bottom=%d" % [safe_area_top, safe_area_bottom])
+	# Load global theme at runtime (avoids boot-time chicken-and-egg with font imports in CI)
+	if ResourceLoader.exists("res://assets/theme/Theme.tres"):
+		var t := load("res://assets/theme/Theme.tres") as Theme
+		if t:
+			get_tree().root.theme = t
+			print("[AppTheme] global theme applied")
+		else:
+			push_warning("[AppTheme] Theme.tres load returned null")
+	else:
+		push_warning("[AppTheme] Theme.tres not found at boot (deferred until imports complete)")
