@@ -18,7 +18,7 @@ func _ready() -> void:
 	await _try_restore_session()
 
 func login(email: String, password: String) -> Dictionary:
-	var result = await NakamaService.client.authenticate_email_async(email, password, false, "")
+	var result = await NakamaService.client.authenticate_email_async(email, password, null, false)
 	if result.is_exception():
 		return {"ok": false, "error": str(result.get_exception().message)}
 	session = result
@@ -27,7 +27,7 @@ func login(email: String, password: String) -> Dictionary:
 	return {"ok": true}
 
 func register(email: String, password: String) -> Dictionary:
-	var result = await NakamaService.client.authenticate_email_async(email, password, true, "")
+	var result = await NakamaService.client.authenticate_email_async(email, password, null, true)
 	if result.is_exception():
 		return {"ok": false, "error": str(result.get_exception().message)}
 	session = result

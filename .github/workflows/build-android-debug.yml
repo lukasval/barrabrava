@@ -18,11 +18,14 @@ jobs:
         with:
           lfs: true
 
-      - name: Setup export templates
+      - name: Setup export templates + editor settings
         run: |
           mkdir -p ~/.local/share/godot/export_templates/
+          mkdir -p ~/.config/
           mv /root/.local/share/godot/export_templates/4.3.stable \
              ~/.local/share/godot/export_templates/4.3.stable
+          # Move pre-configured editor_settings (includes android debug keystore path)
+          mv /root/.config/godot ~/.config/godot
 
       - name: Import project (pre-heat)
         run: godot --headless --editor --quit || true
