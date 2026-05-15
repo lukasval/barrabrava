@@ -10,7 +10,7 @@
 - **Postgres plugin:** ✓ online (instalado, `DATABASE_URL` disponible vía reference variable)
 - **Nakama service:** creado, deploy configurado vía GitHub repo `lukasval/barrabrava` branch `main`, builder Dockerfile (`Dockerfile.nakama`)
 - **URL pública Nakama:** `https://nakama-production-7ea8.up.railway.app` (puerto 7350, generado 2026-05-15)
-- **Console URL:** `https://nakama-production-7ea8.up.railway.app:7351` _(acceso admin con `NAKAMA_CONSOLE_USERNAME` / `NAKAMA_CONSOLE_PASSWORD`)_
+- **Console URL:** **DEFERRED** — Railway UI no expone port 7351 sin custom domain o TCP proxy. Phase 1 no lo necesita (Godot conecta SDK al 7350). Cuando aparezca necesidad real de debug admin, opciones: (a) `+ TCP Proxy` en Railway Networking apuntando 7351, (b) tunel `railway run` CLI local, (c) correr Nakama local apuntando a misma Postgres Railway.
 - **Pre-deploy:** `/bin/sh -ecx "/nakama/nakama migrate up --database.address $DATABASE_URL"`
 - **Start command:** `/bin/sh -ecx "exec /nakama/nakama --database.address $DATABASE_URL --session.encryption_key ... --session.refresh_encryption_key ... --console.username ... --console.password ..."` (env vars referenciadas, no en plano)
 - **Watch paths:** `Dockerfile.nakama,nakama/**`
@@ -72,6 +72,7 @@
 | Resend account + DKIM/SPF | configurar en Wave 0 | Diferido | Phase 2 |
 | AAIP trámite | iniciar Phase 1 Día 1 | Diferido | Phase 6 o Phase 7 (≥1 mes pre-launch) |
 | Password reset E2E test | tarea original Plan 03/04 | Código se escribe, NO se testea SMTP | Phase 2 (cuando Resend esté operativo) |
+| Nakama Console (port 7351) acceso external | exponer puerto Wave 0 | Diferido — Railway UI sin generate-domain free; Phase 1 no requiere console | Resolver on-demand (TCP Proxy / tunnel CLI / local Nakama) |
 
 ## Próximos pasos
 
