@@ -12,50 +12,21 @@ jobs:
     runs-on: ubuntu-22.04
     container:
       image: barichello/godot-ci:4.3
-      env:
-        HOME: /root
+    env:
+      HOME: /root
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           lfs: true
 
-      - name: Setup export templates + editor settings
+      - name: Verify setup
         run: |
-          mkdir -p ~/.local/share/godot/export_templates/
-          mkdir -p ~/.config/godot/
-          mv /root/.local/share/godot/export_templates/4.3.stable \
-             ~/.local/share/godot/export_templates/4.3.stable
-          # Copy the FULL editor_settings file shipped with barichello/godot-ci.
-          # HOME=/github/home in GH Actions, but the image's editor_settings is at
-          # /root/.config/godot/. We need the full file (not a minimal stub) so
-          # Godot doesn't reset to defaults and wipe the Android paths.
-          if [ -f /root/.config/godot/editor_settings-4.tres ]; then
-            cp /root/.config/godot/editor_settings-4.tres ~/.config/godot/editor_settings-4.tres
-            echo "Copied barichello editor_settings-4.tres"
-          elif [ -f /root/.config/godot/editor_settings-4.3.tres ]; then
-            cp /root/.config/godot/editor_settings-4.3.tres ~/.config/godot/editor_settings-4.tres
-            echo "Copied barichello editor_settings-4.3.tres → editor_settings-4.tres"
-          else
-            echo "WARNING: no barichello editor_settings found, falling back to minimal template"
-            cp .github/ci-editor-settings.tres ~/.config/godot/editor_settings-4.tres
-          fi
-          # Force-set our 5 Android paths via sed (override anything baked in).
-          # If a key already exists, replace; otherwise append before closing of [resource].
-          for line in \
-            'export/android/java_sdk_path = "/usr/lib/jvm/java-17-openjdk-amd64"' \
-            'export/android/android_sdk_path = "/usr/lib/android-sdk"' \
-            'export/android/debug_keystore = "/root/debug.keystore"' \
-            'export/android/debug_keystore_user = "androiddebugkey"' \
-            'export/android/debug_keystore_pass = "android"'
-          do
-            key="${line%% =*}"
-            # Remove existing line for this key (if present), then append new line.
-            sed -i "\#^${key} =#d" ~/.config/godot/editor_settings-4.tres
-            echo "$line" >> ~/.config/godot/editor_settings-4.tres
-          done
-          echo "=== final editor_settings android lines ==="
-          grep "^export/android/" ~/.config/godot/editor_settings-4.tres
+          echo "HOME=$HOME"
+          ls -la /root/.config/godot/ 2>&1 | head -10
+          ls -la /root/.local/share/godot/export_templates/4.3.stable/android_debug.apk
+          echo "=== android paths in baked editor_settings ==="
+          (cat /root/.config/godot/editor_settings-4.tres 2>/dev/null || cat /root/.config/godot/editor_settings-4.3.tres 2>/dev/null) | grep -E "java_sdk|android_sdk|debug_keystore" || echo "no baked android paths"
 
       - name: Import project (pre-heat)
         run: godot --headless --editor --quit || true
