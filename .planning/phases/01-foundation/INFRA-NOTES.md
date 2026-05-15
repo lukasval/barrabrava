@@ -8,9 +8,15 @@
 - **Proyecto:** `honest-heart` (auto-generado, **NO renombrado** a `barrabrava-nakama` todavía — TODO opcional)
 - **Región:** US East _(Railway NO tiene São Paulo — ver D-15 revisado en `01-CONTEXT.md`)_
 - **Postgres plugin:** ✓ online (instalado, `DATABASE_URL` disponible vía reference variable)
-- **Nakama service:** creado, **OFFLINE** (no hay deploy todavía — Task 4 del plan configura el deploy)
-- **URL pública Nakama:** _pending Task 4 — Railway aún no generó dominio público_
-- **Console URL:** _pending — será `{RAILWAY_URL}:7351` post-deploy_
+- **Nakama service:** creado, deploy configurado vía GitHub repo `lukasval/barrabrava` branch `main`, builder Dockerfile (`Dockerfile.nakama`)
+- **URL pública Nakama:** `https://nakama-production-7ea8.up.railway.app` (puerto 7350, generado 2026-05-15)
+- **Console URL:** `https://nakama-production-7ea8.up.railway.app:7351` _(acceso admin con `NAKAMA_CONSOLE_USERNAME` / `NAKAMA_CONSOLE_PASSWORD`)_
+- **Pre-deploy:** `/bin/sh -ecx "/nakama/nakama migrate up --database.address $DATABASE_URL"`
+- **Start command:** `/bin/sh -ecx "exec /nakama/nakama --database.address $DATABASE_URL --session.encryption_key ... --session.refresh_encryption_key ... --console.username ... --console.password ..."` (env vars referenciadas, no en plano)
+- **Watch paths:** `Dockerfile.nakama,nakama/**`
+- **Auto-deploy:** Railway reportó "Auto deploy unavailable" (GitHub webhook permission pendiente). Deploys manuales vía dashboard hasta resolver.
+- **Primer deploy:** 2026-05-15 _(esperando confirmación healthcheck 200)_
+- **Status:** Nakama vacío deployado, sin runtime custom (TypeScript modules vienen en Plan 03)
 - **Server key:** stored en Railway Variables (`NAKAMA_SERVER_KEY`)
 - **Env vars seteadas (6):**
   - `NAKAMA_SERVER_KEY`
@@ -69,6 +75,7 @@
 
 ## Próximos pasos
 
-- **Task 4 (orchestrator):** configurar Railway service settings (builder Dockerfile, pre-deploy `migrate up`, start command Nakama, port 7350 público), generar URL pública, validar healthcheck `/healthcheck` → 200 OK.
+- **Task 4 verificación pendiente:** confirmar healthcheck `https://nakama-production-7ea8.up.railway.app/healthcheck` → 200 OK + body `{}` post-deploy.
 - **Plan 02 (Wave 1):** Setup proyecto Godot 4.3 + estructura de directorios. Una vez creado `project.godot`, el workflow Android debe correr verde.
 - **Plan 03 (Wave 2):** Build TypeScript runtime + redeploy Nakama con módulos. **Antes de Plan 03 con password reset:** decidir si setear Resend en Phase 2 (DEFERRED) o stubear el RPC.
+- **Resolver:** "Auto deploy unavailable" en Railway → revisar GitHub App permissions (Railway integration) para habilitar webhook auto-deploy.
