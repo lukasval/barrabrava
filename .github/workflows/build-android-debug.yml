@@ -30,6 +30,27 @@ jobs:
       - name: Import project (pre-heat)
         run: godot --headless --editor --quit || true
 
+      - name: Debug environment
+        run: |
+          echo "=== HOME ==="
+          echo "HOME=$HOME"
+          echo "=== editor_settings location ==="
+          ls -la ~/.config/godot/ 2>&1 || echo "missing ~/.config/godot/"
+          ls -la /root/.config/godot/ 2>&1 || echo "missing /root/.config/godot/"
+          echo "=== editor_settings keystore lines ==="
+          (cat ~/.config/godot/editor_settings-4.tres 2>&1 || cat /root/.config/godot/editor_settings-4.tres 2>&1) | grep -iE "java_sdk|android_sdk|debug_keystore" || echo "no keystore/sdk lines in editor_settings"
+          echo "=== debug.keystore file ==="
+          ls -la /root/debug.keystore 2>&1 || echo "missing /root/debug.keystore"
+          echo "=== templates dir ==="
+          ls -la ~/.local/share/godot/export_templates/4.3.stable/ 2>&1 | head -20 || echo "missing templates"
+          echo "=== ANDROID_HOME / JAVA_HOME ==="
+          echo "ANDROID_HOME=${ANDROID_HOME:-unset}"
+          echo "JAVA_HOME=${JAVA_HOME:-unset}"
+          echo "=== java version ==="
+          java -version 2>&1 || echo "no java"
+          echo "=== export_presets keystore ==="
+          grep -E "keystore|gradle_build" export_presets.cfg
+
       - name: Export APK (debug)
         run: |
           mkdir -p build/android
