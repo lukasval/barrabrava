@@ -58,6 +58,9 @@ decisions:
   - "Autoload renamed NakamaClient → NakamaService to avoid class_name collision with the SDK's class_name NakamaClient (Apache 2.0 SDK type)"
   - "SDK's Nakama.gd registered as autoload Nakama (per official SDK README) — Nakama.create_client(...) is an instance method, not static"
   - "Editor plugin entry removed from project.godot — SDK v3.4.0 ships no plugin.cfg, it is consumed as plain GDScript via autoload"
+  - "POST-EXECUTOR: AuthManager arg order bug — authenticate_email_async signature is (email, password, username=null, create:bool=true). Fixed in e431622."
+  - "POST-EXECUTOR: Theme load moved from project.godot gui/theme/custom to runtime AppTheme._ready() to avoid boot-time chicken-and-egg with font imports. Fixed in 3e0aca9."
+  - "POST-EXECUTOR: CI Android APK build DEFERRED to Phase 7 (see DEFERRED-CI.md). Workflow trigger reduced to workflow_dispatch only — Godot 4.3 + barichello/godot-ci:4.3 emit empty configuration errors list; many fixes attempted, none surfaced root cause. Local Godot 4.3 build untested (Android SDK + JDK not installed locally). Project structure valid: autoloads compile, theme loads at runtime."
   - "Nunito sourced from fontsource CDN (latin subset, ~39KB each TTF) — googlefonts/nunito repo only ships variable fonts; static is needed for predictable rendering"
   - "Nakama server_key hardcoded in NakamaService.gd per user approval — public client identifier, will be rotated pre-launch (Phase 7)"
 metrics:

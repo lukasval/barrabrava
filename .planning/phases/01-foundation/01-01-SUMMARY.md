@@ -42,7 +42,7 @@ key-files:
   modified: []
 decisions:
   - "D-15 revisado en 01-CONTEXT.md: Railway región disponible (no São Paulo); fly.toml prepara migración a Fly.io gru"
-  - "TEC-08 Phase 1 scope reducido a Android-only; iOS CI difiere a Phase 7 (DEFERRED-IOS-CI.md)"
+  - "TEC-08 Phase 1 scope reducido a Android-only; iOS CI difiere a Phase 7 (DEFERRED-CI.md)"
   - "Dominio + Resend DEFERRED a Phase 2+ por decisión del usuario"
   - "AAIP trámite DEFERRED a Phase 6 o Phase 7 (≥1 mes pre-launch, Ley 25.326)"
 metrics:
@@ -92,7 +92,7 @@ Ya estaba revisado en `01-CONTEXT.md` (líneas 49-49 del archivo). El wording re
 No requirió edición durante la ejecución de Task 2 — ya estaba aplicado en commit anterior.
 
 ### TEC-08 scope reducido (Android-only Phase 1)
-Documentado en `.planning/phases/01-foundation/DEFERRED-IOS-CI.md` (verificado existente en disco, 56 líneas, contiene "Phase 7" + razones + plan de reversión).
+Documentado en `.planning/phases/01-foundation/DEFERRED-CI.md` (verificado existente en disco, 56 líneas, contiene "Phase 7" + razones + plan de reversión).
 
 ### Decisiones del usuario para deferral
 1. **Dominio + Resend** → diferido a Phase 2+. Password reset flow se codifica pero no se testea SMTP en Phase 1.
@@ -167,7 +167,7 @@ Ninguno encontrado durante Tasks 2+3. (Task 1 sí implicó auth gates para Railw
 - ✓ `export_presets.cfg` tiene preset `name="Android Debug"` con `architectures/arm64-v8a=true`
 - ✓ `export_presets.cfg` NO contiene `platform="iOS"`
 - ✓ `INFRA-NOTES.md` existe con realidad post-Task 1 (sin placeholders `{...}` sin resolver — los items deferred están marcados como tales)
-- ✓ `DEFERRED-IOS-CI.md` existe (56 líneas, contiene "Phase 7")
+- ✓ `DEFERRED-CI.md` existe (56 líneas, contiene "Phase 7")
 - ✓ `01-CONTEXT.md` D-15 contiene `"(revisado 2026-05-15)"`
 - ✓ `.github/workflows/build-android-debug.yml` parsea como YAML válido (verificado con `npx js-yaml`)
 - ✓ Workflow contiene `barichello/godot-ci:4.3`, `Android Debug`, `actions/checkout@v4`, `actions/upload-artifact@v4`, `godot --headless --editor --quit`
@@ -211,7 +211,7 @@ Caveats anotados en INFRA-NOTES.md:
 - ✓ `export_presets.cfg` existe
 - ✓ `.planning/phases/01-foundation/INFRA-NOTES.md` existe
 - ✓ `.github/workflows/build-android-debug.yml` existe
-- ✓ `.planning/phases/01-foundation/DEFERRED-IOS-CI.md` existe (pre-existente, verificado)
+- ✓ `.planning/phases/01-foundation/DEFERRED-CI.md` existe (pre-existente, verificado)
 - ✓ Commit `2513649` existe en `git log`
 - ✓ Commit `ebf1805` existe en `git log`
 - ✓ Ambos commits pushed a `origin/main`

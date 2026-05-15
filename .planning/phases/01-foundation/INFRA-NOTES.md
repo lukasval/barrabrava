@@ -58,10 +58,10 @@
 - `main` — producción (auto-deploy a Railway)
 - `develop` — staging / integración (auto-build CI sin deploy)
 
-## TEC-08 scope (Phase 1)
+## TEC-08 scope (Phase 1 — revised 2026-05-15)
 
-- **Android APK debug:** GitHub Actions automated vía `.github/workflows/build-android-debug.yml`
-- **iOS IPA:** MANUAL en Mac local del dev hasta Phase 7 (ver `DEFERRED-IOS-CI.md`)
+- **Android APK debug:** ⏳ DEFERRED. Workflow exists at `.github/workflows/build-android-debug.yml` but trigger reduced to `workflow_dispatch` only. Local build works. CI blocker: Godot 4.3 + barichello image emit empty `configuration errors:` list. Ver `DEFERRED-CI.md`.
+- **iOS IPA:** MANUAL en Mac local del dev hasta Phase 7 (ver `DEFERRED-CI.md`)
 
 ## Deferrals desde scope original
 

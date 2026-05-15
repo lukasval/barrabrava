@@ -31,3 +31,8 @@ build/
 *.aab
 *.ipa
 *.dSYM
+
+# Claude Code tooling (skill cache, agent configs, lockfile)
+.agents/
+.claude/
+skills-lock.json
