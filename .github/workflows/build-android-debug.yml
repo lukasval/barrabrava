@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-22.04
     container:
       image: barichello/godot-ci:4.3
+      env:
+        HOME: /root
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
