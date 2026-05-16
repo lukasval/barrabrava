@@ -1,0 +1,15 @@
+{
+  "name": "barrabrava-nakama-runtime",
+  "version": "0.1.0",
+  "private": true,
+  "description": "TypeScript runtime for BarraBrava Nakama server (RPCs + clubs seed)",
+  "scripts": {
+    "build": "node build.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "esbuild": "^0.21.0",
+    "nakama-runtime": "github:heroiclabs/nakama-common#master",
+    "typescript": "^5.4.0"
+  }
+}

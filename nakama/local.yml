@@ -1,0 +1,29 @@
+# Nakama server config for BarraBrava.
+# Used inside the heroiclabs/nakama container — env vars are interpolated at startup.
+
+name: barrabrava-nakama
+data_dir: "./data"
+
+logger:
+  level: "INFO"
+
+session:
+  encryption_key: "${NAKAMA_SESSION_ENCRYPTION_KEY}"
+  refresh_encryption_key: "${NAKAMA_SESSION_REFRESH_ENCRYPTION_KEY}"
+  token_expiry_sec: 3600
+  refresh_token_expiry_sec: 2592000
+
+socket:
+  server_key: "${NAKAMA_SERVER_KEY}"
+
+runtime:
+  js_entrypoint: "build/index.js"
+  env:
+    - "RESEND_API_KEY=${RESEND_API_KEY}"
+    - "RESEND_FROM_EMAIL=${RESEND_FROM_EMAIL}"
+    - "PASSWORD_RESET_BASE_URL=${PASSWORD_RESET_BASE_URL}"
+
+# Rate limits — baseline TEC-10. Mitigates T-1-RT-05, T-1-RT-06.
+limit:
+  registration_per_ip_per_min: 10
+  rpc_per_user_per_min: 60
