@@ -17,10 +17,11 @@ await build({
   define: {
     __CLUBS_JSON__: JSON.stringify(clubsJson),
   },
-  // Nakama's V8 scanner only finds `InitModule` if it's a true top-level binding.
-  // The IIFE hides our export, so we hoist it back out via a footer:
+  // Nakama's Goja runtime calls r.Get("InitModule") internally from registerRpc
+  // native code — needs a true property on globalThis. `var` at top level under
+  // `"use strict";` does not always surface there in Goja, so assign explicitly.
   footer: {
-    js: 'var InitModule = __bbmod.InitModule;',
+    js: 'var InitModule = __bbmod.InitModule; globalThis.InitModule = InitModule;',
   },
   external: ['nakama-runtime'],
   logLevel: 'info',
