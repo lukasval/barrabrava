@@ -11,10 +11,16 @@ await build({
   outfile: 'build/index.js',
   bundle: true,
   format: 'iife',
+  globalName: '__bbmod',
   target: 'es2017',
   platform: 'neutral',
   define: {
     __CLUBS_JSON__: JSON.stringify(clubsJson),
+  },
+  // Nakama's V8 scanner only finds `InitModule` if it's a true top-level binding.
+  // The IIFE hides our export, so we hoist it back out via a footer:
+  footer: {
+    js: 'var InitModule = __bbmod.InitModule;',
   },
   external: ['nakama-runtime'],
   logLevel: 'info',

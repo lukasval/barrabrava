@@ -80,7 +80,10 @@ function seedClubs(nk: nkruntime.Nakama, logger: nkruntime.Logger): void {
   logger.info('Clubs seeded: %d (version=%s)', clubs.length, CLUBS_SEED_VERSION);
 }
 
-const InitModule: nkruntime.InitModule = (
+// Exported so esbuild's globalName wrapper can pull it back to a true top-level
+// `var InitModule = ...` via the footer in build.mjs. Nakama's V8 runtime scans
+// for `InitModule` at script top-level — wrapped IIFE alone is invisible to it.
+export const InitModule: nkruntime.InitModule = (
   _ctx: nkruntime.Context,
   logger: nkruntime.Logger,
   nk: nkruntime.Nakama,
@@ -98,10 +101,3 @@ const InitModule: nkruntime.InitModule = (
 
   logger.info('BarraBrava runtime ready: 5 RPCs registered');
 };
-
-// Nakama's V8 runtime expects InitModule to be discoverable on the global scope.
-// The trailing expression here is the canonical pattern from nakama-project-template:
-// it references the symbol so esbuild does not tree-shake it. The `@ts-ignore` is needed
-// because TypeScript narrows `!InitModule` to `never` (the function is always truthy).
-// @ts-ignore — see comment above
-!InitModule && InitModule.bind(null);
