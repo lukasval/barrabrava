@@ -1,9 +1,24 @@
-FROM heroiclabs/nakama:3.21.0
+# Multi-stage build:
+#   1) runtime-builder — compiles the TypeScript runtime (nakama/src) via esbuild into a single
+#      build/index.js bundle, with data/clubs.json inlined as __CLUBS_JSON__.
+#   2) final image — copies the bundle and local.yml into the official Nakama image at the paths
+#      Nakama discovers automatically (data/modules + data/local.yml).
+#
+# Railway uses this Dockerfile via its repo-attached builder; the pre-deploy + start commands
+# are configured in the Railway dashboard (see INFRA-NOTES.md).
 
-# Copy TypeScript runtime build output (will be built in Plan 03)
-# For Wave 0, no runtime modules — Nakama starts with empty runtime
-# COPY nakama/build/ /nakama/data/modules/
+FROM node:20-alpine AS runtime-builder
+WORKDIR /workspace
+COPY nakama/package.json nakama/package-lock.json nakama/tsconfig.json nakama/build.mjs ./
+COPY nakama/src ./src
+COPY nakama/data ./data
+RUN npm install --no-audit --no-fund
+RUN npm run build
+
+FROM heroiclabs/nakama:3.21.0
+COPY --from=runtime-builder /workspace/build/ /nakama/data/modules/
+COPY nakama/local.yml /nakama/data/local.yml
 
 EXPOSE 7350 7351
 
-# Use Nakama default entrypoint (Railway sets start command via dashboard)
+# Use Nakama default entrypoint (Railway sets start command via dashboard).

@@ -80,3 +80,34 @@
 - **Plan 02 (Wave 1):** Setup proyecto Godot 4.3 + estructura de directorios. Una vez creado `project.godot`, el workflow Android debe correr verde.
 - **Plan 03 (Wave 2):** Build TypeScript runtime + redeploy Nakama con módulos. **Antes de Plan 03 con password reset:** decidir si setear Resend en Phase 2 (DEFERRED) o stubear el RPC.
 - **Resolver:** "Auto deploy unavailable" en Railway → revisar GitHub App permissions (Railway integration) para habilitar webhook auto-deploy.
+
+## Wave 2 — Runtime deployado (Plan 01-03)
+
+- **Fecha de wiring del runtime al Dockerfile:** 2026-05-16
+- **Clubs seedeados (esperados al primer boot post-redeploy):** 133 (Primera 28, Nacional 38, B Metro 17, Federal A 30, C Metro 20)
+- **Bundle compilado:** `nakama/build/index.js` ~50.8KB (esbuild IIFE con `__CLUBS_JSON__` inlined)
+- **RPCs registrados:** `get_clubs`, `create_pibe`, `delete_account`, `request_password_reset` (Phase 1 STUB), `confirm_password_reset` (Phase 1 STUB)
+- **Stubs intencionales (deferred a Phase 2):** `request_password_reset` retorna `{ok:true}` anti-enumeration sin llamar Resend; `confirm_password_reset` retorna `{ok:false, error:"feature_unavailable_phase_1"}`. Razón: Resend + dominio verificado siguen DEFERRED (ver tabla "Deferrals desde scope original" arriba). Cuando Phase 2 habilite Resend, reemplazar el cuerpo de los stubs (TODOs marcados in-code) y actualizar `nakama/src/util/email.ts`.
+- **Smoke test:** `nakama/smoke-test.sh` creado en este plan. **NO corrido todavía** — requiere primero el redeploy Railway con el nuevo Dockerfile. Comando para ejecutar manualmente post-redeploy:
+  ```
+  NAKAMA_HOST=nakama-production-7ea8.up.railway.app \
+  NAKAMA_KEY=<server key real de Railway env var> \
+  bash nakama/smoke-test.sh
+  ```
+- **Rate limits activos (declarados en local.yml):** 10 registers/IP/min, 60 RPCs/user/min (TEC-10).
+- **Server key sync (CHK-07) — RESOLVED:** ya estaba sincronizado desde Plan 01-02. `scripts/autoloads/NakamaService.gd` línea 17 contiene la constante `NAKAMA_SERVER_KEY_DEFAULT := "aee9c099d52a6c22f52fb8bc9f4b72d9"`, que matchea el valor de `NAKAMA_SERVER_KEY` en Railway env vars. Método: hardcoded (repo es privado — `https://github.com/lukasval/barrabrava.git`). Documentado como "public client identifier per Nakama auth model — será rotado pre-launch (Phase 7)" en el comentario del autoload. NO requirió cambios en este plan.
+- **VALIDATION.md (CHK-03):** frontmatter ya marcado `nyquist_compliant: true` y `wave_0_complete: true` desde 2026-05-15. Aprobación firmada vía Plan 03 Task 3 (este plan). No requirió edición en este task.
+
+### Manual Railway redeploy required
+
+Railway auto-deploy sigue DESHABILITADO (GitHub App webhook permissions pendientes, ver fila correspondiente arriba). El push de Task 3 (Dockerfile.nakama multi-stage + nakama/ TS build) **NO disparará** un deploy automático. Pasos para el usuario / orchestrator:
+
+1. Railway dashboard → service Nakama → Deployments → "Deploy latest commit" (o equivalente "Redeploy from source").
+2. Esperar ~3-5 min (build node:20-alpine + esbuild + final image).
+3. Verificar Logs:
+   - `BarraBrava runtime starting...`
+   - `Clubs seeded: 133 (version=v1)`
+   - `BarraBrava runtime ready: 5 RPCs registered`
+4. Si segundo boot, esperar log `Clubs already seeded (version=v1), skipping` — confirma idempotencia.
+5. Smoke test (comando arriba) → esperar `ALL SMOKE TESTS PASSED`.
+6. Si pasa: actualizar este file con timestamp + status.
