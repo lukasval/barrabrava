@@ -18,10 +18,12 @@ await build({
     __CLUBS_JSON__: JSON.stringify(clubsJson),
   },
   // Nakama's Goja runtime calls r.Get("InitModule") internally from registerRpc
-  // native code — needs a true property on globalThis. `var` at top level under
-  // `"use strict";` does not always surface there in Goja, so assign explicitly.
+  // native code — needs a true `function InitModule(...)` DECLARATION at script
+  // top level. `var InitModule = expr` does not hoist into Goja's script global
+  // the way a function declaration does. Wrap the IIFE export as a forwarding
+  // function declaration so registerRpc's internal lookup succeeds.
   footer: {
-    js: 'var InitModule = __bbmod.InitModule; globalThis.InitModule = InitModule;',
+    js: 'function InitModule(ctx, logger, nk, initializer) { return __bbmod.InitModule(ctx, logger, nk, initializer); }',
   },
   external: ['nakama-runtime'],
   logLevel: 'info',
