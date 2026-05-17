@@ -35,19 +35,36 @@ const FONT_LABEL := 14
 var safe_area_top: int = 0
 var safe_area_bottom: int = 34  # iOS home indicator min
 
+const THEME_PATH := "res://assets/theme/Theme.tres"
+
 func _ready() -> void:
 	var rect = DisplayServer.get_display_safe_area()
 	var screen_size = DisplayServer.screen_get_size()
 	safe_area_top = max(0, rect.position.y)
 	safe_area_bottom = max(34, screen_size.y - rect.position.y - rect.size.y)
 	print("[AppTheme] safe_area top=%d bottom=%d" % [safe_area_top, safe_area_bottom])
-	# Load global theme at runtime (avoids boot-time chicken-and-egg with font imports in CI)
-	if ResourceLoader.exists("res://assets/theme/Theme.tres"):
-		var t := load("res://assets/theme/Theme.tres") as Theme
-		if t:
-			get_tree().root.theme = t
-			print("[AppTheme] global theme applied")
-		else:
-			push_warning("[AppTheme] Theme.tres load returned null")
+	# WR-10 fix: Theme.tres carga 2 FontFile (Nunito Regular + Bold) que en
+	# mobile pueden bloquear el main thread 50-300ms con load() síncrono.
+	# Usamos load_threaded_request + check en _process. Las screens ya tienen
+	# fallback styles (theme_override_stylebox), así que el primer frame es OK
+	# sin tema y se aplica cuando termina la carga.
+	if ResourceLoader.exists(THEME_PATH):
+		ResourceLoader.load_threaded_request(THEME_PATH)
+		set_process(true)
 	else:
 		push_warning("[AppTheme] Theme.tres not found at boot (deferred until imports complete)")
+		set_process(false)
+
+func _process(_dt: float) -> void:
+	var status = ResourceLoader.load_threaded_get_status(THEME_PATH)
+	if status == ResourceLoader.THREAD_LOAD_LOADED:
+		var t := ResourceLoader.load_threaded_get(THEME_PATH) as Theme
+		if t:
+			get_tree().root.theme = t
+			print("[AppTheme] global theme applied (threaded)")
+		else:
+			push_warning("[AppTheme] Theme.tres load returned null")
+		set_process(false)
+	elif status == ResourceLoader.THREAD_LOAD_FAILED or status == ResourceLoader.THREAD_LOAD_INVALID_RESOURCE:
+		push_warning("[AppTheme] Theme.tres failed to load threaded")
+		set_process(false)
