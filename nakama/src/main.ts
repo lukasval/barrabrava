@@ -16,8 +16,8 @@ import { rpcCreatePibe } from './rpc/create_pibe';
 import { rpcDeleteAccount } from './rpc/delete_account';
 import { rpcRequestPasswordReset } from './rpc/request_password_reset';
 import { rpcConfirmPasswordReset } from './rpc/confirm_password_reset';
+import { COL_CLUBS, COL_META, SYSTEM_USER_ID } from './storage_keys';
 
-const SYSTEM_USER_ID = '00000000-0000-0000-0000-000000000000';
 const CLUBS_SEED_VERSION = 'v1';
 
 export interface Club {
@@ -37,7 +37,7 @@ function seedClubs(nk: nkruntime.Nakama, logger: nkruntime.Logger): void {
   // Idempotency check — if we already wrote the seed marker, skip.
   try {
     const existing = nk.storageRead([
-      { collection: 'meta', key: seedKey, userId: SYSTEM_USER_ID },
+      { collection: COL_META, key: seedKey, userId: SYSTEM_USER_ID },
     ]);
     if (existing.length > 0) {
       logger.info('Clubs already seeded (version=%s), skipping', CLUBS_SEED_VERSION);
@@ -57,7 +57,7 @@ function seedClubs(nk: nkruntime.Nakama, logger: nkruntime.Logger): void {
 
   // Write clubs as public-read, system-write-only (mitigates T-1-RT-09).
   const writes: nkruntime.StorageWriteRequest[] = clubs.map((club) => ({
-    collection: 'clubs',
+    collection: COL_CLUBS,
     key: club.id,
     userId: SYSTEM_USER_ID,
     value: club,
@@ -69,7 +69,7 @@ function seedClubs(nk: nkruntime.Nakama, logger: nkruntime.Logger): void {
   // Mark as seeded.
   nk.storageWrite([
     {
-      collection: 'meta',
+      collection: COL_META,
       key: seedKey,
       userId: SYSTEM_USER_ID,
       value: { seeded: true, count: clubs.length, at: Date.now() },

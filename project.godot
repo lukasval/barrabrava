@@ -24,6 +24,7 @@ NakamaService="*res://scripts/autoloads/NakamaService.gd"
 AuthManager="*res://scripts/autoloads/AuthManager.gd"
 AppTheme="*res://scripts/autoloads/AppTheme.gd"
 AppConfig="*res://scripts/autoloads/AppConfig.gd"
+StorageKeys="*res://scripts/autoloads/StorageKeys.gd"
 PlayerStore="*res://scripts/autoloads/PlayerStore.gd"
 FlowRouter="*res://scripts/autoloads/FlowRouter.gd"
 

@@ -12,8 +12,13 @@
 //
 // Mitigates T-1-RT-10: action is logged BEFORE deletion (so the audit trail survives).
 
-const SYSTEM_USER_ID = '00000000-0000-0000-0000-000000000000';
-void SYSTEM_USER_ID;
+import {
+  COL_PIBES,
+  COL_PLAYERS,
+  COL_RESET_TOKENS,
+  KEY_PIBE_MAIN,
+  KEY_PLAYER_PROFILE,
+} from '../storage_keys';
 
 export function rpcDeleteAccount(
   ctx: nkruntime.Context,
@@ -31,8 +36,8 @@ export function rpcDeleteAccount(
   // Best-effort cleanup of Storage Objects owned by this user.
   // storageDelete tolerates non-existent objects (no-op).
   const knownObjects: nkruntime.StorageDeleteRequest[] = [
-    { collection: 'pibes', key: 'main', userId },
-    { collection: 'players', key: 'profile', userId },
+    { collection: COL_PIBES, key: KEY_PIBE_MAIN, userId },
+    { collection: COL_PLAYERS, key: KEY_PLAYER_PROFILE, userId },
   ];
 
   try {
@@ -43,10 +48,10 @@ export function rpcDeleteAccount(
 
   // Also clean any password reset tokens issued to this user.
   try {
-    const tokens = nk.storageList(userId, 'reset_tokens', 100, '');
+    const tokens = nk.storageList(userId, COL_RESET_TOKENS, 100, '');
     if (tokens.objects && tokens.objects.length > 0) {
       const dels: nkruntime.StorageDeleteRequest[] = tokens.objects.map((o) => ({
-        collection: 'reset_tokens',
+        collection: COL_RESET_TOKENS,
         key: o.key,
         userId,
       }));

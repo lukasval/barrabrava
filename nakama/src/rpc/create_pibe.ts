@@ -12,8 +12,14 @@
 // Decision D-11: stats fixed at 50/50/50/50.
 
 import { validatePibeName } from '../util/validation';
-
-const SYSTEM_USER_ID = '00000000-0000-0000-0000-000000000000';
+import {
+  COL_CLUBS,
+  COL_PIBES,
+  COL_PLAYERS,
+  KEY_PIBE_MAIN,
+  KEY_PLAYER_PROFILE,
+  SYSTEM_USER_ID,
+} from '../storage_keys';
 
 interface CreatePibeInput {
   name?: unknown;
@@ -64,14 +70,14 @@ export function rpcCreatePibe(
   }
   const clubId = input.club_id;
   const clubLookup = nk.storageRead([
-    { collection: 'clubs', key: clubId, userId: SYSTEM_USER_ID },
+    { collection: COL_CLUBS, key: clubId, userId: SYSTEM_USER_ID },
   ]);
   if (clubLookup.length === 0) {
     return JSON.stringify({ ok: false, error: 'club_not_found' });
   }
 
   // One pibe per account in Phase 1.
-  const existing = nk.storageRead([{ collection: 'pibes', key: 'main', userId }]);
+  const existing = nk.storageRead([{ collection: COL_PIBES, key: KEY_PIBE_MAIN, userId }]);
   if (existing.length > 0) {
     return JSON.stringify({ ok: false, error: 'pibe_already_exists' });
   }
@@ -93,16 +99,16 @@ export function rpcCreatePibe(
 
   nk.storageWrite([
     {
-      collection: 'pibes',
-      key: 'main',
+      collection: COL_PIBES,
+      key: KEY_PIBE_MAIN,
       userId,
       value: pibe,
       permissionRead: 1, // owner read
       permissionWrite: 0, // never client-write — server only via RPC
     },
     {
-      collection: 'players',
-      key: 'profile',
+      collection: COL_PLAYERS,
+      key: KEY_PLAYER_PROFILE,
       userId,
       value: {
         display_name: name,

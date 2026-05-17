@@ -7,9 +7,10 @@
 // Input  (JSON): { division?: string, search?: string, page?: number, page_size?: number }
 // Output (JSON): { clubs: Club[], total: number, page: number, page_size: number }
 
+import { COL_CLUBS, SYSTEM_USER_ID } from '../storage_keys';
+
 const DEFAULT_PAGE_SIZE = 200;
 const MAX_PAGE_SIZE = 500;
-const SYSTEM_USER_ID = '00000000-0000-0000-0000-000000000000';
 
 interface GetClubsInput {
   division?: string;
@@ -48,7 +49,7 @@ export function rpcGetClubs(
   const all: any[] = [];
   // Cap iterations to avoid runaway loops if Storage misbehaves.
   for (let i = 0; i < 50; i++) {
-    const result = nk.storageList(SYSTEM_USER_ID, 'clubs', 100, cursor);
+    const result = nk.storageList(SYSTEM_USER_ID, COL_CLUBS, 100, cursor);
     if (result.objects && result.objects.length > 0) {
       for (let j = 0; j < result.objects.length; j++) {
         all.push(result.objects[j].value);

@@ -34,7 +34,7 @@ func load_from_server() -> Dictionary:
 		return {"ok": false, "error": "Not authenticated"}
 	var session = AuthManager.session
 	var read_req = [
-		{"collection": "players", "key": "profile", "user_id": session.user_id},
+		{"collection": StorageKeys.COL_PLAYERS, "key": StorageKeys.KEY_PLAYER_PROFILE, "user_id": session.user_id},
 	]
 	var resp = await NakamaService.client.read_storage_objects_async(session, read_req)
 	if resp.is_exception():
@@ -45,13 +45,13 @@ func load_from_server() -> Dictionary:
 	pibe_id = profile.get("pibe_id", "")
 	club_id = profile.get("club_id", "")
 	var pibe_resp = await NakamaService.client.read_storage_objects_async(session, [
-		{"collection": "pibes", "key": "main", "user_id": session.user_id},
+		{"collection": StorageKeys.COL_PIBES, "key": StorageKeys.KEY_PIBE_MAIN, "user_id": session.user_id},
 	])
 	if not pibe_resp.is_exception() and pibe_resp.objects.size() > 0:
 		var pibe = JSON.parse_string(pibe_resp.objects[0].value)
 		pibe_name = pibe.get("name", "")
 	var club_resp = await NakamaService.client.read_storage_objects_async(session, [
-		{"collection": "clubs", "key": club_id, "user_id": "00000000-0000-0000-0000-000000000000"},
+		{"collection": StorageKeys.COL_CLUBS, "key": club_id, "user_id": StorageKeys.SYSTEM_USER_ID},
 	])
 	if not club_resp.is_exception() and club_resp.objects.size() > 0:
 		var club = JSON.parse_string(club_resp.objects[0].value)
