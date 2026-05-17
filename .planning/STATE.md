@@ -1,3 +1,17 @@
+---
+gsd_state_version: 1.0
+milestone: v1.1
+milestone_name: milestone
+status: completed
+last_updated: "2026-05-17T19:49:00.103Z"
+progress:
+  total_phases: 7
+  completed_phases: 1
+  total_plans: 5
+  completed_plans: 5
+  percent: 100
+---
+
 # State: BarraBrava
 
 ## Project Reference
@@ -6,13 +20,15 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 
 **Core value:** La realidad del fútbol argentino afecta el juego en tiempo real, y cada jugador es un personaje real dentro de la barra de su club.
 
-**Current focus:** Phase 1 — Foundation ✅ COMPLETE. Ready to plan Phase 2 — Heartbeat AFA.
+**Current focus:** Phase 2 — Heartbeat AFA. Context captured. Ready for research + planning.
 
 ## Current Phase
 
-**Phase:** 1 — Foundation
-**Status:** ✅ COMPLETE (2026-05-17). All 5 plans executed end-to-end.
-**Next action:** Run `/gsd-plan-phase 2` to start Phase 2 — Heartbeat AFA.
+**Phase:** 2 — Heartbeat AFA
+**Status:** 📝 Context gathered (2026-05-17). `02-CONTEXT.md` + `02-DISCUSSION-LOG.md` committed. 27 decisions locked (D-01..D-27).
+**Next action:** Re-run `/gsd-plan-phase 2` to spawn researcher + planner.
+
+**Phase 1:** ✅ COMPLETE (2026-05-17). All 5 plans executed end-to-end.
 
 ### Phase 1 Plans — Final Status
 
@@ -69,6 +85,7 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 - 2026-05-17: Wave 3 Plan 01-04 complete — 7 onboarding screens (Splash, Auth, ForgotPassword, ClubPicker, PibeCreator, Tutorial, Home) + 3 reusable components + FlowRouter/PlayerStore/AppConfig autoloads
 - 2026-05-17: Wave 3 Plan 01-05 complete — privacy/terms/reset web pages LIVE on GitHub Pages; AppConfig PRV-05 asserts; AcceptTerms consent gate in AuthScreen; AAIP-REGISTRATION + LEGAL-NOTES docs
 - 2026-05-17: ✅ PHASE 1 FOUNDATION COMPLETE — repo public, all infra live, all checkpoints closed
+- 2026-05-17: Phase 2 context gathered via /gsd-discuss-phase (`02-CONTEXT.md` + `02-DISCUSSION-LOG.md`). 27 decisions logged (D-01..D-27). User delegó decisiones técnicas a Claude — scheduler in-process Nakama timer, FCM topics+tokens híbrido, admin RPCs vía curl, Resend wired internamente detrás de feature flag (activación real diferida a Phase 6/7 pendiente compra de dominio), scraping lower divisions diferido a v1.1.
 
 ## Open Decisions (rolled into Phase 2+ planning)
 
@@ -86,4 +103,4 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 - 5-6 months target to v1 soft launch
 
 ---
-*Last updated: 2026-05-17 — Phase 1 Foundation COMPLETE; ready for `/gsd-plan-phase 2`*
+*Last updated: 2026-05-17 — Phase 2 context captured; re-run `/gsd-plan-phase 2` para research + plan.*
