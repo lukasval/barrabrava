@@ -21,8 +21,9 @@
 
 ### Marco de propiedad intelectual (AFA + clubes)
 - **Riesgo alto** — uso de nombres de clubes argentinos reales en parodia.
-- **Mitigación Phase 1:** TODOS los clubes usan nombres lunfardo / parodia (ej. River → "Los Millos", Boca → "La Mitad+1"). Nunca nombres oficiales.
-- **Mitigación Phase 1:** paletas de color "loosely inspired", NO copia directa de escudos oficiales (8 arquetipos geométricos: STRIPE/CROWN/SHIELD/STAR/CROSS/WAVE/SUN/EAGLE).
+- **Mitigación Phase 1 (DISPLAY):** TODO lo que ve el jugador usa nombres lunfardo / parodia (ej. River → "Los Millos", Boca → "La Mitad+1", Argentinos → "El Bicho"). Cliente Godot (`ClubCard.gd`, `ClubPickerScreen.gd`) solo renderiza `lunfardo_name`, nunca `id`.
+- **Concesión 2026-05-17 (INTERNAL IDs):** los `id` de Storage / API responses usan slugs de nombre real (`boca_juniors`, `river_plate`, `argentinos_juniors`) para facilitar al dev mantener el catálogo de 153 clubes. **Estos IDs no se muestran en UI** — solo aparecen en network responses crudas, logs server-side, y Postgres Storage keys. Mitigación adicional pendiente: en Phase 7 pre-launch revisar si conviene reemplazar IDs por hash opaco (ej. `c_a3f9b2`) para borrar incluso esa exposición técnica antes de soft launch.
+- **Mitigación Phase 1:** paletas de color "loosely inspired", NO copia directa de escudos oficiales. 8 archetypes en uso: `shield_curved`, `shield_pointed`, `classic_horizontal_stripe`, `classic_vertical_stripe`, `sash`, `oval_crest`, `circle_crest`, `quarters`.
 - **Pre-launch:** revisión por abogado IP argentino (presupuesto $$$). Verificar si la parodia caricaturesca cumple "uso lícito" o si requiere licencia AFA (negociación posible).
 - **Pre-launch:** revisión App Store / Google Play guidelines sobre uso de marcas deportivas en juegos.
 

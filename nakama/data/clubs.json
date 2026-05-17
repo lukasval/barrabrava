@@ -1,139 +1,1991 @@
 [
-  { "id": "millos_de_nunez",         "lunfardo_name": "Los Millos",            "division": "Primera",       "division_rank": 1,  "colors": { "primary": "#FFFFFF", "secondary": "#C8102E" }, "shield_archetype": "sash",                    "barrio_hq": "Núñez",           "city": "Buenos Aires" },
-  { "id": "xeneizes_de_la_ribera",   "lunfardo_name": "La Mitad+1",            "division": "Primera",       "division_rank": 2,  "colors": { "primary": "#003087", "secondary": "#FFD100" }, "shield_archetype": "classic_horizontal_stripe", "barrio_hq": "La Boca",         "city": "Buenos Aires" },
-  { "id": "academia_de_avellaneda",  "lunfardo_name": "La Academia",           "division": "Primera",       "division_rank": 3,  "colors": { "primary": "#76B5E0", "secondary": "#FFFFFF" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Avellaneda",      "city": "Buenos Aires" },
-  { "id": "diablos_rojos_avellaneda","lunfardo_name": "Los Diablos",           "division": "Primera",       "division_rank": 4,  "colors": { "primary": "#C8102E", "secondary": "#FFFFFF" }, "shield_archetype": "shield_pointed",            "barrio_hq": "Avellaneda",      "city": "Buenos Aires" },
-  { "id": "cuervos_de_boedo",        "lunfardo_name": "Los Cuervos",           "division": "Primera",       "division_rank": 5,  "colors": { "primary": "#003087", "secondary": "#C8102E" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Boedo",           "city": "Buenos Aires" },
-  { "id": "fortineros_de_liniers",   "lunfardo_name": "El Fortín",             "division": "Primera",       "division_rank": 6,  "colors": { "primary": "#003087", "secondary": "#FFFFFF" }, "shield_archetype": "shield_curved",             "barrio_hq": "Liniers",         "city": "Buenos Aires" },
-  { "id": "globo_de_parque_patricios","lunfardo_name": "El Globo",             "division": "Primera",       "division_rank": 7,  "colors": { "primary": "#FFFFFF", "secondary": "#C8102E" }, "shield_archetype": "circle_crest",              "barrio_hq": "Parque Patricios","city": "Buenos Aires" },
-  { "id": "bicho_colorado_caballito","lunfardo_name": "El Bicho",              "division": "Primera",       "division_rank": 8,  "colors": { "primary": "#C8102E", "secondary": "#FFFFFF" }, "shield_archetype": "oval_crest",                "barrio_hq": "Caballito",       "city": "Buenos Aires" },
-  { "id": "tricolor_de_saavedra",    "lunfardo_name": "El Tricolor",           "division": "Primera",       "division_rank": 9,  "colors": { "primary": "#C8102E", "secondary": "#003087" }, "shield_archetype": "classic_horizontal_stripe", "barrio_hq": "Saavedra",        "city": "Buenos Aires" },
-  { "id": "calamares_de_la_plata",   "lunfardo_name": "El Pincha",             "division": "Primera",       "division_rank": 10, "colors": { "primary": "#C8102E", "secondary": "#FFFFFF" }, "shield_archetype": "shield_pointed",            "barrio_hq": "City Bell",       "city": "La Plata" },
-  { "id": "tripero_de_la_plata",     "lunfardo_name": "El Lobo",               "division": "Primera",       "division_rank": 11, "colors": { "primary": "#003087", "secondary": "#FFFFFF" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "El Bosque",       "city": "La Plata" },
-  { "id": "tatengue_del_litoral",    "lunfardo_name": "El Tatengue",           "division": "Primera",       "division_rank": 12, "colors": { "primary": "#C8102E", "secondary": "#FFFFFF" }, "shield_archetype": "sash",                      "barrio_hq": "Centro",          "city": "Santa Fe" },
-  { "id": "sabaleros_del_norte",     "lunfardo_name": "El Sabalero",           "division": "Primera",       "division_rank": 13, "colors": { "primary": "#FFD100", "secondary": "#000000" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Barrio Centenario","city": "Santa Fe" },
-  { "id": "leprosos_rosarinos",      "lunfardo_name": "Los Leprosos",          "division": "Primera",       "division_rank": 14, "colors": { "primary": "#C8102E", "secondary": "#000000" }, "shield_archetype": "quarters",                  "barrio_hq": "Arroyito",        "city": "Rosario" },
-  { "id": "canallas_rosarinos",      "lunfardo_name": "Los Canallas",          "division": "Primera",       "division_rank": 15, "colors": { "primary": "#003087", "secondary": "#FFD100" }, "shield_archetype": "classic_horizontal_stripe", "barrio_hq": "Arroyito",        "city": "Rosario" },
-  { "id": "verdolaga_del_norte",     "lunfardo_name": "La Lepra Verde",        "division": "Primera",       "division_rank": 16, "colors": { "primary": "#00843D", "secondary": "#FFFFFF" }, "shield_archetype": "shield_curved",             "barrio_hq": "Parque San Martín","city": "Mendoza" },
-  { "id": "tomba_cuyano",            "lunfardo_name": "El Tomba",              "division": "Primera",       "division_rank": 17, "colors": { "primary": "#003087", "secondary": "#FFFFFF" }, "shield_archetype": "shield_pointed",            "barrio_hq": "General Las Heras","city": "Mendoza" },
-  { "id": "lobo_cordobes",           "lunfardo_name": "La T",                  "division": "Primera",       "division_rank": 18, "colors": { "primary": "#003087", "secondary": "#FFFFFF" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Alberdi",         "city": "Córdoba" },
-  { "id": "pirata_cordobes",         "lunfardo_name": "El Pirata",             "division": "Primera",       "division_rank": 19, "colors": { "primary": "#003087", "secondary": "#FFFFFF" }, "shield_archetype": "shield_curved",             "barrio_hq": "Alta Córdoba",    "city": "Córdoba" },
-  { "id": "guarani_correntino",      "lunfardo_name": "El Guaraní",            "division": "Primera",       "division_rank": 20, "colors": { "primary": "#C8102E", "secondary": "#000000" }, "shield_archetype": "shield_pointed",            "barrio_hq": "Centro",          "city": "Corrientes" },
-  { "id": "carbonero_del_sur",       "lunfardo_name": "El Carbonero",          "division": "Primera",       "division_rank": 21, "colors": { "primary": "#000000", "secondary": "#FFFFFF" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Mar del Plata",   "city": "Mar del Plata" },
-  { "id": "azulgrana_del_sur",       "lunfardo_name": "El Azulgrana",          "division": "Primera",       "division_rank": 22, "colors": { "primary": "#003087", "secondary": "#C8102E" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Centro",          "city": "Mar del Plata" },
-  { "id": "verde_de_san_juan",       "lunfardo_name": "El Verde",              "division": "Primera",       "division_rank": 23, "colors": { "primary": "#00843D", "secondary": "#FFFFFF" }, "shield_archetype": "shield_curved",             "barrio_hq": "Concepción",      "city": "San Juan" },
-  { "id": "santo_de_almagro",        "lunfardo_name": "El Ciclón Chico",       "division": "Primera",       "division_rank": 24, "colors": { "primary": "#003087", "secondary": "#FFFFFF" }, "shield_archetype": "circle_crest",              "barrio_hq": "Almagro",         "city": "Buenos Aires" },
-  { "id": "tibu_de_jose_c_paz",      "lunfardo_name": "El Tiburón",            "division": "Primera",       "division_rank": 25, "colors": { "primary": "#76B5E0", "secondary": "#FFFFFF" }, "shield_archetype": "oval_crest",                "barrio_hq": "José C. Paz",     "city": "Buenos Aires" },
-  { "id": "santo_del_norte",         "lunfardo_name": "El Santo",              "division": "Primera",       "division_rank": 26, "colors": { "primary": "#FFFFFF", "secondary": "#000000" }, "shield_archetype": "shield_pointed",            "barrio_hq": "Centro",          "city": "Tucumán" },
-  { "id": "decano_tucumano",         "lunfardo_name": "El Decano",             "division": "Primera",       "division_rank": 27, "colors": { "primary": "#003087", "secondary": "#FFFFFF" }, "shield_archetype": "classic_horizontal_stripe", "barrio_hq": "Centro",          "city": "Tucumán" },
-  { "id": "azul_de_cordoba_sur",     "lunfardo_name": "El Azul",               "division": "Primera",       "division_rank": 28, "colors": { "primary": "#003087", "secondary": "#FFFFFF" }, "shield_archetype": "circle_crest",              "barrio_hq": "Río Cuarto",      "city": "Río Cuarto" },
-
-  { "id": "ferro_de_caballito",      "lunfardo_name": "El Ferro",              "division": "Nacional",      "division_rank": 1,  "colors": { "primary": "#00843D", "secondary": "#FFFFFF" }, "shield_archetype": "classic_horizontal_stripe", "barrio_hq": "Caballito",       "city": "Buenos Aires" },
-  { "id": "atlanta_de_villa_crespo", "lunfardo_name": "El Bohemio",            "division": "Nacional",      "division_rank": 2,  "colors": { "primary": "#FFD100", "secondary": "#003087" }, "shield_archetype": "oval_crest",                "barrio_hq": "Villa Crespo",    "city": "Buenos Aires" },
-  { "id": "chacarita_de_san_martin", "lunfardo_name": "El Funebrero",          "division": "Nacional",      "division_rank": 3,  "colors": { "primary": "#C8102E", "secondary": "#000000" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "San Martín",      "city": "Buenos Aires" },
-  { "id": "almagro_de_jose_ingenieros","lunfardo_name": "El Tricolor del Oeste","division": "Nacional",     "division_rank": 4,  "colors": { "primary": "#003087", "secondary": "#000000" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Tres de Febrero", "city": "Buenos Aires" },
-  { "id": "nueva_chicago_mataderos", "lunfardo_name": "El Torito",             "division": "Nacional",      "division_rank": 5,  "colors": { "primary": "#00843D", "secondary": "#000000" }, "shield_archetype": "shield_curved",             "barrio_hq": "Mataderos",       "city": "Buenos Aires" },
-  { "id": "all_boys_floresta",       "lunfardo_name": "Los Albos",             "division": "Nacional",      "division_rank": 6,  "colors": { "primary": "#FFFFFF", "secondary": "#000000" }, "shield_archetype": "oval_crest",                "barrio_hq": "Floresta",        "city": "Buenos Aires" },
-  { "id": "deportivo_moron",         "lunfardo_name": "El Gallo",              "division": "Nacional",      "division_rank": 7,  "colors": { "primary": "#C8102E", "secondary": "#FFFFFF" }, "shield_archetype": "shield_pointed",            "barrio_hq": "Morón",           "city": "Buenos Aires" },
-  { "id": "tigre_de_victoria",       "lunfardo_name": "El Matador",            "division": "Nacional",      "division_rank": 8,  "colors": { "primary": "#003087", "secondary": "#C8102E" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Victoria",        "city": "Buenos Aires" },
-  { "id": "platense_de_vicente_lopez","lunfardo_name": "El Calamar",           "division": "Nacional",      "division_rank": 9,  "colors": { "primary": "#7A4C1F", "secondary": "#FFFFFF" }, "shield_archetype": "classic_horizontal_stripe", "barrio_hq": "Vicente López",   "city": "Buenos Aires" },
-  { "id": "talleres_de_remedios",    "lunfardo_name": "El Albirrojo de Esca",  "division": "Nacional",      "division_rank": 10, "colors": { "primary": "#FFFFFF", "secondary": "#C8102E" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Escalada",        "city": "Buenos Aires" },
-  { "id": "temperley_de_lomas",      "lunfardo_name": "El Gasolero",           "division": "Nacional",      "division_rank": 11, "colors": { "primary": "#76B5E0", "secondary": "#FFFFFF" }, "shield_archetype": "circle_crest",              "barrio_hq": "Lomas de Zamora", "city": "Buenos Aires" },
-  { "id": "los_andes_de_lomas",      "lunfardo_name": "El Milrayitas",         "division": "Nacional",      "division_rank": 12, "colors": { "primary": "#C8102E", "secondary": "#FFFFFF" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Lomas de Zamora", "city": "Buenos Aires" },
-  { "id": "deportivo_riestra",       "lunfardo_name": "El Malevo",             "division": "Nacional",      "division_rank": 13, "colors": { "primary": "#FFFFFF", "secondary": "#000000" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Bajo Flores",     "city": "Buenos Aires" },
-  { "id": "deportivo_armenio",       "lunfardo_name": "El Tricolor de Armenia","division": "Nacional",      "division_rank": 14, "colors": { "primary": "#C8102E", "secondary": "#003087" }, "shield_archetype": "shield_curved",             "barrio_hq": "Ingeniero Maschwitz","city": "Buenos Aires" },
-  { "id": "estudiantes_de_caseros",  "lunfardo_name": "El Profesor de Caseros","division": "Nacional",      "division_rank": 15, "colors": { "primary": "#FFFFFF", "secondary": "#C8102E" }, "shield_archetype": "shield_pointed",            "barrio_hq": "Caseros",         "city": "Buenos Aires" },
-  { "id": "san_telmo_de_isla",       "lunfardo_name": "El Candombero",         "division": "Nacional",      "division_rank": 16, "colors": { "primary": "#003087", "secondary": "#FFFFFF" }, "shield_archetype": "oval_crest",                "barrio_hq": "Isla Maciel",     "city": "Buenos Aires" },
-  { "id": "comunicaciones_de_agronomia","lunfardo_name": "El Cartero",         "division": "Nacional",      "division_rank": 17, "colors": { "primary": "#FFD100", "secondary": "#003087" }, "shield_archetype": "circle_crest",              "barrio_hq": "Agronomía",       "city": "Buenos Aires" },
-  { "id": "colegiales_de_munro",     "lunfardo_name": "El Tricolor del Oeste II","division": "Nacional",    "division_rank": 18, "colors": { "primary": "#003087", "secondary": "#C8102E" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Munro",           "city": "Buenos Aires" },
-  { "id": "barracas_central",        "lunfardo_name": "El Guapo",              "division": "Nacional",      "division_rank": 19, "colors": { "primary": "#FFFFFF", "secondary": "#000000" }, "shield_archetype": "shield_pointed",            "barrio_hq": "Barracas",        "city": "Buenos Aires" },
-  { "id": "central_cordoba_sde",     "lunfardo_name": "El Ferroviario",        "division": "Nacional",      "division_rank": 20, "colors": { "primary": "#000000", "secondary": "#FFFFFF" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Santiago Centro", "city": "Santiago del Estero" },
-  { "id": "mitre_de_santiago",       "lunfardo_name": "El Aurinegro",          "division": "Nacional",      "division_rank": 21, "colors": { "primary": "#FFD100", "secondary": "#000000" }, "shield_archetype": "classic_horizontal_stripe", "barrio_hq": "Santiago Centro", "city": "Santiago del Estero" },
-  { "id": "guemes_de_santiago",      "lunfardo_name": "El Gaucho de Güemes",   "division": "Nacional",      "division_rank": 22, "colors": { "primary": "#003087", "secondary": "#FFFFFF" }, "shield_archetype": "shield_curved",             "barrio_hq": "Centro",          "city": "Santiago del Estero" },
-  { "id": "agropecuario_de_carlos_casares","lunfardo_name": "El Sojero",       "division": "Nacional",      "division_rank": 23, "colors": { "primary": "#FFD100", "secondary": "#00843D" }, "shield_archetype": "oval_crest",                "barrio_hq": "Carlos Casares",  "city": "Buenos Aires" },
-  { "id": "estudiantes_de_rio_cuarto","lunfardo_name": "El León de Río Cuarto","division": "Nacional",      "division_rank": 24, "colors": { "primary": "#C8102E", "secondary": "#FFFFFF" }, "shield_archetype": "shield_pointed",            "barrio_hq": "Río Cuarto",      "city": "Río Cuarto" },
-  { "id": "racing_de_cordoba",       "lunfardo_name": "La Academia Cordobesa", "division": "Nacional",      "division_rank": 25, "colors": { "primary": "#76B5E0", "secondary": "#FFFFFF" }, "shield_archetype": "circle_crest",              "barrio_hq": "Nueva Italia",    "city": "Córdoba" },
-  { "id": "instituto_de_alta_cordoba","lunfardo_name": "La Gloria",            "division": "Nacional",      "division_rank": 26, "colors": { "primary": "#C8102E", "secondary": "#FFFFFF" }, "shield_archetype": "shield_curved",             "barrio_hq": "Alta Córdoba",    "city": "Córdoba" },
-  { "id": "atletico_de_rafaela",     "lunfardo_name": "La Crema",              "division": "Nacional",      "division_rank": 27, "colors": { "primary": "#76B5E0", "secondary": "#FFFFFF" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Rafaela",         "city": "Rafaela" },
-  { "id": "patronato_de_parana",     "lunfardo_name": "El Patrón",             "division": "Nacional",      "division_rank": 28, "colors": { "primary": "#C8102E", "secondary": "#000000" }, "shield_archetype": "oval_crest",                "barrio_hq": "Paraná",          "city": "Paraná" },
-  { "id": "san_martin_de_tucuman",   "lunfardo_name": "El Ciruja",             "division": "Nacional",      "division_rank": 29, "colors": { "primary": "#C8102E", "secondary": "#FFFFFF" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Centro",          "city": "Tucumán" },
-  { "id": "almirante_brown_de_isidro","lunfardo_name": "La Fragata",           "division": "Nacional",      "division_rank": 30, "colors": { "primary": "#FFD100", "secondary": "#000000" }, "shield_archetype": "shield_pointed",            "barrio_hq": "Isidro Casanova", "city": "Buenos Aires" },
-  { "id": "deportivo_madryn",        "lunfardo_name": "El Aurinegro del Sur",  "division": "Nacional",      "division_rank": 31, "colors": { "primary": "#FFD100", "secondary": "#000000" }, "shield_archetype": "classic_horizontal_stripe", "barrio_hq": "Puerto Madryn",   "city": "Puerto Madryn" },
-  { "id": "alvarado_de_mar_del_plata","lunfardo_name": "El Torito Marplatense","division": "Nacional",      "division_rank": 32, "colors": { "primary": "#C8102E", "secondary": "#FFFFFF" }, "shield_archetype": "circle_crest",              "barrio_hq": "Mar del Plata",   "city": "Mar del Plata" },
-  { "id": "san_martin_de_san_juan",  "lunfardo_name": "El Verdinegro",         "division": "Nacional",      "division_rank": 33, "colors": { "primary": "#00843D", "secondary": "#000000" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Concepción",      "city": "San Juan" },
-  { "id": "chacarita_juniors_ii",    "lunfardo_name": "El Fune Visitante",     "division": "Nacional",      "division_rank": 34, "colors": { "primary": "#C8102E", "secondary": "#000000" }, "shield_archetype": "shield_curved",             "barrio_hq": "Villa Crespo",    "city": "Buenos Aires" },
-  { "id": "defensores_de_belgrano",  "lunfardo_name": "El Dragón",             "division": "Nacional",      "division_rank": 35, "colors": { "primary": "#C8102E", "secondary": "#000000" }, "shield_archetype": "shield_pointed",            "barrio_hq": "Núñez",           "city": "Buenos Aires" },
-  { "id": "quilmes_atletico",        "lunfardo_name": "El Cervecero",          "division": "Nacional",      "division_rank": 36, "colors": { "primary": "#FFFFFF", "secondary": "#76B5E0" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Quilmes",         "city": "Buenos Aires" },
-  { "id": "gimnasia_de_jujuy",       "lunfardo_name": "El Lobo Jujeño",        "division": "Nacional",      "division_rank": 37, "colors": { "primary": "#003087", "secondary": "#FFFFFF" }, "shield_archetype": "oval_crest",                "barrio_hq": "San Salvador",    "city": "Jujuy" },
-  { "id": "gimnasia_de_mendoza",     "lunfardo_name": "El Lobo Mendocino",     "division": "Nacional",      "division_rank": 38, "colors": { "primary": "#003087", "secondary": "#FFFFFF" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Capital",         "city": "Mendoza" },
-
-  { "id": "deportivo_armenio_b",     "lunfardo_name": "El Tricolor Visitante", "division": "B Metro",       "division_rank": 1,  "colors": { "primary": "#C8102E", "secondary": "#003087" }, "shield_archetype": "shield_curved",             "barrio_hq": "Ingeniero Maschwitz","city": "Buenos Aires" },
-  { "id": "acassuso_de_san_isidro",  "lunfardo_name": "El Quemero",            "division": "B Metro",       "division_rank": 2,  "colors": { "primary": "#003087", "secondary": "#FFD100" }, "shield_archetype": "oval_crest",                "barrio_hq": "San Isidro",      "city": "Buenos Aires" },
-  { "id": "argentino_de_quilmes",    "lunfardo_name": "El Mate",               "division": "B Metro",       "division_rank": 3,  "colors": { "primary": "#FFFFFF", "secondary": "#000000" }, "shield_archetype": "shield_pointed",            "barrio_hq": "Quilmes",         "city": "Buenos Aires" },
-  { "id": "deportivo_armenio_bm",    "lunfardo_name": "El Armenio del Norte",  "division": "B Metro",       "division_rank": 4,  "colors": { "primary": "#C8102E", "secondary": "#003087" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Vicente López",   "city": "Buenos Aires" },
-  { "id": "deportivo_merlo",         "lunfardo_name": "El Charro",             "division": "B Metro",       "division_rank": 5,  "colors": { "primary": "#FFD100", "secondary": "#00843D" }, "shield_archetype": "shield_curved",             "barrio_hq": "Merlo",           "city": "Buenos Aires" },
-  { "id": "excursionistas_de_belgrano","lunfardo_name": "El Cebollita",        "division": "B Metro",       "division_rank": 6,  "colors": { "primary": "#FFFFFF", "secondary": "#00843D" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Belgrano",        "city": "Buenos Aires" },
-  { "id": "flandria_de_jauregui",    "lunfardo_name": "El Canario de Flandria","division": "B Metro",       "division_rank": 7,  "colors": { "primary": "#FFD100", "secondary": "#003087" }, "shield_archetype": "oval_crest",                "barrio_hq": "Jáuregui",        "city": "Buenos Aires" },
-  { "id": "fenix_de_pilar",          "lunfardo_name": "El Ave Fénix",          "division": "B Metro",       "division_rank": 8,  "colors": { "primary": "#C8102E", "secondary": "#FFFFFF" }, "shield_archetype": "shield_pointed",            "barrio_hq": "Pilar",           "city": "Buenos Aires" },
-  { "id": "ituzaingo_de_buenos_aires","lunfardo_name": "El León del Oeste",    "division": "B Metro",       "division_rank": 9,  "colors": { "primary": "#FFFFFF", "secondary": "#003087" }, "shield_archetype": "circle_crest",              "barrio_hq": "Ituzaingó",       "city": "Buenos Aires" },
-  { "id": "justo_jose_de_urquiza",   "lunfardo_name": "El Cebollita Verde",    "division": "B Metro",       "division_rank": 10, "colors": { "primary": "#00843D", "secondary": "#FFFFFF" }, "shield_archetype": "oval_crest",                "barrio_hq": "Caseros",         "city": "Buenos Aires" },
-  { "id": "lugano_villa_lugano",     "lunfardo_name": "El Lugano",             "division": "B Metro",       "division_rank": 11, "colors": { "primary": "#003087", "secondary": "#FFFFFF" }, "shield_archetype": "shield_curved",             "barrio_hq": "Villa Lugano",    "city": "Buenos Aires" },
-  { "id": "midland_de_libertad",     "lunfardo_name": "El Funebrero del Sur",  "division": "B Metro",       "division_rank": 12, "colors": { "primary": "#C8102E", "secondary": "#000000" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Libertad",        "city": "Buenos Aires" },
-  { "id": "puerto_nuevo_de_campana", "lunfardo_name": "El Portuario",          "division": "B Metro",       "division_rank": 13, "colors": { "primary": "#003087", "secondary": "#FFFFFF" }, "shield_archetype": "oval_crest",                "barrio_hq": "Campana",         "city": "Buenos Aires" },
-  { "id": "san_miguel_de_san_miguel","lunfardo_name": "El Trueno Verde",       "division": "B Metro",       "division_rank": 14, "colors": { "primary": "#00843D", "secondary": "#FFFFFF" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "San Miguel",      "city": "Buenos Aires" },
-  { "id": "sportivo_italiano",       "lunfardo_name": "El Tano",               "division": "B Metro",       "division_rank": 15, "colors": { "primary": "#003087", "secondary": "#C8102E" }, "shield_archetype": "shield_pointed",            "barrio_hq": "Ciudad Evita",    "city": "Buenos Aires" },
-  { "id": "uai_urquiza_de_villa_lynch","lunfardo_name": "El Furgón",           "division": "B Metro",       "division_rank": 16, "colors": { "primary": "#FFD100", "secondary": "#003087" }, "shield_archetype": "circle_crest",              "barrio_hq": "Villa Lynch",     "city": "Buenos Aires" },
-  { "id": "villa_san_carlos_berisso","lunfardo_name": "El Celeste Berissense", "division": "B Metro",       "division_rank": 17, "colors": { "primary": "#76B5E0", "secondary": "#FFFFFF" }, "shield_archetype": "oval_crest",                "barrio_hq": "Berisso",         "city": "Berisso" },
-
-  { "id": "boca_unidos_corrientes",  "lunfardo_name": "El Aurirrojo",          "division": "Federal A",     "division_rank": 1,  "colors": { "primary": "#FFD100", "secondary": "#C8102E" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Centro",          "city": "Corrientes" },
-  { "id": "crucero_del_norte",       "lunfardo_name": "El Colectivero",        "division": "Federal A",     "division_rank": 2,  "colors": { "primary": "#FFFFFF", "secondary": "#003087" }, "shield_archetype": "shield_curved",             "barrio_hq": "Garupá",          "city": "Misiones" },
-  { "id": "sarmiento_de_resistencia","lunfardo_name": "El Verde Chaqueño",     "division": "Federal A",     "division_rank": 3,  "colors": { "primary": "#00843D", "secondary": "#FFFFFF" }, "shield_archetype": "oval_crest",                "barrio_hq": "Resistencia",     "city": "Chaco" },
-  { "id": "chaco_for_ever",          "lunfardo_name": "El Eterno",             "division": "Federal A",     "division_rank": 4,  "colors": { "primary": "#000000", "secondary": "#FFFFFF" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Resistencia",     "city": "Chaco" },
-  { "id": "douglas_haig_de_pergamino","lunfardo_name": "El Faro",              "division": "Federal A",     "division_rank": 5,  "colors": { "primary": "#C8102E", "secondary": "#FFFFFF" }, "shield_archetype": "shield_pointed",            "barrio_hq": "Pergamino",       "city": "Buenos Aires" },
-  { "id": "estudiantes_de_san_luis", "lunfardo_name": "El Pincha del Cuyo",    "division": "Federal A",     "division_rank": 6,  "colors": { "primary": "#FFFFFF", "secondary": "#C8102E" }, "shield_archetype": "shield_pointed",            "barrio_hq": "San Luis",        "city": "San Luis" },
-  { "id": "gimnasia_y_tiro_de_salta","lunfardo_name": "El Albo Salteño",       "division": "Federal A",     "division_rank": 7,  "colors": { "primary": "#FFFFFF", "secondary": "#000000" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Salta Capital",   "city": "Salta" },
-  { "id": "central_norte_de_salta",  "lunfardo_name": "El Cuervo Salteño",     "division": "Federal A",     "division_rank": 8,  "colors": { "primary": "#000000", "secondary": "#FFD100" }, "shield_archetype": "oval_crest",                "barrio_hq": "Salta Capital",   "city": "Salta" },
-  { "id": "juventud_unida_universitario","lunfardo_name": "El Universitario",  "division": "Federal A",     "division_rank": 9,  "colors": { "primary": "#003087", "secondary": "#FFFFFF" }, "shield_archetype": "circle_crest",              "barrio_hq": "San Luis",        "city": "San Luis" },
-  { "id": "kimberley_de_mar_del_plata","lunfardo_name": "El Dragón Marplatense","division": "Federal A",    "division_rank": 10, "colors": { "primary": "#FFD100", "secondary": "#000000" }, "shield_archetype": "shield_pointed",            "barrio_hq": "Mar del Plata",   "city": "Mar del Plata" },
-  { "id": "circulo_deportivo_otamendi","lunfardo_name": "El Círculo",          "division": "Federal A",     "division_rank": 11, "colors": { "primary": "#003087", "secondary": "#FFFFFF" }, "shield_archetype": "circle_crest",              "barrio_hq": "Otamendi",        "city": "Buenos Aires" },
-  { "id": "olimpo_de_bahia_blanca",  "lunfardo_name": "El Aurinegro del Sur II","division": "Federal A",    "division_rank": 12, "colors": { "primary": "#FFD100", "secondary": "#000000" }, "shield_archetype": "shield_curved",             "barrio_hq": "Bahía Blanca",    "city": "Bahía Blanca" },
-  { "id": "villa_mitre_bahia",       "lunfardo_name": "El Tricolor Bahiense",  "division": "Federal A",     "division_rank": 13, "colors": { "primary": "#FFFFFF", "secondary": "#C8102E" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Bahía Blanca",    "city": "Bahía Blanca" },
-  { "id": "sansinena_de_general_cerri","lunfardo_name": "El Sanci",            "division": "Federal A",     "division_rank": 14, "colors": { "primary": "#003087", "secondary": "#FFD100" }, "shield_archetype": "oval_crest",                "barrio_hq": "General Cerri",   "city": "Bahía Blanca" },
-  { "id": "huracan_las_heras",       "lunfardo_name": "El Globito de Las Heras","division": "Federal A",    "division_rank": 15, "colors": { "primary": "#FFFFFF", "secondary": "#C8102E" }, "shield_archetype": "circle_crest",              "barrio_hq": "Las Heras",       "city": "Mendoza" },
-  { "id": "independiente_de_chivilcoy","lunfardo_name": "El Rojo del Oeste",   "division": "Federal A",     "division_rank": 16, "colors": { "primary": "#C8102E", "secondary": "#FFFFFF" }, "shield_archetype": "shield_pointed",            "barrio_hq": "Chivilcoy",       "city": "Buenos Aires" },
-  { "id": "ciudad_de_bovril",        "lunfardo_name": "El Bovrilense",         "division": "Federal A",     "division_rank": 17, "colors": { "primary": "#76B5E0", "secondary": "#FFFFFF" }, "shield_archetype": "oval_crest",                "barrio_hq": "Bovril",          "city": "Entre Ríos" },
-  { "id": "racing_de_chivilcoy",     "lunfardo_name": "La Academia Chivilcoyana","division": "Federal A",   "division_rank": 18, "colors": { "primary": "#76B5E0", "secondary": "#FFFFFF" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Chivilcoy",       "city": "Buenos Aires" },
-  { "id": "social_y_atletico_de_la_pampa","lunfardo_name": "El Pampeano",      "division": "Federal A",     "division_rank": 19, "colors": { "primary": "#00843D", "secondary": "#FFFFFF" }, "shield_archetype": "shield_curved",             "barrio_hq": "Santa Rosa",      "city": "La Pampa" },
-  { "id": "san_lorenzo_de_alem",     "lunfardo_name": "El Cuervo Misionero",   "division": "Federal A",     "division_rank": 20, "colors": { "primary": "#003087", "secondary": "#C8102E" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Alem",            "city": "Misiones" },
-  { "id": "andino_de_la_rioja",      "lunfardo_name": "El Andino",             "division": "Federal A",     "division_rank": 21, "colors": { "primary": "#FFFFFF", "secondary": "#000000" }, "shield_archetype": "shield_pointed",            "barrio_hq": "La Rioja",        "city": "La Rioja" },
-  { "id": "defensores_de_pronunciamiento","lunfardo_name": "El Defe",          "division": "Federal A",     "division_rank": 22, "colors": { "primary": "#003087", "secondary": "#FFFFFF" }, "shield_archetype": "oval_crest",                "barrio_hq": "Pronunciamiento", "city": "Entre Ríos" },
-  { "id": "sportivo_belgrano_san_francisco","lunfardo_name": "El Verde Sanfra","division": "Federal A",     "division_rank": 23, "colors": { "primary": "#00843D", "secondary": "#FFFFFF" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "San Francisco",   "city": "Córdoba" },
-  { "id": "deportivo_maipu",         "lunfardo_name": "El Cruzado",            "division": "Federal A",     "division_rank": 24, "colors": { "primary": "#C8102E", "secondary": "#000000" }, "shield_archetype": "shield_curved",             "barrio_hq": "Maipú",           "city": "Mendoza" },
-  { "id": "ferro_de_general_pico",   "lunfardo_name": "El Verde Picaño",       "division": "Federal A",     "division_rank": 25, "colors": { "primary": "#00843D", "secondary": "#FFFFFF" }, "shield_archetype": "circle_crest",              "barrio_hq": "General Pico",    "city": "La Pampa" },
-  { "id": "olimpo_de_madryn",        "lunfardo_name": "El Olimpo Sureño",      "division": "Federal A",     "division_rank": 26, "colors": { "primary": "#FFD100", "secondary": "#000000" }, "shield_archetype": "shield_pointed",            "barrio_hq": "Puerto Madryn",   "city": "Puerto Madryn" },
-  { "id": "germinal_de_rawson",      "lunfardo_name": "El Germi",              "division": "Federal A",     "division_rank": 27, "colors": { "primary": "#000000", "secondary": "#FFFFFF" }, "shield_archetype": "oval_crest",                "barrio_hq": "Rawson",          "city": "Chubut" },
-  { "id": "guillermo_brown_madryn",  "lunfardo_name": "El Almirante",          "division": "Federal A",     "division_rank": 28, "colors": { "primary": "#003087", "secondary": "#FFD100" }, "shield_archetype": "shield_curved",             "barrio_hq": "Puerto Madryn",   "city": "Puerto Madryn" },
-  { "id": "boxing_de_rio_gallegos",  "lunfardo_name": "El Boxeador",           "division": "Federal A",     "division_rank": 29, "colors": { "primary": "#C8102E", "secondary": "#FFFFFF" }, "shield_archetype": "circle_crest",              "barrio_hq": "Río Gallegos",    "city": "Santa Cruz" },
-  { "id": "deportivo_rincon",        "lunfardo_name": "El Verdolaga del Lago", "division": "Federal A",     "division_rank": 30, "colors": { "primary": "#00843D", "secondary": "#FFFFFF" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Rincón de los Sauces","city": "Neuquén" },
-
-  { "id": "argentino_de_merlo",      "lunfardo_name": "El Tricolor de Merlo",  "division": "C Metro",       "division_rank": 1,  "colors": { "primary": "#FFD100", "secondary": "#000000" }, "shield_archetype": "classic_horizontal_stripe", "barrio_hq": "Merlo",           "city": "Buenos Aires" },
-  { "id": "berazategui_fc",          "lunfardo_name": "El Naranja",            "division": "C Metro",       "division_rank": 2,  "colors": { "primary": "#FF6F00", "secondary": "#FFFFFF" }, "shield_archetype": "oval_crest",                "barrio_hq": "Berazategui",     "city": "Buenos Aires" },
-  { "id": "central_ballester",       "lunfardo_name": "El Granate del Norte",  "division": "C Metro",       "division_rank": 3,  "colors": { "primary": "#7A1F2E", "secondary": "#FFFFFF" }, "shield_archetype": "shield_pointed",            "barrio_hq": "Villa Ballester", "city": "Buenos Aires" },
-  { "id": "centro_espanol",          "lunfardo_name": "El Gallego",            "division": "C Metro",       "division_rank": 4,  "colors": { "primary": "#FFD100", "secondary": "#C8102E" }, "shield_archetype": "shield_curved",             "barrio_hq": "Hurlingham",      "city": "Buenos Aires" },
-  { "id": "claypole_de_burzaco",     "lunfardo_name": "El Tambero",            "division": "C Metro",       "division_rank": 5,  "colors": { "primary": "#FFFFFF", "secondary": "#00843D" }, "shield_archetype": "circle_crest",              "barrio_hq": "Claypole",        "city": "Buenos Aires" },
-  { "id": "deportivo_espanol",       "lunfardo_name": "El Gallego del Bajo",   "division": "C Metro",       "division_rank": 6,  "colors": { "primary": "#C8102E", "secondary": "#FFD100" }, "shield_archetype": "shield_pointed",            "barrio_hq": "Bajo Flores",     "city": "Buenos Aires" },
-  { "id": "deportivo_paraguayo",     "lunfardo_name": "El Guaraní del Conurbano","division": "C Metro",     "division_rank": 7,  "colors": { "primary": "#C8102E", "secondary": "#003087" }, "shield_archetype": "oval_crest",                "barrio_hq": "La Matanza",      "city": "Buenos Aires" },
-  { "id": "general_lamadrid",        "lunfardo_name": "El Carcelero",          "division": "C Metro",       "division_rank": 8,  "colors": { "primary": "#003087", "secondary": "#FFFFFF" }, "shield_archetype": "circle_crest",              "barrio_hq": "Villa Devoto",    "city": "Buenos Aires" },
-  { "id": "leandro_n_alem",          "lunfardo_name": "El Lechero",            "division": "C Metro",       "division_rank": 9,  "colors": { "primary": "#FFFFFF", "secondary": "#003087" }, "shield_archetype": "shield_curved",             "barrio_hq": "General Rodríguez","city": "Buenos Aires" },
-  { "id": "liniers_de_buenos_aires", "lunfardo_name": "El Topo",               "division": "C Metro",       "division_rank": 10, "colors": { "primary": "#FFFFFF", "secondary": "#76B5E0" }, "shield_archetype": "oval_crest",                "barrio_hq": "Liniers",         "city": "Buenos Aires" },
-  { "id": "lugano_villa_lugano_c",   "lunfardo_name": "El Luganito",           "division": "C Metro",       "division_rank": 11, "colors": { "primary": "#003087", "secondary": "#FFFFFF" }, "shield_archetype": "shield_pointed",            "barrio_hq": "Villa Lugano",    "city": "Buenos Aires" },
-  { "id": "muniz_san_miguel",        "lunfardo_name": "El Albirrojo Muñizense","division": "C Metro",       "division_rank": 12, "colors": { "primary": "#FFFFFF", "secondary": "#C8102E" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Muñiz",           "city": "Buenos Aires" },
-  { "id": "puerto_nuevo_c",          "lunfardo_name": "El Portuario del Río",  "division": "C Metro",       "division_rank": 13, "colors": { "primary": "#003087", "secondary": "#FFFFFF" }, "shield_archetype": "oval_crest",                "barrio_hq": "Campana",         "city": "Buenos Aires" },
-  { "id": "sportivo_barracas_bolivar","lunfardo_name": "El Albirrojo Bolivarense","division": "C Metro",    "division_rank": 14, "colors": { "primary": "#FFFFFF", "secondary": "#C8102E" }, "shield_archetype": "shield_curved",             "barrio_hq": "Bolívar",         "city": "Buenos Aires" },
-  { "id": "victoriano_arenas",       "lunfardo_name": "El Litoraleño",         "division": "C Metro",       "division_rank": 15, "colors": { "primary": "#003087", "secondary": "#FFD100" }, "shield_archetype": "classic_vertical_stripe",   "barrio_hq": "Valentín Alsina", "city": "Buenos Aires" },
-  { "id": "yupanqui_de_jose_leon",   "lunfardo_name": "El Yupa",               "division": "C Metro",       "division_rank": 16, "colors": { "primary": "#FFD100", "secondary": "#003087" }, "shield_archetype": "shield_pointed",            "barrio_hq": "José León Suárez","city": "Buenos Aires" },
-  { "id": "atletico_lugano",         "lunfardo_name": "El Lugano Atlético",    "division": "C Metro",       "division_rank": 17, "colors": { "primary": "#C8102E", "secondary": "#FFFFFF" }, "shield_archetype": "circle_crest",              "barrio_hq": "Villa Lugano",    "city": "Buenos Aires" },
-  { "id": "atlas_de_general_rodriguez","lunfardo_name": "El Atlas",            "division": "C Metro",       "division_rank": 18, "colors": { "primary": "#FFFFFF", "secondary": "#003087" }, "shield_archetype": "oval_crest",                "barrio_hq": "General Rodríguez","city": "Buenos Aires" },
-  { "id": "deportivo_camioneros",    "lunfardo_name": "El Camionero",          "division": "C Metro",       "division_rank": 19, "colors": { "primary": "#003087", "secondary": "#FFFFFF" }, "shield_archetype": "shield_curved",             "barrio_hq": "Esteban Echeverría","city": "Buenos Aires" },
-  { "id": "real_pilar",              "lunfardo_name": "El Real Pilarense",     "division": "C Metro",       "division_rank": 20, "colors": { "primary": "#FFD100", "secondary": "#003087" }, "shield_archetype": "shield_pointed",            "barrio_hq": "Pilar",           "city": "Buenos Aires" }
+  {
+    "id": "independiente_rivadavia",
+    "lunfardo_name": "La Lepra Mendocina",
+    "division": "Primera",
+    "division_rank": 1,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_curved",
+    "barrio_hq": "Parque General San Martin",
+    "city": "Mendoza"
+  },
+  {
+    "id": "estudiantes_la_plata",
+    "lunfardo_name": "El Pincha",
+    "division": "Primera",
+    "division_rank": 2,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "City Bell",
+    "city": "La Plata"
+  },
+  {
+    "id": "boca_juniors",
+    "lunfardo_name": "La Mitad+1",
+    "division": "Primera",
+    "division_rank": 3,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFD100"
+    },
+    "shield_archetype": "classic_horizontal_stripe",
+    "barrio_hq": "La Boca",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "river_plate",
+    "lunfardo_name": "Los Millos",
+    "division": "Primera",
+    "division_rank": 4,
+    "colors": {
+      "primary": "#FFFFFF",
+      "secondary": "#C8102E"
+    },
+    "shield_archetype": "sash",
+    "barrio_hq": "Núñez",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "argentinos_juniors",
+    "lunfardo_name": "El Bicho",
+    "division": "Primera",
+    "division_rank": 5,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "oval_crest",
+    "barrio_hq": "La Paternal",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "velez_sarsfield",
+    "lunfardo_name": "El Fortin",
+    "division": "Primera",
+    "division_rank": 6,
+    "colors": {
+      "primary": "#FFFFFF",
+      "secondary": "#003087"
+    },
+    "shield_archetype": "shield_curved",
+    "barrio_hq": "Liniers",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "rosario_central",
+    "lunfardo_name": "Los Canallas",
+    "division": "Primera",
+    "division_rank": 7,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFD100"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Arroyito",
+    "city": "Rosario"
+  },
+  {
+    "id": "talleres_cordoba",
+    "lunfardo_name": "La T",
+    "division": "Primera",
+    "division_rank": 8,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Barrio Jardin",
+    "city": "Córdoba"
+  },
+  {
+    "id": "belgrano",
+    "lunfardo_name": "El Pirata",
+    "division": "Primera",
+    "division_rank": 9,
+    "colors": {
+      "primary": "#76B5E0",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_curved",
+    "barrio_hq": "Alberdi",
+    "city": "Córdoba"
+  },
+  {
+    "id": "gimnasia_la_plata",
+    "lunfardo_name": "El Lobo",
+    "division": "Primera",
+    "division_rank": 10,
+    "colors": {
+      "primary": "#FFFFFF",
+      "secondary": "#003087"
+    },
+    "shield_archetype": "classic_horizontal_stripe",
+    "barrio_hq": "El Bosque",
+    "city": "La Plata"
+  },
+  {
+    "id": "independiente",
+    "lunfardo_name": "Los Diablos",
+    "division": "Primera",
+    "division_rank": 11,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "Avellaneda",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "lanus",
+    "lunfardo_name": "El Granate",
+    "division": "Primera",
+    "division_rank": 12,
+    "colors": {
+      "primary": "#7A1F2E",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "circle_crest",
+    "barrio_hq": "Lanus",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "huracan",
+    "lunfardo_name": "El Globo",
+    "division": "Primera",
+    "division_rank": 13,
+    "colors": {
+      "primary": "#FFFFFF",
+      "secondary": "#C8102E"
+    },
+    "shield_archetype": "circle_crest",
+    "barrio_hq": "Parque Patricios",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "san_lorenzo",
+    "lunfardo_name": "El Ciclon",
+    "division": "Primera",
+    "division_rank": 14,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#C8102E"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Boedo",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "union_santa_fe",
+    "lunfardo_name": "El Tatengue",
+    "division": "Primera",
+    "division_rank": 15,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Santa Fe",
+    "city": "Santa Fe"
+  },
+  {
+    "id": "racing_club",
+    "lunfardo_name": "La Academia",
+    "division": "Primera",
+    "division_rank": 16,
+    "colors": {
+      "primary": "#76B5E0",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Avellaneda",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "instituto",
+    "lunfardo_name": "La Gloria",
+    "division": "Primera",
+    "division_rank": 17,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_curved",
+    "barrio_hq": "Alta Cordoba",
+    "city": "Córdoba"
+  },
+  {
+    "id": "barracas_central",
+    "lunfardo_name": "El Guapo",
+    "division": "Primera",
+    "division_rank": 18,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Barracas",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "tigre",
+    "lunfardo_name": "El Matador",
+    "division": "Primera",
+    "division_rank": 19,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#C8102E"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Victoria",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "defensa_y_justicia",
+    "lunfardo_name": "El Halcon",
+    "division": "Primera",
+    "division_rank": 20,
+    "colors": {
+      "primary": "#FFD100",
+      "secondary": "#00843D"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "Florencio Varela",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "sarmiento_junin",
+    "lunfardo_name": "El Verde",
+    "division": "Primera",
+    "division_rank": 21,
+    "colors": {
+      "primary": "#00843D",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_curved",
+    "barrio_hq": "Junin",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "gimnasia_mendoza",
+    "lunfardo_name": "El Lobo Mendocino",
+    "division": "Primera",
+    "division_rank": 22,
+    "colors": {
+      "primary": "#000000",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Parque General San Martin",
+    "city": "Mendoza"
+  },
+  {
+    "id": "banfield",
+    "lunfardo_name": "El Taladro",
+    "division": "Primera",
+    "division_rank": 23,
+    "colors": {
+      "primary": "#00843D",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Banfield",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "platense",
+    "lunfardo_name": "El Calamar",
+    "division": "Primera",
+    "division_rank": 24,
+    "colors": {
+      "primary": "#7A4C1F",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_horizontal_stripe",
+    "barrio_hq": "Vicente Lopez",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "central_cordoba_sde",
+    "lunfardo_name": "El Ferroviario",
+    "division": "Primera",
+    "division_rank": 25,
+    "colors": {
+      "primary": "#000000",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Santiago Centro",
+    "city": "Santiago del Estero"
+  },
+  {
+    "id": "newells_old_boys",
+    "lunfardo_name": "La Lepra",
+    "division": "Primera",
+    "division_rank": 26,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#000000"
+    },
+    "shield_archetype": "quarters",
+    "barrio_hq": "Parque Independencia",
+    "city": "Rosario"
+  },
+  {
+    "id": "atletico_tucuman",
+    "lunfardo_name": "El Decano",
+    "division": "Primera",
+    "division_rank": 27,
+    "colors": {
+      "primary": "#76B5E0",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "San Miguel de Tucuman",
+    "city": "Tucumán"
+  },
+  {
+    "id": "deportivo_riestra",
+    "lunfardo_name": "El Malevo",
+    "division": "Primera",
+    "division_rank": 28,
+    "colors": {
+      "primary": "#000000",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Bajo Flores",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "aldosivi",
+    "lunfardo_name": "El Tiburon",
+    "division": "Primera",
+    "division_rank": 29,
+    "colors": {
+      "primary": "#00843D",
+      "secondary": "#FFD100"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Puerto",
+    "city": "Mar del Plata"
+  },
+  {
+    "id": "estudiantes_rio_cuarto",
+    "lunfardo_name": "El Leon de Rio Cuarto",
+    "division": "Primera",
+    "division_rank": 30,
+    "colors": {
+      "primary": "#76B5E0",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "Rio Cuarto",
+    "city": "Rio Cuarto"
+  },
+  {
+    "id": "colon",
+    "lunfardo_name": "El Sabalero",
+    "division": "Nacional",
+    "division_rank": 1,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#000000"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Barrio Centenario",
+    "city": "Santa Fe"
+  },
+  {
+    "id": "deportivo_moron",
+    "lunfardo_name": "El Gallo",
+    "division": "Nacional",
+    "division_rank": 2,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "Morón",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "ciudad_de_bolivar",
+    "lunfardo_name": "El Celeste Bolivarense",
+    "division": "Nacional",
+    "division_rank": 3,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_curved",
+    "barrio_hq": "Bolivar",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "los_andes",
+    "lunfardo_name": "El Milrayitas",
+    "division": "Nacional",
+    "division_rank": 4,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Lomas de Zamora",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "deportivo_madryn",
+    "lunfardo_name": "El Aurinegro del Sur",
+    "division": "Nacional",
+    "division_rank": 5,
+    "colors": {
+      "primary": "#FFD100",
+      "secondary": "#000000"
+    },
+    "shield_archetype": "classic_horizontal_stripe",
+    "barrio_hq": "Puerto Madryn",
+    "city": "Chubut"
+  },
+  {
+    "id": "godoy_cruz",
+    "lunfardo_name": "El Tomba",
+    "division": "Nacional",
+    "division_rank": 6,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "Godoy Cruz",
+    "city": "Mendoza"
+  },
+  {
+    "id": "almirante_brown",
+    "lunfardo_name": "La Fragata",
+    "division": "Nacional",
+    "division_rank": 7,
+    "colors": {
+      "primary": "#FFD100",
+      "secondary": "#000000"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "Isidro Casanova",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "ferro_carril_oeste",
+    "lunfardo_name": "El Verde de Caballito",
+    "division": "Nacional",
+    "division_rank": 8,
+    "colors": {
+      "primary": "#00843D",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_horizontal_stripe",
+    "barrio_hq": "Caballito",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "estudiantes_caseros",
+    "lunfardo_name": "El Pincha de Caseros",
+    "division": "Nacional",
+    "division_rank": 9,
+    "colors": {
+      "primary": "#000000",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Caseros",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "defensores_belgrano",
+    "lunfardo_name": "El Dragon",
+    "division": "Nacional",
+    "division_rank": 10,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#000000"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "Núñez",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "san_telmo",
+    "lunfardo_name": "El Candombero",
+    "division": "Nacional",
+    "division_rank": 11,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#76B5E0"
+    },
+    "shield_archetype": "oval_crest",
+    "barrio_hq": "Isla Maciel",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "san_miguel",
+    "lunfardo_name": "El Trueno Verde",
+    "division": "Nacional",
+    "division_rank": 12,
+    "colors": {
+      "primary": "#00843D",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Los Polvorines",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "racing_cordoba",
+    "lunfardo_name": "La Academia Cordobesa",
+    "division": "Nacional",
+    "division_rank": 13,
+    "colors": {
+      "primary": "#76B5E0",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "circle_crest",
+    "barrio_hq": "Nueva Italia",
+    "city": "Córdoba"
+  },
+  {
+    "id": "mitre_sde",
+    "lunfardo_name": "El Aurinegro",
+    "division": "Nacional",
+    "division_rank": 14,
+    "colors": {
+      "primary": "#FFD100",
+      "secondary": "#000000"
+    },
+    "shield_archetype": "classic_horizontal_stripe",
+    "barrio_hq": "Santiago Centro",
+    "city": "Santiago del Estero"
+  },
+  {
+    "id": "central_norte",
+    "lunfardo_name": "El Cuervo Salteno",
+    "division": "Nacional",
+    "division_rank": 15,
+    "colors": {
+      "primary": "#000000",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "oval_crest",
+    "barrio_hq": "Salta Capital",
+    "city": "Salta"
+  },
+  {
+    "id": "all_boys",
+    "lunfardo_name": "Los Albos",
+    "division": "Nacional",
+    "division_rank": 16,
+    "colors": {
+      "primary": "#FFFFFF",
+      "secondary": "#000000"
+    },
+    "shield_archetype": "oval_crest",
+    "barrio_hq": "Floresta",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "acassuso",
+    "lunfardo_name": "El Quemero",
+    "division": "Nacional",
+    "division_rank": 17,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFD100"
+    },
+    "shield_archetype": "oval_crest",
+    "barrio_hq": "San Isidro",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "chaco_for_ever",
+    "lunfardo_name": "El Negro Chaqueño",
+    "division": "Nacional",
+    "division_rank": 18,
+    "colors": {
+      "primary": "#000000",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Resistencia",
+    "city": "Chaco"
+  },
+  {
+    "id": "atlanta",
+    "lunfardo_name": "El Bohemio",
+    "division": "Nacional",
+    "division_rank": 19,
+    "colors": {
+      "primary": "#FFD100",
+      "secondary": "#003087"
+    },
+    "shield_archetype": "oval_crest",
+    "barrio_hq": "Villa Crespo",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "gimnasia_jujuy",
+    "lunfardo_name": "El Lobo Jujeno",
+    "division": "Nacional",
+    "division_rank": 20,
+    "colors": {
+      "primary": "#76B5E0",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "oval_crest",
+    "barrio_hq": "San Salvador",
+    "city": "Jujuy"
+  },
+  {
+    "id": "san_martin_tucuman",
+    "lunfardo_name": "El Ciruja",
+    "division": "Nacional",
+    "division_rank": 21,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Ciudadela",
+    "city": "Tucumán"
+  },
+  {
+    "id": "tristan_suarez",
+    "lunfardo_name": "El Lechero",
+    "division": "Nacional",
+    "division_rank": 22,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Tristan Suarez",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "midland",
+    "lunfardo_name": "El Funebrero del Sur",
+    "division": "Nacional",
+    "division_rank": 23,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFD100"
+    },
+    "shield_archetype": "shield_curved",
+    "barrio_hq": "Libertad",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "atletico_rafaela",
+    "lunfardo_name": "La Crema",
+    "division": "Nacional",
+    "division_rank": 24,
+    "colors": {
+      "primary": "#76B5E0",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Rafaela",
+    "city": "Santa Fe"
+  },
+  {
+    "id": "nueva_chicago",
+    "lunfardo_name": "El Torito",
+    "division": "Nacional",
+    "division_rank": 25,
+    "colors": {
+      "primary": "#00843D",
+      "secondary": "#000000"
+    },
+    "shield_archetype": "shield_curved",
+    "barrio_hq": "Mataderos",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "temperley",
+    "lunfardo_name": "El Gasolero",
+    "division": "Nacional",
+    "division_rank": 26,
+    "colors": {
+      "primary": "#76B5E0",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "circle_crest",
+    "barrio_hq": "Temperley",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "deportivo_maipu",
+    "lunfardo_name": "El Cruzado",
+    "division": "Nacional",
+    "division_rank": 27,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#000000"
+    },
+    "shield_archetype": "shield_curved",
+    "barrio_hq": "Maipú",
+    "city": "Mendoza"
+  },
+  {
+    "id": "chacarita_juniors",
+    "lunfardo_name": "El Funebrero",
+    "division": "Nacional",
+    "division_rank": 28,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#000000"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "San Martin",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "agropecuario",
+    "lunfardo_name": "El Sojero",
+    "division": "Nacional",
+    "division_rank": 29,
+    "colors": {
+      "primary": "#00843D",
+      "secondary": "#C8102E"
+    },
+    "shield_archetype": "oval_crest",
+    "barrio_hq": "Carlos Casares",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "colegiales",
+    "lunfardo_name": "El Tricolor de Munro",
+    "division": "Nacional",
+    "division_rank": 30,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#C8102E"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Munro",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "san_martin_san_juan",
+    "lunfardo_name": "El Verdinegro",
+    "division": "Nacional",
+    "division_rank": 31,
+    "colors": {
+      "primary": "#00843D",
+      "secondary": "#000000"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Concepcion",
+    "city": "San Juan"
+  },
+  {
+    "id": "patronato",
+    "lunfardo_name": "El Patron",
+    "division": "Nacional",
+    "division_rank": 32,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#000000"
+    },
+    "shield_archetype": "oval_crest",
+    "barrio_hq": "Parana",
+    "city": "Entre Ríos"
+  },
+  {
+    "id": "quilmes",
+    "lunfardo_name": "El Cervecero",
+    "division": "Nacional",
+    "division_rank": 33,
+    "colors": {
+      "primary": "#FFFFFF",
+      "secondary": "#76B5E0"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Quilmes",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "guemes_sde",
+    "lunfardo_name": "El Gaucho de Guemes",
+    "division": "Nacional",
+    "division_rank": 34,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#C8102E"
+    },
+    "shield_archetype": "shield_curved",
+    "barrio_hq": "Santiago Centro",
+    "city": "Santiago del Estero"
+  },
+  {
+    "id": "gimnasia_y_tiro",
+    "lunfardo_name": "El Albo Salteno",
+    "division": "Nacional",
+    "division_rank": 35,
+    "colors": {
+      "primary": "#FFFFFF",
+      "secondary": "#76B5E0"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Salta Capital",
+    "city": "Salta"
+  },
+  {
+    "id": "almagro",
+    "lunfardo_name": "El Tricolor del Oeste",
+    "division": "Nacional",
+    "division_rank": 36,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#000000"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Jose Ingenieros",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "arsenal_sarandi",
+    "lunfardo_name": "El Arse",
+    "division": "B Metro",
+    "division_rank": 1,
+    "colors": {
+      "primary": "#76B5E0",
+      "secondary": "#C8102E"
+    },
+    "shield_archetype": "shield_curved",
+    "barrio_hq": "Sarandi",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "villa_dalmine",
+    "lunfardo_name": "El Violeta",
+    "division": "B Metro",
+    "division_rank": 2,
+    "colors": {
+      "primary": "#5A2D82",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "Campana",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "excursionistas",
+    "lunfardo_name": "Excursio",
+    "division": "B Metro",
+    "division_rank": 3,
+    "colors": {
+      "primary": "#00843D",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Belgrano",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "talleres_remedios_escalada",
+    "lunfardo_name": "El Tallarin",
+    "division": "B Metro",
+    "division_rank": 4,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Remedios de Escalada",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "camioneros",
+    "lunfardo_name": "El Camionero",
+    "division": "B Metro",
+    "division_rank": 5,
+    "colors": {
+      "primary": "#00843D",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_curved",
+    "barrio_hq": "Esteban Echeverria",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "sportivo_italiano",
+    "lunfardo_name": "El Tano",
+    "division": "B Metro",
+    "division_rank": 6,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#C8102E"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "Ciudad Evita",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "real_pilar",
+    "lunfardo_name": "El Monarca",
+    "division": "B Metro",
+    "division_rank": 7,
+    "colors": {
+      "primary": "#000000",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "circle_crest",
+    "barrio_hq": "Pilar",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "deportivo_merlo",
+    "lunfardo_name": "El Charro",
+    "division": "B Metro",
+    "division_rank": 8,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_curved",
+    "barrio_hq": "Merlo",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "san_martin_burzaco",
+    "lunfardo_name": "El Azul",
+    "division": "B Metro",
+    "division_rank": 9,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Burzaco",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "comunicaciones",
+    "lunfardo_name": "El Cartero",
+    "division": "B Metro",
+    "division_rank": 10,
+    "colors": {
+      "primary": "#FFD100",
+      "secondary": "#000000"
+    },
+    "shield_archetype": "circle_crest",
+    "barrio_hq": "Agronomia",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "argentino_merlo",
+    "lunfardo_name": "La Academia de Merlo",
+    "division": "B Metro",
+    "division_rank": 11,
+    "colors": {
+      "primary": "#76B5E0",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Merlo",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "liniers",
+    "lunfardo_name": "La Topadora",
+    "division": "B Metro",
+    "division_rank": 12,
+    "colors": {
+      "primary": "#76B5E0",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "oval_crest",
+    "barrio_hq": "San Justo",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "sportivo_dock_sud",
+    "lunfardo_name": "El Docke",
+    "division": "B Metro",
+    "division_rank": 13,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFD100"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Dock Sud",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "flandria",
+    "lunfardo_name": "El Canario",
+    "division": "B Metro",
+    "division_rank": 14,
+    "colors": {
+      "primary": "#FFD100",
+      "secondary": "#000000"
+    },
+    "shield_archetype": "oval_crest",
+    "barrio_hq": "Jauregui",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "defensores_unidos",
+    "lunfardo_name": "El CADU",
+    "division": "B Metro",
+    "division_rank": 15,
+    "colors": {
+      "primary": "#76B5E0",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_curved",
+    "barrio_hq": "Zarate",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "deportivo_laferrere",
+    "lunfardo_name": "El Verde",
+    "division": "B Metro",
+    "division_rank": 16,
+    "colors": {
+      "primary": "#00843D",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Laferrere",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "uai_urquiza",
+    "lunfardo_name": "El Furgon",
+    "division": "B Metro",
+    "division_rank": 17,
+    "colors": {
+      "primary": "#76B5E0",
+      "secondary": "#003087"
+    },
+    "shield_archetype": "circle_crest",
+    "barrio_hq": "Villa Lynch",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "brown_adrogue",
+    "lunfardo_name": "El Tricolor de Adrogue",
+    "division": "B Metro",
+    "division_rank": 18,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#C8102E"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Adrogue",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "deportivo_armenio",
+    "lunfardo_name": "El Tricolor de Armenia",
+    "division": "B Metro",
+    "division_rank": 19,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#003087"
+    },
+    "shield_archetype": "shield_curved",
+    "barrio_hq": "Ingeniero Maschwitz",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "villa_san_carlos",
+    "lunfardo_name": "El Celeste Berissense",
+    "division": "B Metro",
+    "division_rank": 20,
+    "colors": {
+      "primary": "#76B5E0",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "oval_crest",
+    "barrio_hq": "Berisso",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "argentino_quilmes",
+    "lunfardo_name": "El Mate",
+    "division": "B Metro",
+    "division_rank": 21,
+    "colors": {
+      "primary": "#FFFFFF",
+      "secondary": "#76B5E0"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "Quilmes",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "ituzaingo",
+    "lunfardo_name": "El Leon del Oeste",
+    "division": "B Metro",
+    "division_rank": 22,
+    "colors": {
+      "primary": "#00843D",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "circle_crest",
+    "barrio_hq": "Ituzaingo",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "berazategui",
+    "lunfardo_name": "El Naranja",
+    "division": "C Metro",
+    "division_rank": 1,
+    "colors": {
+      "primary": "#FF6F00",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "oval_crest",
+    "barrio_hq": "Berazategui",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "centro_espanol",
+    "lunfardo_name": "El Gallego",
+    "division": "C Metro",
+    "division_rank": 2,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#C8102E"
+    },
+    "shield_archetype": "shield_curved",
+    "barrio_hq": "Villa Sarmiento",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "sacachispas",
+    "lunfardo_name": "El Lila",
+    "division": "C Metro",
+    "division_rank": 3,
+    "colors": {
+      "primary": "#7B3FB2",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "oval_crest",
+    "barrio_hq": "Villa Soldati",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "ca_lugano",
+    "lunfardo_name": "El Naranja de Tapiales",
+    "division": "C Metro",
+    "division_rank": 4,
+    "colors": {
+      "primary": "#FF6F00",
+      "secondary": "#003087"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "Tapiales",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "estrella_del_sur",
+    "lunfardo_name": "La Estrella",
+    "division": "C Metro",
+    "division_rank": 5,
+    "colors": {
+      "primary": "#FF6F00",
+      "secondary": "#003087"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "Alejandro Korn",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "victoriano_arenas",
+    "lunfardo_name": "El CAVA",
+    "division": "C Metro",
+    "division_rank": 6,
+    "colors": {
+      "primary": "#76B5E0",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Valentín Alsina",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "defensores_cambaceres",
+    "lunfardo_name": "El Rojo de Ensenada",
+    "division": "C Metro",
+    "division_rank": 7,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "Ensenada",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "leandro_n_alem",
+    "lunfardo_name": "El Lechero",
+    "division": "C Metro",
+    "division_rank": 8,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_curved",
+    "barrio_hq": "General Rodríguez",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "mercedes",
+    "lunfardo_name": "El Blanquinegro",
+    "division": "C Metro",
+    "division_rank": 9,
+    "colors": {
+      "primary": "#000000",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Mercedes",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "justo_jose_urquiza",
+    "lunfardo_name": "El Celeste de Loma Hermosa",
+    "division": "C Metro",
+    "division_rank": 10,
+    "colors": {
+      "primary": "#76B5E0",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "oval_crest",
+    "barrio_hq": "Loma Hermosa",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "puerto_nuevo",
+    "lunfardo_name": "El Portuario",
+    "division": "C Metro",
+    "division_rank": 11,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFD100"
+    },
+    "shield_archetype": "oval_crest",
+    "barrio_hq": "Campana",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "deportivo_paraguayo",
+    "lunfardo_name": "El Guarani del Conurbano",
+    "division": "C Metro",
+    "division_rank": 12,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#003087"
+    },
+    "shield_archetype": "oval_crest",
+    "barrio_hq": "González Catán",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "juventud_unida_san_miguel",
+    "lunfardo_name": "El Lobo Rojo",
+    "division": "C Metro",
+    "division_rank": 13,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_curved",
+    "barrio_hq": "San Miguel",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "argentino_rosario",
+    "lunfardo_name": "El Salaito",
+    "division": "C Metro",
+    "division_rank": 14,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "Rosario",
+    "city": "Rosario"
+  },
+  {
+    "id": "general_lamadrid",
+    "lunfardo_name": "El Carcelero",
+    "division": "C Metro",
+    "division_rank": 15,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "circle_crest",
+    "barrio_hq": "Villa Devoto",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "yupanqui",
+    "lunfardo_name": "El Trapero",
+    "division": "C Metro",
+    "division_rank": 16,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#C8102E"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "Villa Lugano",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "leones_rosario_fc",
+    "lunfardo_name": "Los Leones",
+    "division": "C Metro",
+    "division_rank": 17,
+    "colors": {
+      "primary": "#000000",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "circle_crest",
+    "barrio_hq": "Rosario",
+    "city": "Rosario"
+  },
+  {
+    "id": "el_porvenir",
+    "lunfardo_name": "El Porve",
+    "division": "C Metro",
+    "division_rank": 18,
+    "colors": {
+      "primary": "#000000",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Gerli",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "claypole",
+    "lunfardo_name": "El Tambero",
+    "division": "C Metro",
+    "division_rank": 19,
+    "colors": {
+      "primary": "#000000",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "circle_crest",
+    "barrio_hq": "Claypole",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "canuelas",
+    "lunfardo_name": "El Tambero Rojo",
+    "division": "C Metro",
+    "division_rank": 20,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Canuelas",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "central_ballester",
+    "lunfardo_name": "El Canalla",
+    "division": "C Metro",
+    "division_rank": 21,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFD100"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "Villa Ballester",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "club_lujan",
+    "lunfardo_name": "El Lujanero",
+    "division": "C Metro",
+    "division_rank": 22,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "circle_crest",
+    "barrio_hq": "Lujan",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "sportivo_barracas",
+    "lunfardo_name": "El Arrabalero",
+    "division": "C Metro",
+    "division_rank": 23,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#C8102E"
+    },
+    "shield_archetype": "shield_curved",
+    "barrio_hq": "Barracas",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "central_cordoba_rosario",
+    "lunfardo_name": "El Charrua",
+    "division": "C Metro",
+    "division_rank": 24,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#C8102E"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Tablada",
+    "city": "Rosario"
+  },
+  {
+    "id": "atlas",
+    "lunfardo_name": "El Marron",
+    "division": "C Metro",
+    "division_rank": 25,
+    "colors": {
+      "primary": "#7A4C1F",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "oval_crest",
+    "barrio_hq": "General Rodríguez",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "deportivo_espanol",
+    "lunfardo_name": "El Gallego del Bajo",
+    "division": "C Metro",
+    "division_rank": 26,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#FFD100"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "Bajo Flores",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "fenix",
+    "lunfardo_name": "El Ave Fenix",
+    "division": "C Metro",
+    "division_rank": 27,
+    "colors": {
+      "primary": "#000000",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "Pilar",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "muniz",
+    "lunfardo_name": "El Rayo Rojo",
+    "division": "C Metro",
+    "division_rank": 28,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Muniz",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "douglas_haig",
+    "lunfardo_name": "El Fogonero",
+    "division": "Federal A",
+    "division_rank": 1,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#000000"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Pergamino",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "gimnasia_esgrima_chivilcoy",
+    "lunfardo_name": "El Verde de Chivilcoy",
+    "division": "Federal A",
+    "division_rank": 2,
+    "colors": {
+      "primary": "#00843D",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_curved",
+    "barrio_hq": "Chivilcoy",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "nueve_de_julio_rafaela",
+    "lunfardo_name": "El Leon Rafaelino",
+    "division": "Federal A",
+    "division_rank": 3,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Rafaela",
+    "city": "Santa Fe"
+  },
+  {
+    "id": "sportivo_belgrano",
+    "lunfardo_name": "El Verde Sanfra",
+    "division": "Federal A",
+    "division_rank": 4,
+    "colors": {
+      "primary": "#00843D",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "San Francisco",
+    "city": "Córdoba"
+  },
+  {
+    "id": "independiente_chivilcoy",
+    "lunfardo_name": "El Rojo de Chivilcoy",
+    "division": "Federal A",
+    "division_rank": 5,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "Chivilcoy",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "defensores_belgrano_villa_ramallo",
+    "lunfardo_name": "El Granate de Villa Ramallo",
+    "division": "Federal A",
+    "division_rank": 6,
+    "colors": {
+      "primary": "#7A1F2E",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_curved",
+    "barrio_hq": "Villa Ramallo",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "el_linquenio",
+    "lunfardo_name": "El Leon de Lincoln",
+    "division": "Federal A",
+    "division_rank": 7,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "Lincoln",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "atletico_escobar",
+    "lunfardo_name": "El Fucsia",
+    "division": "Federal A",
+    "division_rank": 8,
+    "colors": {
+      "primary": "#E83E8C",
+      "secondary": "#000000"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Escobar",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "sportivo_las_parejas",
+    "lunfardo_name": "El Lobo Parejense",
+    "division": "Federal A",
+    "division_rank": 9,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#00843D"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Las Parejas",
+    "city": "Santa Fe"
+  },
+  {
+    "id": "gimnasia_concepcion",
+    "lunfardo_name": "El Lobo Entrerriano",
+    "division": "Federal A",
+    "division_rank": 10,
+    "colors": {
+      "primary": "#76B5E0",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "circle_crest",
+    "barrio_hq": "Concepcion del Uruguay",
+    "city": "Entre Ríos"
+  },
+  {
+    "id": "san_martin_formosa",
+    "lunfardo_name": "El Franjeado",
+    "division": "Federal A",
+    "division_rank": 11,
+    "colors": {
+      "primary": "#FFFFFF",
+      "secondary": "#003087"
+    },
+    "shield_archetype": "classic_horizontal_stripe",
+    "barrio_hq": "Formosa",
+    "city": "Formosa"
+  },
+  {
+    "id": "sol_de_america_formosa",
+    "lunfardo_name": "El Solense",
+    "division": "Federal A",
+    "division_rank": 12,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFD100"
+    },
+    "shield_archetype": "circle_crest",
+    "barrio_hq": "Formosa",
+    "city": "Formosa"
+  },
+  {
+    "id": "bartolome_mitre_posadas",
+    "lunfardo_name": "El Auriazul Posadeno",
+    "division": "Federal A",
+    "division_rank": 13,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFD100"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Posadas",
+    "city": "Misiones"
+  },
+  {
+    "id": "juventud_antoniana",
+    "lunfardo_name": "El Santo Salteno",
+    "division": "Federal A",
+    "division_rank": 14,
+    "colors": {
+      "primary": "#7A4C1F",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_curved",
+    "barrio_hq": "Salta Capital",
+    "city": "Salta"
+  },
+  {
+    "id": "defensores_puerto_vilelas",
+    "lunfardo_name": "El Verde de Vilelas",
+    "division": "Federal A",
+    "division_rank": 15,
+    "colors": {
+      "primary": "#00843D",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Puerto Vilelas",
+    "city": "Chaco"
+  },
+  {
+    "id": "tucuman_central",
+    "lunfardo_name": "El Central Tucumano",
+    "division": "Federal A",
+    "division_rank": 16,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "San Miguel de Tucuman",
+    "city": "Tucumán"
+  },
+  {
+    "id": "boca_unidos_corrientes",
+    "lunfardo_name": "El Aurirrojo",
+    "division": "Federal A",
+    "division_rank": 17,
+    "colors": {
+      "primary": "#FFD100",
+      "secondary": "#C8102E"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Corrientes",
+    "city": "Corrientes"
+  },
+  {
+    "id": "sarmiento_resistencia",
+    "lunfardo_name": "El Decano Chaqueño",
+    "division": "Federal A",
+    "division_rank": 18,
+    "colors": {
+      "primary": "#FFD100",
+      "secondary": "#C8102E"
+    },
+    "shield_archetype": "oval_crest",
+    "barrio_hq": "Resistencia",
+    "city": "Chaco"
+  },
+  {
+    "id": "sarmiento_la_banda",
+    "lunfardo_name": "El Profe Bandeño",
+    "division": "Federal A",
+    "division_rank": 19,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "La Banda",
+    "city": "Santiago del Estero"
+  },
+  {
+    "id": "atenas_rio_cuarto",
+    "lunfardo_name": "El Albo de Rio Cuarto",
+    "division": "Federal A",
+    "division_rank": 20,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Rio Cuarto",
+    "city": "Córdoba"
+  },
+  {
+    "id": "juventud_unida_san_luis",
+    "lunfardo_name": "El Juve Puntano",
+    "division": "Federal A",
+    "division_rank": 21,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFD100"
+    },
+    "shield_archetype": "circle_crest",
+    "barrio_hq": "San Luis",
+    "city": "San Luis"
+  },
+  {
+    "id": "cipolletti",
+    "lunfardo_name": "El Capataz de la Patagonia",
+    "division": "Federal A",
+    "division_rank": 22,
+    "colors": {
+      "primary": "#000000",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Cipolletti",
+    "city": "Río Negro"
+  },
+  {
+    "id": "huracan_las_heras",
+    "lunfardo_name": "El Globito de Las Heras",
+    "division": "Federal A",
+    "division_rank": 23,
+    "colors": {
+      "primary": "#FFFFFF",
+      "secondary": "#C8102E"
+    },
+    "shield_archetype": "circle_crest",
+    "barrio_hq": "Las Heras",
+    "city": "Mendoza"
+  },
+  {
+    "id": "argentino_monte_maiz",
+    "lunfardo_name": "El Raya de Monte Maiz",
+    "division": "Federal A",
+    "division_rank": 24,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Monte Maiz",
+    "city": "Córdoba"
+  },
+  {
+    "id": "costa_brava_general_pico",
+    "lunfardo_name": "El Costero Pampeano",
+    "division": "Federal A",
+    "division_rank": 25,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "General Pico",
+    "city": "La Pampa"
+  },
+  {
+    "id": "deportivo_rincon",
+    "lunfardo_name": "El Leon del Norte Neuquino",
+    "division": "Federal A",
+    "division_rank": 26,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Rincón de los Sauces",
+    "city": "Neuquén"
+  },
+  {
+    "id": "fadep",
+    "lunfardo_name": "Fundacion Amigos",
+    "division": "Federal A",
+    "division_rank": 27,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#000000"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "Chacras de Coria",
+    "city": "Mendoza"
+  },
+  {
+    "id": "san_martin_mendoza",
+    "lunfardo_name": "El Chacarero",
+    "division": "Federal A",
+    "division_rank": 28,
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "San Martin",
+    "city": "Mendoza"
+  },
+  {
+    "id": "olimpo",
+    "lunfardo_name": "El Aurinegro",
+    "division": "Federal A",
+    "division_rank": 29,
+    "colors": {
+      "primary": "#FFD100",
+      "secondary": "#000000"
+    },
+    "shield_archetype": "shield_curved",
+    "barrio_hq": "Bahia Blanca",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "alvarado",
+    "lunfardo_name": "El Torito Marplatense",
+    "division": "Federal A",
+    "division_rank": 30,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "circle_crest",
+    "barrio_hq": "Mar del Plata",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "sol_de_mayo",
+    "lunfardo_name": "El Albiceleste de Viedma",
+    "division": "Federal A",
+    "division_rank": 31,
+    "colors": {
+      "primary": "#76B5E0",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_curved",
+    "barrio_hq": "Viedma",
+    "city": "Río Negro"
+  },
+  {
+    "id": "kimberley_mar_del_plata",
+    "lunfardo_name": "El Dragon Marplatense",
+    "division": "Federal A",
+    "division_rank": 32,
+    "colors": {
+      "primary": "#00843D",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "Mar del Plata",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "germinal_rawson",
+    "lunfardo_name": "El Verde Rawsonense",
+    "division": "Federal A",
+    "division_rank": 33,
+    "colors": {
+      "primary": "#00843D",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "oval_crest",
+    "barrio_hq": "Rawson",
+    "city": "Chubut"
+  },
+  {
+    "id": "santamarina_tandil",
+    "lunfardo_name": "El Aurinegro Tandilense",
+    "division": "Federal A",
+    "division_rank": 34,
+    "colors": {
+      "primary": "#FFD100",
+      "secondary": "#000000"
+    },
+    "shield_archetype": "shield_pointed",
+    "barrio_hq": "Tandil",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "villa_mitre",
+    "lunfardo_name": "El Tricolor Bahiense",
+    "division": "Federal A",
+    "division_rank": 35,
+    "colors": {
+      "primary": "#00843D",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "classic_vertical_stripe",
+    "barrio_hq": "Bahia Blanca",
+    "city": "Buenos Aires"
+  },
+  {
+    "id": "guillermo_brown",
+    "lunfardo_name": "La Banda Madrynense",
+    "division": "Federal A",
+    "division_rank": 36,
+    "colors": {
+      "primary": "#003087",
+      "secondary": "#FFFFFF"
+    },
+    "shield_archetype": "shield_curved",
+    "barrio_hq": "Puerto Madryn",
+    "city": "Chubut"
+  },
+  {
+    "id": "circulo_deportivo",
+    "lunfardo_name": "El Papero",
+    "division": "Federal A",
+    "division_rank": 37,
+    "colors": {
+      "primary": "#00843D",
+      "secondary": "#C8102E"
+    },
+    "shield_archetype": "oval_crest",
+    "barrio_hq": "Nicanor Otamendi",
+    "city": "Buenos Aires"
+  }
 ]
