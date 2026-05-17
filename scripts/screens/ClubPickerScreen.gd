@@ -1,8 +1,12 @@
 extends Control
 
-# Lists all clubs via get_clubs RPC (paginated, follows has_more=true up to 10 pages),
-# filters by division (ChipButton scroll) and by free-text search (debounced 200ms).
-# On selection, stores club_id in PlayerStore and routes to PibeCreatorScreen.
+# Lists all clubs via get_clubs RPC (paginated using `total` returned by server,
+# up to 10 pages of page_size=100), filters by division (ChipButton scroll) and
+# by free-text search (debounced 200ms). On selection, stores club_id in
+# PlayerStore and routes to PibeCreatorScreen.
+#
+# CR-02 fix: server returns {clubs, total, page, page_size}; loop on accumulated
+# count vs total instead of a non-existent `has_more` field.
 
 const DIVISIONS := ["Todos", "Primera", "Nacional", "B Metro", "Federal A", "C Metro"]
 
@@ -58,16 +62,18 @@ func _process(delta: float) -> void:
 
 func _load_clubs() -> void:
 	var session = AuthManager.session
-	var payload = JSON.stringify({"division": "Todos", "page": 1})
+	var page_size := 100
+	var payload = JSON.stringify({"division": "Todos", "page": 1, "page_size": page_size})
 	var resp = await NakamaService.client.rpc_async(session, "get_clubs", payload)
 	if resp.is_exception():
 		push_error("[ClubPicker] get_clubs failed: %s" % resp.get_exception().message)
 		return
 	var data = JSON.parse_string(resp.payload)
 	_all_clubs = data.get("clubs", [])
-	var page = 2
-	while data.get("has_more", false) and page < 10:
-		var p = JSON.stringify({"division": "Todos", "page": page})
+	var total: int = int(data.get("total", _all_clubs.size()))
+	var page := 2
+	while _all_clubs.size() < total and page < 10:
+		var p = JSON.stringify({"division": "Todos", "page": page, "page_size": page_size})
 		var r = await NakamaService.client.rpc_async(session, "get_clubs", p)
 		if r.is_exception():
 			break
