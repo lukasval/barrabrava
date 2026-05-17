@@ -43,9 +43,14 @@
 
   // Step 1: Anonymous device auth — Nakama accepts this without a server key when
   // the endpoint is configured publicly (default). The "id" is just a per-flow unique string.
+  //
+  // WR-01 fix: deviceId derived from the reset token ONLY (no Date.now()). This way
+  // repeated submits for the same token reuse the SAME helper account instead of
+  // creating a new orphan Nakama account per submit (DoS / DB bloat vector). Cap on
+  // helper accounts now equals the number of distinct reset tokens emitted.
   async function fetchBearerToken() {
-    var deviceId = "reset-helper-" + token + "-" + Date.now();
-    // Pad to >= 10 chars (Nakama requirement); token + suffix already exceeds it.
+    var deviceId = "reset-helper-" + token;
+    // Pad to >= 10 chars (Nakama requirement); token alone already exceeds it.
     var resp = await fetch(
       "https://" + NAKAMA_HOST + "/v2/account/authenticate/device?create=true",
       {
