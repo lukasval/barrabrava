@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://chipbutton01"]
+
+[ext_resource type="Script" path="res://scripts/components/ChipButton.gd" id="1"]
+
+[node name="ChipButton" type="PanelContainer"]
+custom_minimum_size = Vector2(64, 32)
+mouse_filter = 1
+script = ExtResource("1")
+
+[node name="H" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="H"]
+layout_mode = 2
+text = "Chip"
+horizontal_alignment = 1
+vertical_alignment = 1

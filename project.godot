@@ -13,7 +13,7 @@ config_version=5
 config/name="BarraBrava"
 config/description="Juego mobile multiplayer de barras bravas argentinas"
 config/version="0.1.0"
-run/main_scene="res://scenes/PlaceholderMain.tscn"
+run/main_scene="res://scenes/SplashScreen.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -23,6 +23,9 @@ Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
 NakamaService="*res://scripts/autoloads/NakamaService.gd"
 AuthManager="*res://scripts/autoloads/AuthManager.gd"
 AppTheme="*res://scripts/autoloads/AppTheme.gd"
+AppConfig="*res://scripts/autoloads/AppConfig.gd"
+PlayerStore="*res://scripts/autoloads/PlayerStore.gd"
+FlowRouter="*res://scripts/autoloads/FlowRouter.gd"
 
 [display]
 
