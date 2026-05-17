@@ -36,11 +36,11 @@ func register(email: String, password: String) -> Dictionary:
 	return {"ok": true}
 
 func logout() -> void:
+	# WR-04 fix: borrar el session file directamente vía DirAccess sobre el path
+	# user://, sin truncate redundante ni globalize_path (que es frágil en web/HTML5).
 	session = null
-	var fa = FileAccess.open(SESSION_FILE, FileAccess.WRITE)
-	if fa:
-		fa.close()
-	DirAccess.remove_absolute(ProjectSettings.globalize_path(SESSION_FILE))
+	if FileAccess.file_exists(SESSION_FILE):
+		DirAccess.remove_absolute(SESSION_FILE)
 	session_cleared.emit()
 
 func is_authenticated() -> bool:
