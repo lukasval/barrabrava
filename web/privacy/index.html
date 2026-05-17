@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="referrer" content="no-referrer" />
+  <title>Política de Privacidad — BarraBrava</title>
+  <meta name="description" content="Política de Privacidad de BarraBrava conforme a la Ley 25.326 de Protección de Datos Personales (Argentina)." />
+  <link rel="stylesheet" href="/barrabrava/styles/base.css" />
+</head>
+<body>
+  <main>
+    <div class="lang-switch">
+      <a href="/barrabrava/privacy/en.html">English →</a>
+    </div>
+
+    <h1>Política de Privacidad</h1>
+    <p class="meta">
+      Última actualización: <strong>{YYYY-MM-DD del deploy}</strong> · BarraBrava ·
+      Régimen aplicable: Ley 25.326 de Protección de los Datos Personales
+      (República Argentina) y normativa complementaria de la Agencia de Acceso a
+      la Información Pública (AAIP).
+    </p>
+
+    <div class="callout warn">
+      <p>
+        <strong>Edad mínima:</strong> esta aplicación está dirigida a personas
+        mayores de <strong>13 años</strong>. No recolectamos a sabiendas datos de
+        menores de 13.
+      </p>
+    </div>
+
+    <h2>1. Responsable del Tratamiento</h2>
+    <p>
+      El responsable de la base de datos personales es <strong>{nombre dev}</strong>,
+      CUIT <strong>{CUIT}</strong>, con domicilio en
+      <strong>{ciudad provincia}</strong>, Argentina.
+    </p>
+    <p>
+      Contacto a efectos de esta política:
+      <a href="mailto:privacidad@barrabrava.com.ar">privacidad@barrabrava.com.ar</a>.
+    </p>
+    <p>
+      Base de datos inscripta ante la AAIP bajo el número de trámite
+      <strong>{NRO-TRAMITE-AAIP}</strong>.
+    </p>
+
+    <h2>2. Datos personales que recolectamos</h2>
+    <p>Para que el juego funcione, recolectamos y almacenamos los siguientes datos:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Categoría</th>
+          <th>Datos</th>
+          <th>Origen</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Identificación</td>
+          <td>Dirección de email</td>
+          <td>Provisto por el usuario al registrarse</td>
+        </tr>
+        <tr>
+          <td>Credenciales</td>
+          <td>Hash de la contraseña (bcrypt) — nunca la contraseña en texto plano</td>
+          <td>Derivado del registro</td>
+        </tr>
+        <tr>
+          <td>Perfil de juego</td>
+          <td>Identificador de cuenta (UUID), nombre del pibe, club elegido, marcas temporales</td>
+          <td>Generado por el juego</td>
+        </tr>
+        <tr>
+          <td>Datos técnicos mínimos</td>
+          <td>Dirección IP (logs de servidor durante 30 días por seguridad), tipo de dispositivo en caso de error</td>
+          <td>Recolección automática del servidor</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      <strong>No recolectamos</strong> ubicación geográfica (GPS), contactos,
+      cámara, micrófono, lista de aplicaciones instaladas ni publicidad
+      identificadora del dispositivo en esta versión del juego (Phase 1).
+    </p>
+
+    <h2>3. Finalidad del tratamiento</h2>
+    <p>Usamos esos datos exclusivamente para:</p>
+    <ul>
+      <li>Crear y mantener tu cuenta de jugador.</li>
+      <li>Permitirte autenticarte y recuperar la contraseña.</li>
+      <li>Persistir tu progreso (pibe, club, estadísticas) entre sesiones.</li>
+      <li>Operar el servicio (anti-fraude, prevención de abuso, logs de seguridad).</li>
+      <li>Responder a tus pedidos de soporte.</li>
+    </ul>
+    <p>
+      <strong>No usamos los datos</strong> para publicidad comportamental, perfilamiento
+      con fines de marketing, ni los compartimos con redes publicitarias.
+    </p>
+
+    <h2>4. Transferencia internacional de datos</h2>
+    <p>
+      Los servidores de la App (Nakama + PostgreSQL) están alojados en
+      <strong>Railway, región LATAM</strong> (proveedor con presencia regional
+      adecuada para Argentina). Argentina considera a Brasil, Estados Unidos y
+      otros países con nivel adecuado de protección. La región exacta queda
+      especificada en el documento interno
+      <code>AAIP-REGISTRATION.md</code> y se notifica oportunamente ante cambios.
+    </p>
+    <p>
+      El envío de emails transaccionales (reseteo de contraseña) podrá tercerizarse
+      a un proveedor con sede en Estados Unidos (por ejemplo, Resend); en ese caso,
+      la base legal para la transferencia es la <em>ejecución del contrato</em> a tu
+      pedido (Ley 25.326, art. 12).
+    </p>
+
+    <h2>5. Conservación de los datos</h2>
+    <p>
+      Tus datos de cuenta se conservan mientras tu cuenta esté activa. Al borrar
+      tu cuenta desde el juego (Home → "Borrar mi cuenta"), eliminamos tu perfil
+      y datos asociados de nuestros sistemas en un plazo razonable (típicamente
+      hasta 30 días por backups). Los logs técnicos se rotan a los 30 días.
+    </p>
+
+    <h2>6. Derechos del titular (ARCO + portabilidad)</h2>
+    <p>
+      De acuerdo con la Ley 25.326 (arts. 14, 16 y 27) podés ejercer en forma
+      gratuita los siguientes derechos:
+    </p>
+    <ul>
+      <li><strong>Acceso:</strong> saber qué datos tuyos guardamos.</li>
+      <li><strong>Rectificación:</strong> corregir datos inexactos.</li>
+      <li><strong>Cancelación / supresión:</strong> borrar tus datos (también disponible in-app).</li>
+      <li><strong>Oposición:</strong> oponerte a un tratamiento específico.</li>
+    </ul>
+    <p>
+      Para ejercerlos, escribinos a
+      <a href="mailto:privacidad@barrabrava.com.ar">privacidad@barrabrava.com.ar</a>
+      desde el email asociado a la cuenta. Respondemos dentro de los 10 días
+      corridos (art. 14, Ley 25.326).
+    </p>
+    <p>
+      Si considerás que no respetamos tus derechos, podés presentar reclamo ante
+      la <strong>Agencia de Acceso a la Información Pública (AAIP)</strong>:
+      <a href="https://www.argentina.gob.ar/aaip" target="_blank" rel="noopener noreferrer">argentina.gob.ar/aaip</a>.
+    </p>
+
+    <h2>7. Seguridad</h2>
+    <p>
+      Aplicamos medidas técnicas y organizativas razonables: TLS en todas las
+      conexiones, hashing bcrypt de contraseñas, control de accesos al servidor,
+      backups cifrados, rate limiting de API. Ningún sistema es 100% impenetrable;
+      en caso de incidente notable, notificaremos a los usuarios afectados y a la
+      AAIP según corresponda.
+    </p>
+
+    <h2>8. Menores de edad</h2>
+    <p>
+      El servicio no está dirigido a menores de <strong>13 años</strong>. Si
+      tomamos conocimiento de que recolectamos datos de un menor de 13 sin
+      autorización válida de su representante legal, los eliminaremos sin
+      demora.
+    </p>
+
+    <h2>9. Cambios a esta política</h2>
+    <p>
+      Podemos actualizar esta política. La fecha "Última actualización" arriba
+      refleja la versión vigente. Cambios sustanciales serán notificados dentro
+      de la aplicación.
+    </p>
+
+    <h2>10. Contacto</h2>
+    <ul>
+      <li>Privacidad: <a href="mailto:privacidad@barrabrava.com.ar">privacidad@barrabrava.com.ar</a></li>
+      <li>Soporte: <a href="mailto:soporte@barrabrava.com.ar">soporte@barrabrava.com.ar</a></li>
+      <li>Responsable: {nombre dev} · CUIT {CUIT} · {ciudad provincia}, Argentina</li>
+    </ul>
+
+    <p class="link"><a href="/barrabrava/">← Volver al inicio</a></p>
+
+    <footer class="site-footer">
+      <p>BarraBrava &middot; parodia ficticia &middot; sin afiliación con la AFA ni con clubes reales.</p>
+    </footer>
+  </main>
+</body>
+</html>

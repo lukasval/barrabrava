@@ -17,6 +17,7 @@ extends Control
 @onready var reg_button: Button = $VBox/TabContainer/Registrarse/Submit
 @onready var reg_error: Label = $VBox/TabContainer/Registrarse/ErrorLabel
 @onready var privacy_link: RichTextLabel = $VBox/TabContainer/Registrarse/PrivacyLink
+@onready var accept_terms: CheckBox = $VBox/TabContainer/Registrarse/AcceptTerms
 
 func _ready() -> void:
 	tabs.set_tab_title(0, "Entrar")
@@ -25,10 +26,16 @@ func _ready() -> void:
 	reg_button.pressed.connect(_on_register)
 	privacy_link.meta_clicked.connect(_on_privacy_clicked)
 	forgot_link.meta_clicked.connect(_on_forgot_clicked)
+	accept_terms.toggled.connect(_on_accept_toggled)
 	forgot_link.text = "[url=forgot]¿Olvidaste tu contraseña?[/url]"
-	privacy_link.text = "[url=%s]Antes de arrancar, leé las reglas del juego[/url]" % AppConfig.PRIVACY_URL
+	# PRV-05: explicit privacy + terms consent before account creation.
+	privacy_link.text = "Antes de jugar: [url=%s]privacidad[/url] · [url=%s]términos[/url]" % [AppConfig.PRIVACY_URL, AppConfig.TERMS_URL]
+	reg_button.disabled = true  # gated by accept_terms checkbox
 	login_error.visible = false
 	reg_error.visible = false
+
+func _on_accept_toggled(pressed: bool) -> void:
+	reg_button.disabled = not pressed
 
 func _on_login() -> void:
 	login_error.visible = false
@@ -47,6 +54,10 @@ func _on_login() -> void:
 
 func _on_register() -> void:
 	reg_error.visible = false
+	if not accept_terms.button_pressed:
+		reg_error.text = "Tenés que aceptar privacidad + términos, chabón."
+		reg_error.visible = true
+		return
 	if reg_password.text != reg_confirm.text:
 		reg_error.text = "Las contraseñas no coinciden, chabón."
 		reg_error.visible = true

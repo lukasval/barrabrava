@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="referrer" content="no-referrer" />
+  <title>Resetear contraseña — BarraBrava</title>
+  <link rel="stylesheet" href="/barrabrava/styles/base.css" />
+  <link rel="stylesheet" href="/barrabrava/reset-password/style.css" />
+</head>
+<body>
+  <main class="reset">
+    <h1>Resetear contraseña</h1>
+    <p id="intro">Poné tu nueva contraseña abajo. Mínimo 8 caracteres.</p>
+    <form id="reset-form" autocomplete="off">
+      <label for="pw">Nueva contraseña</label>
+      <input type="password" id="pw" name="pw" minlength="8" required autocomplete="new-password" />
+      <label for="pw2">Confirmar contraseña</label>
+      <input type="password" id="pw2" name="pw2" minlength="8" required autocomplete="new-password" />
+      <button type="submit" id="submit-btn">Cambiar contraseña</button>
+    </form>
+    <p id="status" role="status" aria-live="polite"></p>
+    <p class="link"><a href="/barrabrava/">← Volver al inicio</a></p>
+  </main>
+  <script src="/barrabrava/reset-password/script.js" defer></script>
+</body>
+</html>

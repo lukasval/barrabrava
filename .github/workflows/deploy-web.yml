@@ -1,0 +1,53 @@
+name: Deploy Web to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'web/**'
+      - '.github/workflows/deploy-web.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Inject Nakama host into reset-password script (NAKAMA_HOST is non-secret)
+        run: |
+          sed -i "s|REPLACE_WITH_NAKAMA_HOST|${{ secrets.NAKAMA_PUBLIC_HOST }}|g" web/reset-password/script.js
+          echo "Verifying host injection (should be 0 remaining placeholders):"
+          test $(grep -c "REPLACE_WITH_NAKAMA_HOST" web/reset-password/script.js) -eq 0
+          echo "Verifying NO server key got injected (defensive — CHK-06):"
+          ! grep -q "NAKAMA_SERVER_KEY\|defaultkey" web/reset-password/script.js
+          ! grep -qE "Basic\s+[A-Za-z0-9+/=]+" web/reset-password/script.js
+          echo "Host injection + CHK-06 defensive checks passed."
+
+      - name: Inject deploy date into privacy policies
+        run: |
+          TODAY=$(date +%Y-%m-%d)
+          sed -i "s|{YYYY-MM-DD del deploy}|$TODAY|g" web/privacy/index.html || true
+          sed -i "s|{YYYY-MM-DD del deploy}|$TODAY|g" web/privacy/en.html || true
+          sed -i "s|{YYYY-MM-DD del deploy}|$TODAY|g" web/terms/index.html || true
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web/
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

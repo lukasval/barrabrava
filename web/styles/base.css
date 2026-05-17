@@ -1,0 +1,172 @@
+/* BarraBrava — base.css
+ * Dark theme compartido por todas las páginas públicas (privacy, terms, reset, landing).
+ * Paleta tomada de scripts/autoloads/AppTheme.gd (UI-SPEC §Colors).
+ *   - bg primario        #1A1A1A
+ *   - bg superficie      #232323
+ *   - bg superficie alt  #2C2C2C
+ *   - text primario      #F5F5F5
+ *   - text secundario    #A0A0A0
+ *   - accent (Aguante)   #D62828
+ *   - error / destructive #E67E22
+ *   - success            #2A9D8F
+ * Tipografía Nunito (Google Fonts CDN) — coherente con la app Godot.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #1a1a1a;
+  color: #f5f5f5;
+  font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 800;
+  color: #f5f5f5;
+  margin-top: 1.8em;
+  margin-bottom: 0.5em;
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: 1.75rem;
+  margin-top: 0.2em;
+  border-bottom: 2px solid #d62828;
+  padding-bottom: 0.4em;
+}
+
+h2 {
+  font-size: 1.25rem;
+  color: #d62828;
+}
+
+h3 {
+  font-size: 1.05rem;
+  color: #f5f5f5;
+}
+
+p,
+li {
+  color: #f5f5f5;
+  margin: 0.6em 0;
+}
+
+ul,
+ol {
+  padding-left: 1.4em;
+}
+
+a {
+  color: #d62828;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+a:hover,
+a:focus {
+  color: #e67e22;
+}
+
+code,
+pre {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  background: #232323;
+  color: #f5f5f5;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.92em;
+}
+
+.meta {
+  color: #a0a0a0;
+  font-size: 0.9rem;
+  margin-bottom: 1.2em;
+}
+
+.callout {
+  background: #232323;
+  border-left: 4px solid #d62828;
+  padding: 12px 16px;
+  border-radius: 4px;
+  margin: 1em 0;
+}
+
+.callout.warn {
+  border-left-color: #e67e22;
+}
+
+.lang-switch {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-bottom: 0.5em;
+  font-size: 0.9rem;
+}
+
+.lang-switch a {
+  color: #a0a0a0;
+}
+
+.link a {
+  color: #a0a0a0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+  font-size: 0.95rem;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid #2c2c2c;
+  vertical-align: top;
+}
+
+th {
+  background: #232323;
+  color: #d62828;
+  font-weight: 700;
+}
+
+footer.site-footer {
+  margin-top: 3em;
+  padding-top: 1em;
+  border-top: 1px solid #2c2c2c;
+  color: #a0a0a0;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  main {
+    padding: 20px 14px 48px;
+  }
+  h1 {
+    font-size: 1.45rem;
+  }
+}

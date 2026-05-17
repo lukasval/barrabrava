@@ -103,9 +103,15 @@ fit_content = true
 meta_underlined = true
 theme_override_colors/default_color = Color(0.627, 0.627, 0.627, 1)
 
+[node name="AcceptTerms" type="CheckBox" parent="VBox/TabContainer/Registrarse"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "Acepto privacidad + términos (mayor a 13)"
+
 [node name="Submit" type="Button" parent="VBox/TabContainer/Registrarse"]
 custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
+disabled = true
 text = "Armar mi cuenta"
 
 [node name="ErrorLabel" type="Label" parent="VBox/TabContainer/Registrarse"]
