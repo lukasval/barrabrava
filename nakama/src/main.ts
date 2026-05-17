@@ -55,6 +55,31 @@ function seedClubs(nk: nkruntime.Nakama, logger: nkruntime.Logger): void {
     throw e;
   }
 
+  // Migration: when bumping CLUBS_SEED_VERSION (e.g., v1→v2 with renamed IDs),
+  // wipe the entire `clubs` collection first so stale records from previous
+  // versions don't coexist with the new catalog (and inflate get_clubs results).
+  // Cap pagination at 50 iterations × 100 = 5000 records max — safe for ~133-300 clubs.
+  try {
+    let cursor = '';
+    const toDelete: nkruntime.StorageDeleteRequest[] = [];
+    for (let i = 0; i < 50; i++) {
+      const page = nk.storageList(SYSTEM_USER_ID, COL_CLUBS, 100, cursor);
+      if (page.objects && page.objects.length > 0) {
+        for (const obj of page.objects) {
+          toDelete.push({ collection: COL_CLUBS, key: obj.key, userId: SYSTEM_USER_ID });
+        }
+      }
+      if (!page.cursor) break;
+      cursor = page.cursor;
+    }
+    if (toDelete.length > 0) {
+      nk.storageDelete(toDelete);
+      logger.info('Cleared %d stale clubs from previous seed version', toDelete.length);
+    }
+  } catch (e) {
+    logger.warn('seedClubs: previous-version cleanup failed (proceeding): %s', String(e));
+  }
+
   // Write clubs as public-read, system-write-only (mitigates T-1-RT-09).
   const writes: nkruntime.StorageWriteRequest[] = clubs.map((club) => ({
     collection: COL_CLUBS,
