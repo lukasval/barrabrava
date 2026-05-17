@@ -6,35 +6,49 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 
 **Core value:** La realidad del fútbol argentino afecta el juego en tiempo real, y cada jugador es un personaje real dentro de la barra de su club.
 
-**Current focus:** Phase 1 — Foundation (no iniciada)
+**Current focus:** Phase 1 — Foundation ✅ COMPLETE. Ready to plan Phase 2 — Heartbeat AFA.
 
 ## Current Phase
 
 **Phase:** 1 — Foundation
-**Status:** Ready to execute (5 plans in 4 waves)
-**Next action:** Run `/gsd-execute-phase 1`
+**Status:** ✅ COMPLETE (2026-05-17). All 5 plans executed end-to-end.
+**Next action:** Run `/gsd-plan-phase 2` to start Phase 2 — Heartbeat AFA.
 
-### Phase 1 Plans
+### Phase 1 Plans — Final Status
 
-| Plan | Wave | Objective |
-|------|------|-----------|
-| 01-01 | 0 | Infra: Railway+Nakama+Postgres+CI+AAIP+Resend (1 human-action + 3 auto + 1 human-verify) |
-| 01-02 | 1 | Godot 4.3 skeleton + SDK + Theme + autoloads |
-| 01-03 | 2 | Nakama TS runtime + 5 RPCs + clubs.json seed (~133) + rate limiting |
-| 01-04 | 3 | 6 screens (Splash, Auth, ForgotPassword, ClubPicker, PibeCreator, Tutorial, Home) + components |
-| 01-05 | 3 | Privacy Policy ES/EN + Reset HTML (device auth Bearer) + AAIP docs + PRV-05 enforcement |
+| Plan | Wave | Status | Live URL / Artifact |
+|------|------|--------|---------------------|
+| 01-01 | 0 | ✅ | Railway Nakama deploy https://nakama-production-7ea8.up.railway.app |
+| 01-02 | 1 | ✅ | Godot 4.3 project + 4 autoloads + Nakama SDK v3.4.0 vendored |
+| 01-03 | 2 | ✅ | TS runtime live — 5 RPCs + 133 clubs seeded — smoke test passed with real server_key |
+| 01-04 | 3 | ✅ | 7 onboarding screens + 3 components + 3 autoloads + flow router |
+| 01-05 | 3 | ✅ | Privacy/Terms/Reset web LIVE https://lukasval.github.io/barrabrava/ + AAIP/LEGAL docs |
 
 ## Progress
 
 | Phase | Status |
 |-------|--------|
-| 1. Foundation | 📋 Planned (ready to execute) |
-| 2. Heartbeat AFA | ⏳ Pending |
+| 1. Foundation | ✅ Complete (2026-05-17) |
+| 2. Heartbeat AFA | ⏳ Next — `/gsd-plan-phase 2` |
 | 3. Core Loop Laboral | ⏳ Pending |
 | 4. Combate Estratégico | ⏳ Pending |
 | 5. Mundo Social | ⏳ Pending |
 | 6. Monetización + Seasons | ⏳ Pending |
 | 7. Polish + Soft Launch | ⏳ Pending |
+
+## Deferrals carried over to later phases
+
+| Item | Deferred to | Status |
+|------|-------------|--------|
+| Resend / SMTP for password reset emails | Phase 2 | Stub RPC returns `feature_unavailable_phase_1` |
+| Custom domain (`barrabrava.com.ar` or similar) | Phase 2 | GitHub Pages free `lukasval.github.io/barrabrava` works for now |
+| Railway project rename `barrabrava-nakama` | TODO cosmetic | Current name `honest-heart` (auto-gen) |
+| Nakama Console (port 7351) public exposure | On demand | Use TCP Proxy or local Nakama for admin |
+| Railway auto-deploy GitHub webhook | TBD | Manual redeploys for now |
+| iOS CI workflow | Phase 7 | `DEFERRED-CI.md` |
+| Android APK CI workflow | Phase 7 | `DEFERRED-CI.md` — workflow exists, trigger reduced to `workflow_dispatch` |
+| AAIP trámite | Phase 6/7 (≥1mo pre-launch) | `AAIP-REGISTRATION.md` checklist ready |
+| IP lawyer review (AFA parodia) | Pre-launch | `LEGAL-NOTES.md` documents constraints |
 
 ## Recent Activity
 
@@ -46,18 +60,23 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 - 2026-05-14: ROADMAP.md committed (7 phases, ~5-6 months solo dev)
 - 2026-05-14: Phase 1 context gathered via /gsd-discuss-phase (01-CONTEXT.md)
 - 2026-05-14: Phase 1 UI design contract approved via /gsd-ui-phase (01-UI-SPEC.md)
-- 2026-05-15: Phase 1 research committed (01-RESEARCH.md — Railway/Fly.io finding, Nakama-Godot SDK patterns)
+- 2026-05-15: Phase 1 research committed (01-RESEARCH.md)
 - 2026-05-15: Phase 1 validation strategy created (01-VALIDATION.md — nyquist_compliant: true)
 - 2026-05-15: Phase 1 planning complete — 5 plans across 4 waves (verified by plan-checker, iteration 2)
-- 2026-05-15: CONTEXT.md D-14/D-15 revised — TEC-08 Android-only Phase 1, Railway region flexible
-- 2026-05-15: DEFERRED-IOS-CI.md documents iOS CI deferral to Phase 7
+- 2026-05-15: Wave 0 Plan 01-01 complete — Railway + Postgres + Nakama + GitHub repo + INFRA-NOTES
+- 2026-05-15: Wave 1 Plan 01-02 complete — Godot 4.3 skeleton (Android CI deferred to Phase 7 → DEFERRED-CI.md)
+- 2026-05-17: Wave 2 Plan 01-03 complete — Nakama TS runtime LIVE; resolved Goja InitModule AST issue (function decls, not arrows) + IIFE strip post-build; smoke test passes end-to-end with real server_key after Railway start command updated with `--socket.server_key $NAKAMA_SERVER_KEY`
+- 2026-05-17: Wave 3 Plan 01-04 complete — 7 onboarding screens (Splash, Auth, ForgotPassword, ClubPicker, PibeCreator, Tutorial, Home) + 3 reusable components + FlowRouter/PlayerStore/AppConfig autoloads
+- 2026-05-17: Wave 3 Plan 01-05 complete — privacy/terms/reset web pages LIVE on GitHub Pages; AppConfig PRV-05 asserts; AcceptTerms consent gate in AuthScreen; AAIP-REGISTRATION + LEGAL-NOTES docs
+- 2026-05-17: ✅ PHASE 1 FOUNDATION COMPLETE — repo public, all infra live, all checkpoints closed
 
-## Open Decisions
+## Open Decisions (rolled into Phase 2+ planning)
 
 - Final art direction for parodied club identities (commission illustrator? or paramétrico puro?)
-- Legal review timing: pre-Phase 1 or post-Phase 3?
-- ARS pricing tiers final values (depend on FX rate at launch month)
-- AAIP database registration: when to start? (2-4 week process)
+- Legal review timing: confirmed pre-launch (Phase 7) — `LEGAL-NOTES.md` tracks
+- ARS pricing tiers final values (depend on FX rate at launch month — Phase 6)
+- Custom domain registration (Phase 2)
+- Resend SMTP wiring (Phase 2)
 
 ## Key Constraints
 
@@ -67,4 +86,4 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 - 5-6 months target to v1 soft launch
 
 ---
-*Last updated: 2026-05-15 — Phase 1 planning complete (5 plans, ready to execute)*
+*Last updated: 2026-05-17 — Phase 1 Foundation COMPLETE; ready for `/gsd-plan-phase 2`*

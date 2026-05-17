@@ -22,7 +22,7 @@
 
 ---
 
-## Phase 1: Foundation
+## Phase 1: Foundation ✅ COMPLETE (2026-05-17)
 
 **Goal:** Player puede crear cuenta, elegir club entre ~130, crear su pibe, ver pantalla de inicio funcional.
 
@@ -32,20 +32,36 @@
 - CLB-01..02 (identidad paramétrica clubes, disclaimer fiction)
 - PRV-01..05 (privacy policy, AAIP registro, account delete, consents)
 
-**Success criteria:**
-1. App buildea para iOS y Android desde GitHub Actions
-2. Player puede registrarse con email + login
-3. Lista de ~130 clubes con identidades paramétricas (colores + escudo generado + barrio HQ)
-4. Player puede elegir club, facción inicial, crear pibe con stats base
-5. Datos persisten en Postgres via Nakama
-6. Privacy policy en español accesible desde app
+**Success criteria — FINAL STATUS:**
+1. ⏳ App buildea para iOS y Android desde GitHub Actions → DEFERRED to Phase 7 (see DEFERRED-CI.md). Workflow exists at `.github/workflows/build-android-debug.yml` with `workflow_dispatch` trigger only. Local builds work.
+2. ✅ Player puede registrarse con email + login — verified via smoke-test.sh against live Nakama
+3. ✅ Lista de 133 clubes con identidades paramétricas — seeded idempotently via Nakama TS runtime InitModule
+4. ✅ Player puede elegir club, crear pibe con stats base — RPCs `get_clubs` + `create_pibe` LIVE, Godot screens wired via FlowRouter
+5. ✅ Datos persisten en Postgres via Nakama — Storage collections `clubs`, `pibes`, `meta`
+6. ✅ Privacy policy en español accesible desde app — `web/privacy/index.html` LIVE on GitHub Pages, AuthScreen routes via `OS.shell_open(AppConfig.PRIVACY_URL)`
+
+**Bonus delivered (beyond success criteria):**
+- Privacy policy ES + EN (mirror)
+- Terms of Service ES
+- Password Reset page (stub, Phase 2 wires real Resend)
+- PRV-05 consent gate (AcceptTerms CheckBox enforced before register)
+- AAIP-REGISTRATION.md checklist (trámite deferred to Phase 6/7)
+- LEGAL-NOTES.md (Ley 25.326 + 24.240 + AFA parodia mitigation)
+- 8 shield archetypes for parametric club identities
 
 **Outputs:**
-- Godot project structure
-- Nakama instance en Railway
-- Postgres schema (players, pibes, clubs, factions)
-- CI/CD pipeline funcionando
-- Basic UI: login, club picker, pibe creator
+- Godot 4.3 project + 7 onboarding screens + 3 reusable components + 7 autoloads
+- Nakama 3.21.0 LIVE at https://nakama-production-7ea8.up.railway.app + Postgres
+- 5 RPCs registered (get_clubs/create_pibe/delete_account + 2 password_reset stubs)
+- 133-club seed (Primera 28, Nacional 38, B Metro 17, Federal A 30, C Metro 20) — lunfardo parody names + paletas + barrios
+- Web pages LIVE at https://lukasval.github.io/barrabrava/ (landing + privacy ES/EN + terms + reset-password)
+- GitHub Pages deploy workflow auto-triggered on web/** changes
+- INFRA-NOTES + DEFERRED-CI + AAIP-REGISTRATION + LEGAL-NOTES docs
+
+**Carried over to Phase 2:**
+- Custom domain registration → swap AppConfig.SITE_BASE constant
+- Resend SMTP wiring → un-stub `request_password_reset` + `confirm_password_reset` RPCs
+- Email contacts in privacy/terms become real (currently placeholder `legal@barrabrava.com.ar`)
 
 ---
 
