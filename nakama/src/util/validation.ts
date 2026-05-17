@@ -17,7 +17,13 @@ const MAX_LENGTH = 20;
 // Allowed glyph class — letters incl. Spanish (á-ÿ, ñ, ü), digits, space, _ -
 const ALLOWED_RE = /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9 _-]+$/;
 
-// Deny list (substring match, case-insensitive). Keep small and obvious.
+// Deny list (word-boundary match, case-insensitive). Keep small and obvious.
+//
+// WR-03 fix: substring match generaba falsos positivos (e.g. 'orto' rechazaba
+// 'Ortodoxo', 'Aporto', 'Norto'; 'root' rechazaba 'Rootkit'). Cambiamos a
+// word-boundary regex (\b). 'orto' y 'hdp' se sacaron porque los falsos
+// positivos superan el valor — para Phase 5 (Mundo Social) hay que reemplazar
+// todo esto por una solución más robusta (Levenshtein + servicio externo).
 const DENY_WORDS: string[] = [
   // System / impersonation
   'admin',
@@ -48,11 +54,15 @@ const DENY_WORDS: string[] = [
   'forra',
   'trolo',
   'trola',
-  'hdp',
   'mogolico',
   'mogolica',
-  'orto',
 ];
+
+// Pre-compile regex with word boundaries. Escape any regex metacharacters
+// in deny words (currently none, but defensive).
+const DENY_REGEXES: RegExp[] = DENY_WORDS.map(
+  (w) => new RegExp('\\b' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i'),
+);
 
 export interface ValidationResult {
   ok: boolean;
@@ -79,9 +89,8 @@ export function validatePibeName(raw: unknown): ValidationResult {
   if (!ALLOWED_RE.test(name)) {
     return { ok: false, error: 'name_has_invalid_chars' };
   }
-  const lower = name.toLowerCase();
-  for (let i = 0; i < DENY_WORDS.length; i++) {
-    if (lower.indexOf(DENY_WORDS[i]) !== -1) {
+  for (let i = 0; i < DENY_REGEXES.length; i++) {
+    if (DENY_REGEXES[i].test(name)) {
       return { ok: false, error: 'name_contains_forbidden_word' };
     }
   }
