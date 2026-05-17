@@ -128,3 +128,11 @@ Railway auto-deploy sigue DESHABILITADO (GitHub App webhook permissions pendient
 4. Si segundo boot, esperar log `Clubs already seeded (version=v1), skipping` — confirma idempotencia.
 5. Smoke test (comando arriba) → esperar `ALL SMOKE TESTS PASSED`.
 6. Si pasa: actualizar este file con timestamp + status.
+
+## Follow-ups — diferidos a Phase 6/7 (review WR-02)
+
+- **Device-auth público sin captcha:** Nakama acepta `/v2/account/authenticate/device?create=true` con rate-limit por IP (`registration_per_ip_per_min: 10`) como única defensa. Para soft-launch público (Phase 6/7), evaluar:
+  - Registrar hook `before_authenticate_device` que requiera un captcha token (Cloudflare Turnstile free tier o hCaptcha).
+  - O deshabilitar `create=true` en device-auth público y forzar onboarding por email gated por verificación (cuando Resend esté wired en Phase 2+).
+  - Decisión por documentar en plan de Phase 6/7.
+- **Cuentas helper de reset-password huérfanas:** post-WR-01 fix, cada token de reset crea UNA cuenta `device-id` con prefijo `"reset-helper-"`. En Phase 2 (cuando Resend habilite reset real), agregar job de housekeeping que purgue `device-id` con prefijo `reset-helper-` después de X días.
