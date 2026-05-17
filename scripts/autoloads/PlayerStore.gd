@@ -5,8 +5,11 @@ extends Node
 #
 # Source of truth lives in Nakama Storage:
 #   - collection "players", key "profile"            (per-user, owned by user_id)
-#   - collection "pibes",   key <pibe_id>            (per-user, owned by user_id)
+#   - collection "pibes",   key "main"               (per-user fixed slot — Phase 1 = 1 pibe per account)
 #   - collection "clubs",   key <club_id>            (system-owned, user_id = nil UUID)
+#
+# CR-01 fix: pibe lookup uses fixed key "main" (matches create_pibe.ts).
+# The pibe_id UUID is preserved inside the value for future multi-pibe support.
 
 signal profile_loaded
 signal profile_cleared
@@ -42,7 +45,7 @@ func load_from_server() -> Dictionary:
 	pibe_id = profile.get("pibe_id", "")
 	club_id = profile.get("club_id", "")
 	var pibe_resp = await NakamaService.client.read_storage_objects_async(session, [
-		{"collection": "pibes", "key": pibe_id, "user_id": session.user_id},
+		{"collection": "pibes", "key": "main", "user_id": session.user_id},
 	])
 	if not pibe_resp.is_exception() and pibe_resp.objects.size() > 0:
 		var pibe = JSON.parse_string(pibe_resp.objects[0].value)
