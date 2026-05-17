@@ -18,7 +18,7 @@ import { rpcRequestPasswordReset } from './rpc/request_password_reset';
 import { rpcConfirmPasswordReset } from './rpc/confirm_password_reset';
 import { COL_CLUBS, COL_META, SYSTEM_USER_ID } from './storage_keys';
 
-const CLUBS_SEED_VERSION = 'v2';  // v1→v2: 133→153 clubs, real-name IDs (display stays lunfardo), barrio/city accent fixes
+const CLUBS_SEED_VERSION = 'v3';  // v1+v2 marker collision in production left 265 clubs coexisting; bumping to v3 forces the new wipe-then-seed path to run cleanly
 
 export interface Club {
   id: string;
