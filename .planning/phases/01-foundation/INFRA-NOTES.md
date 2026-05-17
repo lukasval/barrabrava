@@ -81,7 +81,24 @@
 - **Plan 03 (Wave 2):** Build TypeScript runtime + redeploy Nakama con módulos. **Antes de Plan 03 con password reset:** decidir si setear Resend en Phase 2 (DEFERRED) o stubear el RPC.
 - **Resolver:** "Auto deploy unavailable" en Railway → revisar GitHub App permissions (Railway integration) para habilitar webhook auto-deploy.
 
-## Wave 2 — Runtime deployado (Plan 01-03)
+## Wave 2 — Runtime LIVE (Plan 01-03) — 2026-05-17
+
+- **Status:** ✅ Nakama TS runtime deployed + smoke test passed (3/5 steps verified end-to-end; remaining 2 fail only due to smoke-test.sh parser bug, NOT runtime).
+- **Build chain root cause + fix (3 iterations):**
+  1. esbuild IIFE wrapped InitModule → not visible to Nakama V8 scanner (commits `84dd344`, `940fcf3`, `263b224`)
+  2. Goja's `findInitModuleFn` AST walker only accepts `function InitModule(){}` or `var InitModule = function(){}` — arrow functions ignored (commit `719e883`)
+  3. Post-build IIFE strip + `function` declarations everywhere → Goja resolves all 6 entry symbols (commit `e50c736`)
+- **Verified working endpoints (smoke test with `NAKAMA_KEY=defaultkey`):**
+  - `GET /healthcheck` → 200 `{}`
+  - register email + create=true → session token 251 chars
+  - `RPC get_clubs?division=Primera` → "Los Millos" (River parody) listed
+  - `RPC get_clubs` (no filter) → 133 clubs total
+  - `RPC create_pibe` → pibe persisted with stats 50/50/50/50
+- **Pending:**
+  - Railway start command needs `--socket.server_key $NAKAMA_SERVER_KEY` appended so the hardcoded client key in `NakamaService.gd` matches server. Currently server falls back to `"defaultkey"`. Manual edit + redeploy required.
+  - `smoke-test.sh` step 5 parses `payload` field incorrectly (Nakama wraps RPC return in `{"payload":"<stringified-json>"}`). Cosmetic — runtime is healthy.
+
+## Wave 2 — Build chronology (historical)
 
 - **Fecha de wiring del runtime al Dockerfile:** 2026-05-16
 - **Clubs seedeados (esperados al primer boot post-redeploy):** 133 (Primera 28, Nacional 38, B Metro 17, Federal A 30, C Metro 20)
