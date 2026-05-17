@@ -30,10 +30,20 @@ func _on_delete() -> void:
 	dlg.popup_centered()
 
 func _perform_delete() -> void:
+	# WR-05 fix: deshabilita el botón mientras el RPC está in-flight (evita
+	# double-tap → 2 RPCs concurrentes) y muestra un AcceptDialog visible si
+	# el RPC falla (en vez de solo push_error a consola, que deja al usuario
+	# en limbo sin feedback).
+	delete_button.disabled = true
 	var session = AuthManager.session
 	var resp = await NakamaService.client.rpc_async(session, "delete_account", "")
 	if resp.is_exception():
+		delete_button.disabled = false
 		push_error("[HomeScreen] delete_account failed: %s" % resp.get_exception().message)
+		var err_dlg = AcceptDialog.new()
+		err_dlg.dialog_text = "No pudimos borrar la cuenta. Probá de nuevo en un rato."
+		add_child(err_dlg)
+		err_dlg.popup_centered()
 		return
 	# T-1-UI-10: always wipe cache after logout.
 	AuthManager.logout()
