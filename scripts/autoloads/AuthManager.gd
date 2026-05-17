@@ -53,6 +53,18 @@ func _save_session() -> void:
 	cfg.save(SESSION_FILE)
 	print("[AuthManager] session saved")
 
+# Added in Plan 04 Task 2 (D-03 UI entry point — ForgotPasswordScreen).
+# Unauthenticated RPC: Nakama allows server-key auth for public RPCs by
+# passing a null session. Server returns ok:true uniformly for
+# anti-enumeration (Plan 03 T-1-RT-02), so the client treats any non-exception
+# response as success and shows a uniform confirmation message.
+func request_password_reset(email: String) -> Dictionary:
+	var payload = JSON.stringify({"email": email.strip_edges()})
+	var resp = await NakamaService.client.rpc_async(null, "request_password_reset", payload)
+	if resp.is_exception():
+		return {"ok": false, "error": str(resp.get_exception().message)}
+	return {"ok": true}
+
 func _try_restore_session() -> void:
 	var cfg = ConfigFile.new()
 	if cfg.load(SESSION_FILE) != OK:
