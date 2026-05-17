@@ -25,6 +25,9 @@ var _selected_club_id := ""
 var _selected_card: Node = null
 var _all_clubs: Array = []
 var _search_debounce: float = 0.0
+# WR-07 fix: pool de ClubCards reutilizables — evita queue_free+instantiate
+# en cada filter/search change (con 133 clubs eran ~800 nodos por keystroke).
+var _card_pool: Array = []
 
 func _ready() -> void:
 	cta.disabled = true
@@ -83,8 +86,8 @@ func _load_clubs() -> void:
 	_render_clubs()
 
 func _render_clubs() -> void:
-	for c in list_box.get_children():
-		c.queue_free()
+	# WR-07 fix: usa pool de cards reutilizables en vez de free+instantiate.
+	# Crece el pool si hace falta, asigna data + visibilidad, oculta los sobrantes.
 	_selected_card = null
 	_selected_club_id = ""
 	cta.disabled = true
@@ -101,13 +104,25 @@ func _render_clubs() -> void:
 		filtered.append(club)
 	empty_state.visible = filtered.size() == 0
 	scroll.visible = filtered.size() > 0
-	for club in filtered:
-		var card = ClubCardScene.instantiate()
-		list_box.add_child(card)
-		card.set_club(club)
-		card.tapped.connect(_on_club_tapped.bind(card, club))
+	# Grow pool to match needed size.
+	while _card_pool.size() < filtered.size():
+		var new_card = ClubCardScene.instantiate()
+		list_box.add_child(new_card)
+		new_card.tapped.connect(_on_card_pool_tapped.bind(new_card))
+		_card_pool.append(new_card)
+	# Assign data + visibility to all pool entries.
+	for i in range(_card_pool.size()):
+		var card = _card_pool[i]
+		if i < filtered.size():
+			card.set_club(filtered[i])
+			card.set_meta("club_data", filtered[i])
+			card.visible = true
+			card.set_selected(false)
+		else:
+			card.visible = false
 
-func _on_club_tapped(card: Node, club: Dictionary) -> void:
+func _on_card_pool_tapped(card: Node) -> void:
+	var club = card.get_meta("club_data", {})
 	if _selected_card != null and is_instance_valid(_selected_card):
 		_selected_card.set_selected(false)
 	_selected_card = card
