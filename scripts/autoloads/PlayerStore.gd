@@ -41,20 +41,29 @@ func load_from_server() -> Dictionary:
 		return {"ok": false, "error": str(resp.get_exception().message)}
 	if resp.objects.size() == 0:
 		return {"ok": false, "error": "no_profile"}
-	var profile = JSON.parse_string(resp.objects[0].value)
-	pibe_id = profile.get("pibe_id", "")
-	club_id = profile.get("club_id", "")
+	# WR-09 fix: defensa contra value corrupto / null — JSON.parse_string puede
+	# devolver null (value vacío) o un tipo no-Dictionary (test fixture roto, etc.).
+	# Llamar .get() sobre null crashea con "Invalid call to method 'get' on a
+	# base of type 'Nil'". Validar typeof y normalizar a string con str().
+	var profile_raw = JSON.parse_string(resp.objects[0].value)
+	if typeof(profile_raw) != TYPE_DICTIONARY:
+		return {"ok": false, "error": "profile_corrupt"}
+	var profile: Dictionary = profile_raw
+	pibe_id = str(profile.get("pibe_id", ""))
+	club_id = str(profile.get("club_id", ""))
 	var pibe_resp = await NakamaService.client.read_storage_objects_async(session, [
 		{"collection": StorageKeys.COL_PIBES, "key": StorageKeys.KEY_PIBE_MAIN, "user_id": session.user_id},
 	])
 	if not pibe_resp.is_exception() and pibe_resp.objects.size() > 0:
-		var pibe = JSON.parse_string(pibe_resp.objects[0].value)
-		pibe_name = pibe.get("name", "")
+		var pibe_raw = JSON.parse_string(pibe_resp.objects[0].value)
+		if typeof(pibe_raw) == TYPE_DICTIONARY:
+			pibe_name = str(pibe_raw.get("name", ""))
 	var club_resp = await NakamaService.client.read_storage_objects_async(session, [
 		{"collection": StorageKeys.COL_CLUBS, "key": club_id, "user_id": StorageKeys.SYSTEM_USER_ID},
 	])
 	if not club_resp.is_exception() and club_resp.objects.size() > 0:
-		var club = JSON.parse_string(club_resp.objects[0].value)
-		club_name = club.get("lunfardo_name", "")
+		var club_raw = JSON.parse_string(club_resp.objects[0].value)
+		if typeof(club_raw) == TYPE_DICTIONARY:
+			club_name = str(club_raw.get("lunfardo_name", ""))
 	profile_loaded.emit()
 	return {"ok": true}
