@@ -32,11 +32,16 @@ func _on_submit() -> void:
 	submit_button.disabled = true
 	status_label.visible = false
 	var _res = await AuthManager.request_password_reset(email)
-	submit_button.disabled = true
 	# Anti-enumeration: uniform success message regardless of server result.
 	# Server already responds uniformly (Plan 03 T-1-RT-02); client respects
 	# the contract so a logged response never leaks existence.
 	status_label.text = "Si ese email está en la base, te llega un link en unos minutos. Revisá spam también."
 	status_label.add_theme_color_override("font_color", AppTheme.TEXT_SECONDARY)
 	status_label.visible = true
-	email_input.editable = false
+	# WR-06 fix: re-habilita el botón después de 30s para permitir retry si
+	# hubo network failure real. El email_input queda editable así el usuario
+	# puede corregir un typo. Anti-enumeration se mantiene: el mensaje es
+	# uniforme y el server sigue respondiendo igual independiente del email.
+	await get_tree().create_timer(30.0).timeout
+	submit_button.disabled = false
+	submit_button.text = "Enviar de nuevo"
