@@ -20,6 +20,10 @@ signal pressed
 			_refresh_style()
 
 var _label: Label
+# WR-11 fix: cachear 2 StyleBoxFlat (selected + unselected) en lugar de
+# crear uno nuevo en cada _refresh_style — evita basura de GC en cada tap.
+var _style_selected: StyleBoxFlat
+var _style_unselected: StyleBoxFlat
 
 func _ready() -> void:
 	custom_minimum_size = Vector2(64, 32)
@@ -28,34 +32,40 @@ func _ready() -> void:
 	_label.text = label_text
 	_refresh_style()
 
+func _build_styles() -> void:
+	_style_selected = StyleBoxFlat.new()
+	_style_selected.corner_radius_top_left = 16
+	_style_selected.corner_radius_top_right = 16
+	_style_selected.corner_radius_bottom_left = 16
+	_style_selected.corner_radius_bottom_right = 16
+	_style_selected.content_margin_left = 8
+	_style_selected.content_margin_right = 8
+	_style_selected.content_margin_top = 8
+	_style_selected.content_margin_bottom = 8
+	_style_selected.bg_color = AppTheme.ACCENT
+	# no border when selected
+	_style_unselected = StyleBoxFlat.new()
+	_style_unselected.corner_radius_top_left = 16
+	_style_unselected.corner_radius_top_right = 16
+	_style_unselected.corner_radius_bottom_left = 16
+	_style_unselected.corner_radius_bottom_right = 16
+	_style_unselected.content_margin_left = 8
+	_style_unselected.content_margin_right = 8
+	_style_unselected.content_margin_top = 8
+	_style_unselected.content_margin_bottom = 8
+	_style_unselected.bg_color = AppTheme.SECONDARY
+	_style_unselected.border_width_left = 1
+	_style_unselected.border_width_right = 1
+	_style_unselected.border_width_top = 1
+	_style_unselected.border_width_bottom = 1
+	_style_unselected.border_color = AppTheme.BORDER_INACTIVE
+
 func _refresh_style() -> void:
-	var sb := StyleBoxFlat.new()
-	sb.corner_radius_top_left = 16
-	sb.corner_radius_top_right = 16
-	sb.corner_radius_bottom_left = 16
-	sb.corner_radius_bottom_right = 16
-	sb.content_margin_left = 8
-	sb.content_margin_right = 8
-	sb.content_margin_top = 8
-	sb.content_margin_bottom = 8
-	if is_selected:
-		sb.bg_color = AppTheme.ACCENT
-		sb.border_width_left = 0
-		sb.border_width_right = 0
-		sb.border_width_top = 0
-		sb.border_width_bottom = 0
-		if _label:
-			_label.add_theme_color_override("font_color", AppTheme.TEXT_PRIMARY)
-	else:
-		sb.bg_color = AppTheme.SECONDARY
-		sb.border_width_left = 1
-		sb.border_width_right = 1
-		sb.border_width_top = 1
-		sb.border_width_bottom = 1
-		sb.border_color = AppTheme.BORDER_INACTIVE
-		if _label:
-			_label.add_theme_color_override("font_color", AppTheme.TEXT_SECONDARY)
-	add_theme_stylebox_override("panel", sb)
+	if _style_selected == null:
+		_build_styles()
+	add_theme_stylebox_override("panel", _style_selected if is_selected else _style_unselected)
+	if _label:
+		_label.add_theme_color_override("font_color", AppTheme.TEXT_PRIMARY if is_selected else AppTheme.TEXT_SECONDARY)
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch and event.pressed:
