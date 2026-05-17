@@ -86,7 +86,16 @@ func _humanize_error(err: String) -> String:
 	return "Algo salió mal. Probá de nuevo."
 
 func _on_privacy_clicked(meta: Variant) -> void:
-	OS.shell_open(str(meta))
+	# WR-12 fix (defensive): solo abrir URLs http(s). Hoy el meta viene de un
+	# BBCode literal hardcoded en privacy_link.text, pero si en el futuro la
+	# URL viene del server (A/B testing del privacy URL), un attacker podría
+	# inyectar 'javascript:' o 'file:///'. OS.shell_open normalmente no honra
+	# esquemas raros pero algunos browsers webview sí.
+	var url := str(meta)
+	if not (url.begins_with("https://") or url.begins_with("http://")):
+		push_warning("[AuthScreen] rejected suspicious URL: %s" % url)
+		return
+	OS.shell_open(url)
 
 func _on_forgot_clicked(_meta: Variant) -> void:
 	FlowRouter.go_forgot_password()
