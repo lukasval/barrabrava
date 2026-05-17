@@ -66,22 +66,28 @@ func request_password_reset(email: String) -> Dictionary:
 	return {"ok": true}
 
 func _try_restore_session() -> void:
+	# CR-03 fix: SIEMPRE emitir un signal terminal (session_ready o session_cleared)
+	# para que SplashScreen no espere los 3 segundos completos cuando no hay sesión.
 	var cfg = ConfigFile.new()
 	if cfg.load(SESSION_FILE) != OK:
 		print("[AuthManager] no saved session")
+		session_cleared.emit()
 		return
 	var token = cfg.get_value("auth", "token", "")
 	var refresh = cfg.get_value("auth", "refresh_token", "")
 	if token == "":
+		session_cleared.emit()
 		return
 	var restored = NakamaService.client.restore_session(token)
 	if restored.expired:
 		if refresh == "":
 			print("[AuthManager] session expired, no refresh token")
+			session_cleared.emit()
 			return
 		var refreshed = await NakamaService.client.session_refresh_async(restored, refresh)
 		if refreshed.is_exception():
 			print("[AuthManager] refresh failed: %s" % refreshed.get_exception().message)
+			session_cleared.emit()
 			return
 		session = refreshed
 	else:
