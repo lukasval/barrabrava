@@ -80,15 +80,16 @@ function seedClubs(nk: nkruntime.Nakama, logger: nkruntime.Logger): void {
   logger.info('Clubs seeded: %d (version=%s)', clubs.length, CLUBS_SEED_VERSION);
 }
 
-// Exported so esbuild's globalName wrapper can pull it back to a true top-level
-// `var InitModule = ...` via the footer in build.mjs. Nakama's V8 runtime scans
-// for `InitModule` at script top-level — wrapped IIFE alone is invisible to it.
-export const InitModule: nkruntime.InitModule = (
+// MUST be a function declaration (or `var InitModule = function() {}`), NOT an
+// arrow function. Nakama parses the bundle AST looking for either pattern in
+// findInitModuleFn (server/runtime_javascript_init_module.go) — arrow functions
+// are ignored, causing `failed to find InitModule function` from registerRpc.
+export function InitModule(
   _ctx: nkruntime.Context,
   logger: nkruntime.Logger,
   nk: nkruntime.Nakama,
   initializer: nkruntime.Initializer,
-) => {
+): void {
   logger.info('BarraBrava runtime starting...');
 
   seedClubs(nk, logger);
@@ -100,4 +101,4 @@ export const InitModule: nkruntime.InitModule = (
   initializer.registerRpc('confirm_password_reset', rpcConfirmPasswordReset);
 
   logger.info('BarraBrava runtime ready: 5 RPCs registered');
-};
+}

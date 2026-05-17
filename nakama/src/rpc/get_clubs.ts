@@ -18,12 +18,12 @@ interface GetClubsInput {
   page_size?: number;
 }
 
-export const rpcGetClubs: nkruntime.RpcFunction = (
+export function rpcGetClubs(
   _ctx: nkruntime.Context,
   logger: nkruntime.Logger,
   nk: nkruntime.Nakama,
   payload: string,
-): string => {
+): string {
   let input: GetClubsInput = {};
   if (payload && payload.length > 0) {
     try {
@@ -94,4 +94,4 @@ export const rpcGetClubs: nkruntime.RpcFunction = (
   logger.debug('get_clubs: division=%s search=%s page=%d returned=%d total=%d', String(input.division || ''), String(input.search || ''), page, slice.length, total);
 
   return JSON.stringify({ clubs: slice, total, page, page_size: pageSize });
-};
+}

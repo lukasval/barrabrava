@@ -33,12 +33,12 @@ interface PibeRecord {
   created_at: number;
 }
 
-export const rpcCreatePibe: nkruntime.RpcFunction = (
+export function rpcCreatePibe(
   ctx: nkruntime.Context,
   logger: nkruntime.Logger,
   nk: nkruntime.Nakama,
   payload: string,
-): string => {
+): string {
   const userId = ctx.userId;
   if (!userId) {
     throw new Error('not_authenticated');
@@ -118,4 +118,4 @@ export const rpcCreatePibe: nkruntime.RpcFunction = (
   logger.info('create_pibe: user=%s pibe=%s club=%s', userId, pibeId, clubId);
 
   return JSON.stringify({ ok: true, pibe });
-};
+}

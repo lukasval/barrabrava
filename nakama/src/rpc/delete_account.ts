@@ -15,12 +15,12 @@
 const SYSTEM_USER_ID = '00000000-0000-0000-0000-000000000000';
 void SYSTEM_USER_ID;
 
-export const rpcDeleteAccount: nkruntime.RpcFunction = (
+export function rpcDeleteAccount(
   ctx: nkruntime.Context,
   logger: nkruntime.Logger,
   nk: nkruntime.Nakama,
   _payload: string,
-): string => {
+): string {
   const userId = ctx.userId;
   if (!userId) {
     throw new Error('not_authenticated');
@@ -66,4 +66,4 @@ export const rpcDeleteAccount: nkruntime.RpcFunction = (
 
   logger.info('delete_account: complete for user=%s', userId);
   return JSON.stringify({ ok: true });
-};
+}

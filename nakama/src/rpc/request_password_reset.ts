@@ -23,12 +23,12 @@ interface RequestResetInput {
   email?: unknown;
 }
 
-export const rpcRequestPasswordReset: nkruntime.RpcFunction = (
+export function rpcRequestPasswordReset(
   _ctx: nkruntime.Context,
   logger: nkruntime.Logger,
   _nk: nkruntime.Nakama,
   payload: string,
-): string => {
+): string {
   let input: RequestResetInput = {};
   try {
     input = (payload ? JSON.parse(payload) : {}) as RequestResetInput;
@@ -47,4 +47,4 @@ export const rpcRequestPasswordReset: nkruntime.RpcFunction = (
 
   // TODO Phase 2: real Resend + token persistence here.
   return JSON.stringify({ ok: true });
-};
+}

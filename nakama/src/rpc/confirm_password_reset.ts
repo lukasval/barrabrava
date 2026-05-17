@@ -20,12 +20,12 @@ interface ConfirmResetInput {
   new_password?: unknown;
 }
 
-export const rpcConfirmPasswordReset: nkruntime.RpcFunction = (
+export function rpcConfirmPasswordReset(
   _ctx: nkruntime.Context,
   _logger: nkruntime.Logger,
   _nk: nkruntime.Nakama,
   payload: string,
-): string => {
+): string {
   let input: ConfirmResetInput = {};
   try {
     input = (payload ? JSON.parse(payload) : {}) as ConfirmResetInput;
@@ -42,4 +42,4 @@ export const rpcConfirmPasswordReset: nkruntime.RpcFunction = (
 
   // TODO Phase 2: real token check + password mutation here.
   return JSON.stringify({ ok: false, error: 'feature_unavailable_phase_1' });
-};
+}
