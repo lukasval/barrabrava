@@ -63,11 +63,13 @@ echo "    registered + got session token (${#SESSION_TOKEN} chars)"
 
 echo
 echo "=== 3) RPC get_clubs (filter division=Primera) ==="
+# CR-04 fix: use ?unwrap to get bare RPC payload (no {"payload":"..."} wrapper).
+# With ?unwrap the body is also plain JSON (no double-stringify needed).
 GET_CLUBS_RESP=$(curl -fsS --max-time 15 -X POST \
-  "$BASE/v2/rpc/get_clubs" \
+  "$BASE/v2/rpc/get_clubs?unwrap" \
   -H "Authorization: Bearer $SESSION_TOKEN" \
   -H "Content-Type: application/json" \
-  -d '"{\"division\":\"Primera\",\"page\":1,\"page_size\":50}"')
+  -d '{"division":"Primera","page":1,"page_size":50}')
 echo "    response (first 200 chars): ${GET_CLUBS_RESP:0:200}"
 
 if ! echo "$GET_CLUBS_RESP" | grep -q "lunfardo_name"; then
@@ -79,14 +81,19 @@ echo "    get_clubs Primera OK"
 echo
 echo "=== 4) RPC get_clubs (no filter — all divisions) ==="
 GET_ALL_RESP=$(curl -fsS --max-time 15 -X POST \
-  "$BASE/v2/rpc/get_clubs" \
+  "$BASE/v2/rpc/get_clubs?unwrap" \
   -H "Authorization: Bearer $SESSION_TOKEN" \
   -H "Content-Type: application/json" \
-  -d '"{\"page\":1,\"page_size\":500}"')
+  -d '{"page":1,"page_size":500}')
 
-# Count lunfardo_name occurrences as a lower-bound on returned clubs.
-COUNT=$(echo "$GET_ALL_RESP" | grep -o "lunfardo_name" | wc -l)
-echo "    clubs returned (approx): $COUNT"
+# Prefer jq for accurate club count from unwrapped payload; fallback to grep for
+# environments without jq.
+if [ -n "$JQ" ]; then
+  COUNT=$(echo "$GET_ALL_RESP" | jq '.clubs | length')
+else
+  COUNT=$(echo "$GET_ALL_RESP" | grep -o "lunfardo_name" | wc -l)
+fi
+echo "    clubs returned: $COUNT"
 if [ "$COUNT" -lt 130 ]; then
   echo "FAIL: expected >=130 clubs, got $COUNT"
   exit 1
@@ -96,10 +103,10 @@ echo "    get_clubs all OK"
 echo
 echo "=== 5) RPC create_pibe (valid name + valid club) ==="
 CREATE_RESP=$(curl -fsS --max-time 15 -X POST \
-  "$BASE/v2/rpc/create_pibe" \
+  "$BASE/v2/rpc/create_pibe?unwrap" \
   -H "Authorization: Bearer $SESSION_TOKEN" \
   -H "Content-Type: application/json" \
-  -d '"{\"name\":\"ElPibe Smoke\",\"club_id\":\"xeneizes_de_la_ribera\"}"')
+  -d '{"name":"ElPibe Smoke","club_id":"xeneizes_de_la_ribera"}')
 echo "    response (first 200 chars): ${CREATE_RESP:0:200}"
 
 if ! echo "$CREATE_RESP" | grep -q '"ok":true'; then
@@ -115,10 +122,10 @@ echo "    create_pibe OK (stats fixed 50/50/50/50)"
 echo
 echo "=== 6) RPC create_pibe (profanity name — must be rejected) ==="
 PROF_RESP=$(curl -fsS --max-time 15 -X POST \
-  "$BASE/v2/rpc/create_pibe" \
+  "$BASE/v2/rpc/create_pibe?unwrap" \
   -H "Authorization: Bearer $SESSION_TOKEN" \
   -H "Content-Type: application/json" \
-  -d '"{\"name\":\"hijo de puta\",\"club_id\":\"xeneizes_de_la_ribera\"}"' || true)
+  -d '{"name":"hijo de puta","club_id":"xeneizes_de_la_ribera"}' || true)
 echo "    response (first 200 chars): ${PROF_RESP:0:200}"
 if ! echo "$PROF_RESP" | grep -q 'name_contains_forbidden_word\|pibe_already_exists'; then
   # pibe_already_exists is also acceptable here — first call already created a pibe and the
@@ -132,10 +139,10 @@ echo "    profanity rejection OK"
 echo
 echo "=== 7) RPC request_password_reset (anti-enumeration stub) ==="
 RESET_RESP=$(curl -fsS --max-time 15 -X POST \
-  "$BASE/v2/rpc/request_password_reset" \
+  "$BASE/v2/rpc/request_password_reset?unwrap" \
   -H "Authorization: Bearer $SESSION_TOKEN" \
   -H "Content-Type: application/json" \
-  -d '"{\"email\":\"nobody@barrabrava.test\"}"')
+  -d '{"email":"nobody@barrabrava.test"}')
 echo "    response: $RESET_RESP"
 if ! echo "$RESET_RESP" | grep -q '"ok":true'; then
   echo "FAIL: request_password_reset did not return ok:true (anti-enumeration)"
@@ -146,10 +153,10 @@ echo "    request_password_reset stub OK"
 echo
 echo "=== 8) RPC delete_account ==="
 DEL_RESP=$(curl -fsS --max-time 15 -X POST \
-  "$BASE/v2/rpc/delete_account" \
+  "$BASE/v2/rpc/delete_account?unwrap" \
   -H "Authorization: Bearer $SESSION_TOKEN" \
   -H "Content-Type: application/json" \
-  -d '""')
+  -d '{}')
 echo "    response: $DEL_RESP"
 if ! echo "$DEL_RESP" | grep -q '"ok":true'; then
   echo "FAIL: delete_account did not return ok:true"
