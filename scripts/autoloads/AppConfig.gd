@@ -20,18 +20,22 @@ const TERMS_URL := SITE_BASE + "/terms/"
 const PASSWORD_RESET_BASE_URL := SITE_BASE + "/reset-password/"
 const RESET_PASSWORD_URL := PASSWORD_RESET_BASE_URL  # alias for legacy refs
 
-# Feature flags — Phase 1 invariants enforced in _ready() asserts (PRV-05).
+# Feature flags. Phase 2 flips PUSH_NOTIFICATIONS_ENABLED on; analytics + GPS
+# stay off until later phases (PRV-05 hardening in _ready asserts).
 const ANALYTICS_ENABLED := false
-const PUSH_NOTIFICATIONS_ENABLED := false
+const PUSH_NOTIFICATIONS_ENABLED := true
 const GPS_ENABLED := false
+
+# Phase 2: FCM topic prefix. Topic name = FCM_TOPIC_PREFIX + club_id.
+# Server (sendTopic / validateTopicName) enforces the same prefix shape.
+const FCM_TOPIC_PREFIX := "club_"
 
 # Minimum age (Apple + Google policies). UI gates around this constant.
 const MIN_AGE := 13
 
 func _ready() -> void:
-	# PRV-05 hardening: any Phase 1 build that ships with these enabled is a
-	# regression. Assert early so misconfigured local builds fail fast.
-	assert(not ANALYTICS_ENABLED, "PRV-05: analytics must stay off in Phase 1")
-	assert(not PUSH_NOTIFICATIONS_ENABLED, "PRV-05: push must stay off in Phase 1")
-	assert(not GPS_ENABLED, "PRV-05: GPS must stay off in Phase 1")
-	print("[AppConfig] site=%s analytics=%s push=%s gps=%s min_age=%d" % [SITE_BASE, ANALYTICS_ENABLED, PUSH_NOTIFICATIONS_ENABLED, GPS_ENABLED, MIN_AGE])
+	# PRV-05 hardening: analytics + GPS must stay off until their respective
+	# phases sign off. Push is intentionally ON in Phase 2+.
+	assert(not ANALYTICS_ENABLED, "PRV-05: analytics must stay off until Phase 7 (privacy review)")
+	assert(not GPS_ENABLED, "PRV-05: GPS must stay off until Phase 3+ (anti-cheat review)")
+	print("[AppConfig] site=%s analytics=%s push=%s gps=%s min_age=%d topic_prefix=%s" % [SITE_BASE, ANALYTICS_ENABLED, PUSH_NOTIFICATIONS_ENABLED, GPS_ENABLED, MIN_AGE, FCM_TOPIC_PREFIX])

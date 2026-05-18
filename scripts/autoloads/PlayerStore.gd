@@ -18,6 +18,11 @@ var pibe_id: String = ""
 var pibe_name: String = ""
 var club_id: String = ""
 var club_name: String = ""
+var club_division: String = ""           # Phase 2: needed for "Coming soon" lower-division gate.
+
+# Phase 2: push + heartbeat state.
+var subscribed_topics: Array[String] = []   # e.g. ["club_xeneizes", ...] — set after subscribe_to_club_topic.
+var current_window: Dictionary = {}          # latest get_current_window response; {} if none.
 
 func has_profile() -> bool:
 	return pibe_id != ""
@@ -27,6 +32,9 @@ func clear() -> void:
 	pibe_name = ""
 	club_id = ""
 	club_name = ""
+	club_division = ""
+	subscribed_topics.clear()
+	current_window = {}
 	profile_cleared.emit()
 
 func load_from_server() -> Dictionary:
@@ -65,5 +73,6 @@ func load_from_server() -> Dictionary:
 		var club_raw = JSON.parse_string(club_resp.objects[0].value)
 		if typeof(club_raw) == TYPE_DICTIONARY:
 			club_name = str(club_raw.get("lunfardo_name", ""))
+			club_division = str(club_raw.get("division", ""))
 	profile_loaded.emit()
 	return {"ok": true}
