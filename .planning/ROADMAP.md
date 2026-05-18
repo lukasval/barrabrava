@@ -89,6 +89,19 @@
 - FCM topics + device token management
 - Fixture cache + fallback logic
 
+**Plans:** 9 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — Wave 0: Storage constants + env vars bootstrap + test fixture RPC + human checkpoint
+- [ ] 02-02-PLAN.md — Wave 1: Scheduler (leaderboard cron) + API-Football + window state machine + season detection
+- [ ] 02-03-PLAN.md — Wave 1: FCM v1 OAuth2 integration + topic_name validator + wire sendTopic into windows
+- [ ] 02-04-PLAN.md — Wave 1: Resend token machinery (un-stub Phase 1 RPCs; RESEND_ENABLED gate)
+- [ ] 02-05-PLAN.md — Wave 1: Admin override plane (5 RPCs + bearer middleware + audit log)
+- [ ] 02-06-PLAN.md — Wave 1: User RPCs (register_fcm_token + get_current_window)
+- [ ] 02-07-PLAN.md — Wave 2: Android FCM GodotPlugin Java source + build config + checkpoint
+- [ ] 02-08-PLAN.md — Wave 2: Godot client wiring (AppConfig flip + NakamaService + PlayerStore + HomeScreen banner)
+- [ ] 02-09-PLAN.md — Wave 3: heartbeat-test.sh (17 invariants) + admin-curl-examples + INFRA-NOTES Phase 2 sections
+
 ---
 
 ## Phase 3: Core Loop Laboral
