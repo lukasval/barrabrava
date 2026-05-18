@@ -22,6 +22,19 @@ runtime:
     - "RESEND_API_KEY=${RESEND_API_KEY}"
     - "RESEND_FROM_EMAIL=${RESEND_FROM_EMAIL}"
     - "PASSWORD_RESET_BASE_URL=${PASSWORD_RESET_BASE_URL}"
+    # Phase 2: AFA scheduler + FCM + admin plane + Resend feature flag.
+    # IMPORTANT — empty-string vs unset: local.yml uses ${VAR} expansion; if a var
+    # is completely unset in local dev the literal "${VAR}" is emitted, breaking
+    # JSON parsing downstream. If skipping a service (e.g. Resend), set the env
+    # var to an empty string in the local .env rather than omitting it entirely.
+    # On Railway, missing vars are treated as empty string automatically.
+    - "API_FOOTBALL_KEY=${API_FOOTBALL_KEY}"
+    - "FCM_SERVICE_ACCOUNT_B64=${FCM_SERVICE_ACCOUNT_B64}"
+    - "FCM_PROJECT_ID=${FCM_PROJECT_ID}"
+    - "RESEND_ENABLED=${RESEND_ENABLED}"
+    - "RESEND_FROM=${RESEND_FROM}"
+    - "ADMIN_BEARER=${ADMIN_BEARER}"
+    - "ADMIN_TEST_MODE=${ADMIN_TEST_MODE}"
 
 # Rate limits — baseline TEC-10. Mitigates T-1-RT-05, T-1-RT-06.
 limit:
