@@ -65,7 +65,7 @@
 
 ---
 
-## Phase 2: Heartbeat AFA
+## Phase 2: Heartbeat AFA ✅ COMPLETE-WITH-DEFERRAL (2026-05-18)
 
 **Goal:** El juego respira al ritmo del fútbol real. Ventanas se abren/cierran automáticamente, jugadores reciben push cuando su club juega.
 
@@ -92,15 +92,15 @@
 **Plans:** 9 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Wave 0: Storage constants + env vars bootstrap + test fixture RPC + human checkpoint
-- [ ] 02-02-PLAN.md — Wave 1: Scheduler (leaderboard cron) + API-Football + window state machine + season detection
-- [ ] 02-03-PLAN.md — Wave 1: FCM v1 OAuth2 integration + topic_name validator + wire sendTopic into windows
-- [ ] 02-04-PLAN.md — Wave 1: Resend token machinery (un-stub Phase 1 RPCs; RESEND_ENABLED gate)
-- [ ] 02-05-PLAN.md — Wave 1: Admin override plane (5 RPCs + bearer middleware + audit log)
-- [ ] 02-06-PLAN.md — Wave 1: User RPCs (register_fcm_token + get_current_window)
-- [ ] 02-07-PLAN.md — Wave 2: Android FCM GodotPlugin Java source + build config + checkpoint
-- [ ] 02-08-PLAN.md — Wave 2: Godot client wiring (AppConfig flip + NakamaService + PlayerStore + HomeScreen banner)
-- [ ] 02-09-PLAN.md — Wave 3: heartbeat-test.sh (17 invariants) + admin-curl-examples + INFRA-NOTES Phase 2 sections
+- [x] 02-01-PLAN.md — Wave 0: Storage constants + env vars bootstrap + test fixture RPC + human checkpoint
+- [x] 02-02-PLAN.md — Wave 1: Scheduler (leaderboard cron) + API-Football + window state machine + season detection
+- [x] 02-03-PLAN.md — Wave 1: FCM v1 OAuth2 integration + topic_name validator + wire sendTopic into windows
+- [x] 02-04-PLAN.md — Wave 1: Resend token machinery (un-stub Phase 1 RPCs; RESEND_ENABLED gate)
+- [x] 02-05-PLAN.md — Wave 1: Admin override plane (7 RPCs + bearer middleware + audit log)
+- [x] 02-06-PLAN.md — Wave 1: User RPCs (register_fcm_token + get_current_window)
+- [ ] 02-07-PLAN.md — **DEFERRED to Phase 7** — Android FCM GodotPlugin requires Android Studio + Firebase Android SDK + signed APK toolchain (user-side device-build work)
+- [x] 02-08-PLAN.md — Wave 2: Godot client wiring (AppConfig flip + NakamaService + PlayerStore + HomeScreen banner)
+- [x] 02-09-PLAN.md — Wave 3: heartbeat-test.sh (20 invariants) + admin-curl-examples + INFRA-NOTES Phase 2 sections
 
 ---
 
