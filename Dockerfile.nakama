@@ -34,6 +34,8 @@ RUN chmod +x /usr/local/bin/nakama-entrypoint.sh
 
 EXPOSE 7350 7351
 
-ENTRYPOINT ["/usr/local/bin/nakama-entrypoint.sh"]
-# CMD intentionally left unset — Railway dashboard provides the start command
-# (and its args become $@ inside the entrypoint wrapper).
+# ENTRYPOINT left as the base image default — Railway invokes our wrapper
+# explicitly by prefixing the dashboard "start command" with
+#   /usr/local/bin/nakama-entrypoint.sh
+# (see INFRA-NOTES.md). Overriding ENTRYPOINT here broke the base image's
+# migration / signal handling chain.
