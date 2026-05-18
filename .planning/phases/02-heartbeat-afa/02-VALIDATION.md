@@ -59,6 +59,9 @@ created: 2026-05-17
 | 02-06-Admin-B | CLB-04 | T-2-ADM-01 | Admin RPC with wrong bearer → `{ok:false, error:"unauthorized"}` | smoke | curl `Authorization: Bearer wrong` | ⬜ |
 | 02-06-Admin-C | CLB-04 | T-2-ADM-02 | Admin RPC with correct bearer + valid input → mutation persisted + `admin_actions` audit row written | smoke | curl + inspect both `match_windows` and `admin_actions` | ⬜ |
 | 02-07-Tick-lock | CLB-03 | T-2-RACE-01 | Tick lock prevents overlap; second concurrent tick logs `previous tick still active; skipping` | 📝 manual logs | trigger 2× `admin_force_repoll` back-to-back | ⬜ |
+| 02-02-MAP-club_team | CLB-03 | T-2-MAP-01 | After first tick, `meta:club_team_map` has ≥1 entry; `meta:unmatched_clubs` written for clubs the fuzzy matcher couldn't resolve | smoke | `curl /v2/console/storage?collection=meta&key=club_team_map` → assert keys.length > 0 | ⬜ |
+| 02-08-FCM-subscribe-on-clubpick | DAY-03 | T-2-FCM-05 | Client wires `NakamaService.subscribe_to_club_topic(PlayerStore.club_id)` after ClubPicker confirmation | static | `grep -c "subscribe_to_club_topic" scripts/autoloads/FlowRouter.gd` returns ≥1 | ⬜ |
+| 02-08-FCM-token-register | DAY-03 | T-2-FCM-03 | Client connects `FCMPlugin.on_token_received` signal and calls `register_fcm_token` RPC on signal | static | `grep -c "on_token_received" scripts/autoloads/NakamaService.gd` returns ≥1 | ⬜ |
 
 *Threat refs trace to the `<threat_model>` block each PLAN.md must include (per Security Threat Model Gate, ASVS L1).*
 

@@ -136,3 +136,84 @@ Railway auto-deploy sigue DESHABILITADO (GitHub App webhook permissions pendient
   - O deshabilitar `create=true` en device-auth público y forzar onboarding por email gated por verificación (cuando Resend esté wired en Phase 2+).
   - Decisión por documentar en plan de Phase 6/7.
 - **Cuentas helper de reset-password huérfanas:** post-WR-01 fix, cada token de reset crea UNA cuenta `device-id` con prefijo `"reset-helper-"`. En Phase 2 (cuando Resend habilite reset real), agregar job de housekeeping que purgue `device-id` con prefijo `reset-helper-` después de X días.
+
+---
+
+# Phase 2 — AFA Heartbeat Notes
+
+## AFA Scheduler
+
+- **Cadence:** 15 min when any fixture in `[now, now+24h]`; 6 h otherwise.
+- **Mechanism:** `initializer.registerLeaderboardReset` on dummy leaderboards `bb_tick_15m` (cron `*/15 * * * *`) and `bb_tick_6h` (cron `0 */6 * * *`). Cron persisted in Postgres — survives container restarts.
+- **Tick lock:** `meta:tick_lock` with 5-minute TTL prevents overlapping ticks (T-2-RACE-01). Second concurrent tick logs `previous tick still active; skipping` and returns clean.
+- **League IDs:** auto-discovered on first tick via API-Football `/leagues?country=Argentina&current=true`, cached in `meta:api_football_league_ids`.
+- **Club-Team Map:** built once per season via `/teams?league=...&season=...`. Fuzzy-matches API team names against Phase 1 club lunfardo_name + barrio_hq. Unmatched clubs land in `meta:unmatched_clubs` — use `admin_set_club_team_mapping` to fix manually.
+- **Debug:** `admin_force_repoll` triggers an immediate tick. Watch Railway logs for `[scheduler]`, `[api_football]`, `[fcm]`, `[reset]` prefixes.
+- **Goja AST gotchas:** `registerLeaderboardReset` and all `registerRpc` calls MUST be direct ExpressionStatements inside `InitModule` body. Wrapping them in helper functions (e.g. `registerSchedulerHooks(initializer)`) breaks Nakama's AST extractor and the server fails to boot with `function key could not be extracted: not found`. See `scheduler/leaderboard_cron.ts` comment for the canonical pattern.
+
+## FCM Setup
+
+- **GCP project:** create at https://console.firebase.google.com (any name; we use `barrasbravas-XXXXX`).
+- **Service account:** Project Settings → Service Accounts → "Generate new private key" → download JSON.
+- **Base64 encode:**
+  - macOS/Linux: `base64 -i key.json | tr -d '\n'`
+  - PowerShell: `[Convert]::ToBase64String([IO.File]::ReadAllBytes("key.json"))`
+- **Railway vars to set:**
+  - `FCM_SERVICE_ACCOUNT_B64` = the base64 string from above
+  - `FCM_PROJECT_ID` = `project_id` value from inside the JSON (e.g. `barrasbravas-a5d0a`)
+- **Verify:** after Railway redeploy, first match-window transition logs `[fcm] sent to topic=club_<slug>`. The OAuth2 access token is cached in `meta:fcm_oauth_token` with 60s safety margin.
+- **iOS:** DEFERRED to Phase 7. Only Android FCM plugin shipped in Phase 2 (plan 02-07).
+- **Security:** the service-account JSON contains a private RSA key. NEVER commit it. `.gitignore` blocks `*-firebase-adminsdk-*.json` and `firebase-adminsdk-*.json` patterns. If accidentally committed, rotate the key in Firebase Console immediately.
+
+## Admin RPCs
+
+- **Bearer token:** UUID v4 stored in Railway env `ADMIN_BEARER` (`requireAdmin` enforces ≥16 chars + constant-time compare).
+  - Generate: `python3 -c "import uuid; print(uuid.uuid4())"` or PowerShell `[guid]::NewGuid().ToString()`.
+- **Test-only mode:** `ADMIN_TEST_MODE=true` in dev unlocks `admin_inject_test_fixture` + `admin_test_validate_topic`. Set to `false` in production.
+- **Usage:** see `nakama/test/admin-curl-examples.md` for copy-pasteable curl commands.
+- **Audit log:** every admin mutation writes a row to `admin_actions` collection (`permissionRead:0`, `permissionWrite:0` — server-only, UUID key per mutation prevents overwrite).
+- **Club mapping reconciliation:** `admin_set_club_team_mapping` merges into `meta:club_team_map` and prunes the matching entry from `meta:unmatched_clubs`.
+
+## Resend (Pending — Phase 6/7)
+
+**Current state (Phase 2):** `RESEND_ENABLED=false`. The reset flow is fully functional internally — token gen via `nk.uuidv4()`, persist with 1h TTL, single-use consume via `consumed_at` marker — but the HTTP call to Resend is disabled. Dev can recover the link from Railway logs.
+
+**IMPORTANT — empty-string vs unset:** Railway env vars consumed by the runtime should be set to at least an empty string. `RESEND_API_KEY=` (empty) is correct; leaving it completely unset would matter only for tooling that does shell expansion. Phase 2 injects all runtime env vars via `--runtime.env=KEY=VALUE` CLI flags in `docker/nakama-entrypoint.sh`, so unset vars simply become empty strings (Nakama's tolerant behavior).
+
+**Railway log grep to recover dev reset link:**
+```
+Railway → Logs → filter: [reset][dev] FULL link
+```
+
+**Do NOT flip `RESEND_ENABLED=true` until ALL of these are done:**
+1. Domain purchased (e.g. `barrabrava.com.ar`).
+2. DNS records added in Resend dashboard (SPF, DKIM, DMARC).
+3. Resend dashboard shows "Domain Verified" (green).
+4. `RESEND_FROM` set to `BarraBrava <noreply@<verified-domain>>`.
+5. `RESEND_API_KEY` set (Resend dashboard → API Keys).
+
+**One-line flip recipe (Phase 6/7):**
+```
+Railway → Variables → RESEND_ENABLED → change "false" to "true" → Redeploy
+```
+
+## Env Var Inventory
+
+| Var | Phase | Sample / shape | Notes |
+|-----|-------|----------------|-------|
+| `NAKAMA_SERVER_KEY` | 1 | `aee9c099...` | Public client identifier; rotate pre-launch (Phase 7). |
+| `NAKAMA_SESSION_ENCRYPTION_KEY` | 1 | base64 32 bytes | Set by Railway; rotate pre-launch. |
+| `NAKAMA_SESSION_REFRESH_ENCRYPTION_KEY` | 1 | base64 32 bytes | Set by Railway; rotate pre-launch. |
+| `NAKAMA_CONSOLE_USERNAME` | 1 | `admin` | Default; change before public launch. |
+| `NAKAMA_CONSOLE_PASSWORD` | 1 | random | Set by Railway; rotate pre-launch. |
+| `DATABASE_URL` | 1 | Railway reference | Auto-set by Postgres plugin. |
+| `RESEND_API_KEY` | 1/6 | `re_...` | Set to empty string until Phase 6/7 domain verified. |
+| `RESEND_FROM_EMAIL` | 1 | placeholder | Phase 1 compat; use `RESEND_FROM` in Phase 2+. |
+| `PASSWORD_RESET_BASE_URL` | 1 | `https://lukasval.github.io/barrabrava/reset-password/` | Update when custom domain live. |
+| `API_FOOTBALL_KEY` | 2 | `xxx` (api-sports.io) | Free tier 100 req/day in dev; paid tier in Phase 6/7. |
+| `FCM_SERVICE_ACCOUNT_B64` | 2 | base64(key.json) | GCP service-account JSON, base64 encoded. NEVER commit raw JSON. |
+| `FCM_PROJECT_ID` | 2 | `barrasbravas-a5d0a` | `project_id` field from the service-account JSON. |
+| `RESEND_ENABLED` | 2 | `false` | Set to `true` ONLY after domain verified (Phase 6/7). |
+| `RESEND_FROM` | 2 | `BarraBrava <onboarding@resend.dev>` | Replace with real domain when live; empty string OK if Resend skipped. |
+| `ADMIN_BEARER` | 2 | UUID v4 | Keep secret; rotate if leaked. |
+| `ADMIN_TEST_MODE` | 2 | `true` (dev) / `false` (prod) | Enables `admin_inject_test_fixture` + `admin_test_validate_topic`. |
