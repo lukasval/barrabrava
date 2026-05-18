@@ -17,6 +17,7 @@ import { rpcDeleteAccount } from './rpc/delete_account';
 import { rpcRequestPasswordReset } from './rpc/request_password_reset';
 import { rpcConfirmPasswordReset } from './rpc/confirm_password_reset';
 import { COL_CLUBS, COL_META, SYSTEM_USER_ID } from './storage_keys';
+import { ensureSchedulerLeaderboards, registerSchedulerHooks } from './scheduler/leaderboard_cron';
 
 const CLUBS_SEED_VERSION = 'v3';  // v1+v2 marker collision in production left 265 clubs coexisting; bumping to v3 forces the new wipe-then-seed path to run cleanly
 
@@ -119,11 +120,14 @@ export function InitModule(
 
   seedClubs(nk, logger);
 
+  ensureSchedulerLeaderboards(nk, logger);
+  registerSchedulerHooks(initializer);
+
   initializer.registerRpc('get_clubs', rpcGetClubs);
   initializer.registerRpc('create_pibe', rpcCreatePibe);
   initializer.registerRpc('delete_account', rpcDeleteAccount);
   initializer.registerRpc('request_password_reset', rpcRequestPasswordReset);
   initializer.registerRpc('confirm_password_reset', rpcConfirmPasswordReset);
 
-  logger.info('BarraBrava runtime ready: 5 RPCs registered');
+  logger.info('BarraBrava runtime ready: 5 RPCs registered + scheduler armed');
 }
