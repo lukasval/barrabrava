@@ -20,13 +20,13 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 
 **Core value:** La realidad del fútbol argentino afecta el juego en tiempo real, y cada jugador es un personaje real dentro de la barra de su club.
 
-**Current focus:** Phase 2 — Heartbeat AFA. Context captured. Ready for research + planning.
+**Current focus:** Phase 2 — Heartbeat AFA. Plans ready. Awaiting execution.
 
 ## Current Phase
 
 **Phase:** 2 — Heartbeat AFA
-**Status:** 📝 Context gathered (2026-05-17). `02-CONTEXT.md` + `02-DISCUSSION-LOG.md` committed. 27 decisions locked (D-01..D-27).
-**Next action:** Re-run `/gsd-plan-phase 2` to spawn researcher + planner.
+**Status:** ✅ PLANNED (2026-05-18). 9 plans across 4 waves. Plan-checker iter 3/3 clean (0 BLOCKER, 0 HIGH, 0 MEDIUM remaining).
+**Next action:** Run `/gsd-execute-phase 2` to start Wave 0 bootstrap (env vars + storage_keys + admin_auth + human checkpoint).
 
 **Phase 1:** ✅ COMPLETE (2026-05-17). All 5 plans executed end-to-end.
 
@@ -45,7 +45,7 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 | Phase | Status |
 |-------|--------|
 | 1. Foundation | ✅ Complete (2026-05-17) |
-| 2. Heartbeat AFA | ⏳ Next — `/gsd-plan-phase 2` |
+| 2. Heartbeat AFA | 📋 Planned — `/gsd-execute-phase 2` |
 | 3. Core Loop Laboral | ⏳ Pending |
 | 4. Combate Estratégico | ⏳ Pending |
 | 5. Mundo Social | ⏳ Pending |
@@ -86,14 +86,27 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 - 2026-05-17: Wave 3 Plan 01-05 complete — privacy/terms/reset web pages LIVE on GitHub Pages; AppConfig PRV-05 asserts; AcceptTerms consent gate in AuthScreen; AAIP-REGISTRATION + LEGAL-NOTES docs
 - 2026-05-17: ✅ PHASE 1 FOUNDATION COMPLETE — repo public, all infra live, all checkpoints closed
 - 2026-05-17: Phase 2 context gathered via /gsd-discuss-phase (`02-CONTEXT.md` + `02-DISCUSSION-LOG.md`). 27 decisions logged (D-01..D-27). User delegó decisiones técnicas a Claude — scheduler in-process Nakama timer, FCM topics+tokens híbrido, admin RPCs vía curl, Resend wired internamente detrás de feature flag (activación real diferida a Phase 6/7 pendiente compra de dominio), scraping lower divisions diferido a v1.1.
+- 2026-05-18: Phase 2 research committed (`02-RESEARCH.md`, 1750 lines, 10 [VERIFY] items). Critical correction: D-01 timer → `registerLeaderboardReset` cron pattern (Nakama TS runtime has no `nk.timerCreate`).
+- 2026-05-18: Phase 2 validation strategy (`02-VALIDATION.md`, 17 invariants, bash+curl smoke) + pattern map (`02-PATTERNS.md`, 32 files mapped to Phase 1 analogs).
+- 2026-05-18: Phase 2 planning complete — 9 plans across 4 waves. Plan-checker iter 1 found 3 BLOCKER + 1 HIGH + 4 MEDIUM + 2 LOW; iter 2 closed 9/10; iter 3 closed MEDIUM 7 (typecheck mask). Final state: 0 issues. Ready for `/gsd-execute-phase 2`.
 
-## Open Decisions (rolled into Phase 2+ planning)
+## Open Decisions (rolled into Phase 3+ planning)
 
 - Final art direction for parodied club identities (commission illustrator? or paramétrico puro?)
 - Legal review timing: confirmed pre-launch (Phase 7) — `LEGAL-NOTES.md` tracks
 - ARS pricing tiers final values (depend on FX rate at launch month — Phase 6)
-- Custom domain registration (Phase 2)
-- Resend SMTP wiring (Phase 2)
+- Custom domain registration → Phase 6/7 prelaunch (per Phase 2 D-26)
+- Resend live wiring → Phase 6/7 once domain verified (Phase 2 ships token machinery behind `RESEND_ENABLED=false` flag)
+- API-Football paid tier → Phase 6 prelaunch (Phase 2 dev uses free tier 100 req/day)
+
+## Phase 2 — Pre-Execute Checklist (USER ACTION REQUIRED at Wave 0)
+
+Plan 02-01 marks `autonomous: false` — executor will STOP and ask user before continuing:
+
+1. API-Football signup (free tier) → set `API_FOOTBALL_KEY` on Railway
+2. GCP project + FCM + service account JSON (base64 encoded) → set `FCM_SERVICE_ACCOUNT_B64` + `FCM_PROJECT_ID` on Railway
+3. Generate UUID v4 → set `ADMIN_BEARER` on Railway
+4. (Optional Phase 2) Resend account → set `RESEND_API_KEY` on Railway (any value if `RESEND_ENABLED=false`)
 
 ## Key Constraints
 
@@ -103,4 +116,4 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 - 5-6 months target to v1 soft launch
 
 ---
-*Last updated: 2026-05-17 — Phase 2 context captured; re-run `/gsd-plan-phase 2` para research + plan.*
+*Last updated: 2026-05-18 — Phase 2 plans verified clean (3-iteration loop). Ready for `/gsd-execute-phase 2`.*
