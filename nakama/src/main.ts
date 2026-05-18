@@ -17,6 +17,14 @@ import { rpcDeleteAccount } from './rpc/delete_account';
 import { rpcRequestPasswordReset } from './rpc/request_password_reset';
 import { rpcConfirmPasswordReset } from './rpc/confirm_password_reset';
 import { rpcAdminTestValidateTopic } from './rpc/admin_test_validate_topic'; // plan 02-03
+// Phase 2 admin RPCs — plan 02-05
+import { rpcAdminPostponeFixture } from './rpc/admin_postpone_fixture';
+import { rpcAdminCloseWindow } from './rpc/admin_close_window';
+import { rpcAdminSetSeasonWindow } from './rpc/admin_set_season_window';
+import { rpcAdminForceRepoll } from './rpc/admin_force_repoll';
+import { rpcAdminListWindows } from './rpc/admin_list_windows';
+import { rpcAdminSetClubTeamMapping } from './rpc/admin_set_club_team_mapping';
+import { rpcAdminInjectTestFixture } from './rpc/admin_inject_test_fixture'; // created plan 02-01
 import { COL_CLUBS, COL_META, SYSTEM_USER_ID } from './storage_keys';
 import { ensureSchedulerLeaderboards, onSchedulerLeaderboardReset } from './scheduler/leaderboard_cron';
 
@@ -134,5 +142,15 @@ export function InitModule(
   initializer.registerRpc('confirm_password_reset', rpcConfirmPasswordReset);
   initializer.registerRpc('admin_test_validate_topic', rpcAdminTestValidateTopic);
 
-  logger.info('BarraBrava runtime ready: 6 RPCs registered + scheduler armed');
+  // Phase 2 admin plane — plan 02-05 (6 RPCs) + admin_inject_test_fixture (plan 02-01).
+  // All gated server-side by requireAdmin (ADMIN_BEARER constant-time compare).
+  initializer.registerRpc('admin_postpone_fixture', rpcAdminPostponeFixture);
+  initializer.registerRpc('admin_close_window', rpcAdminCloseWindow);
+  initializer.registerRpc('admin_set_season_window', rpcAdminSetSeasonWindow);
+  initializer.registerRpc('admin_force_repoll', rpcAdminForceRepoll);
+  initializer.registerRpc('admin_list_windows', rpcAdminListWindows);
+  initializer.registerRpc('admin_set_club_team_mapping', rpcAdminSetClubTeamMapping);
+  initializer.registerRpc('admin_inject_test_fixture', rpcAdminInjectTestFixture);
+
+  logger.info('BarraBrava runtime ready: 13 RPCs registered + scheduler armed');
 }
