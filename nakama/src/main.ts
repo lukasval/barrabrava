@@ -16,6 +16,7 @@ import { rpcCreatePibe } from './rpc/create_pibe';
 import { rpcDeleteAccount } from './rpc/delete_account';
 import { rpcRequestPasswordReset } from './rpc/request_password_reset';
 import { rpcConfirmPasswordReset } from './rpc/confirm_password_reset';
+import { rpcAdminTestValidateTopic } from './rpc/admin_test_validate_topic'; // plan 02-03
 import { COL_CLUBS, COL_META, SYSTEM_USER_ID } from './storage_keys';
 import { ensureSchedulerLeaderboards, registerSchedulerHooks } from './scheduler/leaderboard_cron';
 
@@ -128,6 +129,7 @@ export function InitModule(
   initializer.registerRpc('delete_account', rpcDeleteAccount);
   initializer.registerRpc('request_password_reset', rpcRequestPasswordReset);
   initializer.registerRpc('confirm_password_reset', rpcConfirmPasswordReset);
+  initializer.registerRpc('admin_test_validate_topic', rpcAdminTestValidateTopic);
 
-  logger.info('BarraBrava runtime ready: 5 RPCs registered + scheduler armed');
+  logger.info('BarraBrava runtime ready: 6 RPCs registered + scheduler armed');
 }

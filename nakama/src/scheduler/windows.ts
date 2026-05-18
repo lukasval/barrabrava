@@ -26,28 +26,7 @@ import {
   COL_MATCH_WINDOWS,
   SYSTEM_USER_ID,
 } from '../storage_keys';
-
-// Stub sendTopic until plan 02-03 (fcm.ts) lands.
-// Replace with real import once fcm.ts exists:
-//   import { sendTopic } from '../integrations/fcm';
-interface FcmTopicPayload {
-  topic: string;
-  title: string;
-  body: string;
-  data: { [k: string]: string };
-}
-function sendTopic(
-  _ctx: nkruntime.Context,
-  logger: nkruntime.Logger,
-  _nk: nkruntime.Nakama,
-  p: FcmTopicPayload,
-): boolean {
-  logger.info(
-    '[fcm][stub] would send to topic=%s (real send wired in plan 02-03)',
-    p.topic,
-  );
-  return false;
-}
+import { sendTopic } from '../integrations/fcm';
 
 const WINDOW_PRE_MS = 2 * 3600 * 1000;
 const WINDOW_POST_MS = 2 * 3600 * 1000;
