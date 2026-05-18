@@ -50,22 +50,21 @@ export function ensureSchedulerLeaderboards(
   logger.info('Scheduler leaderboards ensured (bb_tick_15m, bb_tick_6h)');
 }
 
-// Nakama scans the AST of the registered callback to extract a "function key".
-// Anonymous function expressions have no name → "function key could not be extracted: not found"
-// at boot (#GOJA-AST). Pass a NAMED top-level function declaration instead (same
-// constraint that makes InitModule itself a function declaration, not an arrow).
-function onSchedulerLeaderboardReset(
-  ctx: nkruntime.Context,
-  logger: nkruntime.Logger,
-  nk: nkruntime.Nakama,
-  lb: nkruntime.Leaderboard,
-  _reset: number,
-): void {
-  if (lb.id === 'bb_tick_15m' || lb.id === 'bb_tick_6h') {
-    runHeartbeatTick(ctx, logger, nk, lb.id as 'bb_tick_15m' | 'bb_tick_6h');
-  }
-}
-
+// Nakama extracts the "function key" from the AST at the call site of
+// registerLeaderboardReset — NOT from the runtime function value. So passing
+// a top-level named function by reference fails ("function key could not be
+// extracted: not found"). The callback MUST be a named function expression
+// inline at the registerLeaderboardReset() call.
 export function registerSchedulerHooks(initializer: nkruntime.Initializer): void {
-  initializer.registerLeaderboardReset(onSchedulerLeaderboardReset);
+  initializer.registerLeaderboardReset(function onSchedulerLeaderboardReset(
+    ctx: nkruntime.Context,
+    logger: nkruntime.Logger,
+    nk: nkruntime.Nakama,
+    lb: nkruntime.Leaderboard,
+    _reset: number,
+  ): void {
+    if (lb.id === 'bb_tick_15m' || lb.id === 'bb_tick_6h') {
+      runHeartbeatTick(ctx, logger, nk, lb.id as 'bb_tick_15m' | 'bb_tick_6h');
+    }
+  });
 }
