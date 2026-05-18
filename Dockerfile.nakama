@@ -16,9 +16,24 @@ RUN npm install --no-audit --no-fund
 RUN npm run build
 
 FROM heroiclabs/nakama:3.21.0
+
+# envsubst (gettext-base) for ${VAR} expansion in local.yml at container boot.
+# Nakama's convertRuntimeEnv reads runtime.env entries LITERALLY — no shell
+# expansion — so ${ADMIN_TEST_MODE} would end up as the literal string in
+# ctx.env. The entrypoint wrapper materialises a real local.yml from the
+# template before Nakama starts.
+USER root
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends gettext-base \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY --from=runtime-builder /workspace/build/ /nakama/data/modules/
-COPY nakama/local.yml /nakama/data/local.yml
+COPY nakama/local.yml /nakama/data/local.yml.tpl
+COPY docker/nakama-entrypoint.sh /usr/local/bin/nakama-entrypoint.sh
+RUN chmod +x /usr/local/bin/nakama-entrypoint.sh
 
 EXPOSE 7350 7351
 
-# Use Nakama default entrypoint (Railway sets start command via dashboard).
+ENTRYPOINT ["/usr/local/bin/nakama-entrypoint.sh"]
+# CMD intentionally left unset — Railway dashboard provides the start command
+# (and its args become $@ inside the entrypoint wrapper).
