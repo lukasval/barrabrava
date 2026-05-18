@@ -53,3 +53,12 @@ func go_club_picker() -> void: go_to("res://scenes/ClubPickerScreen.tscn")
 func go_pibe_creator() -> void: go_to("res://scenes/PibeCreatorScreen.tscn")
 func go_tutorial() -> void: go_to("res://scenes/TutorialScreen.tscn")
 func go_home() -> void: go_to("res://scenes/HomeScreen.tscn")
+
+# Phase 2: club confirmation entrypoint. ClubPickerScreen calls this instead of
+# raw go_pibe_creator() so the FCM topic subscribe happens at exactly one place.
+# subscribe_to_club_topic is idempotent (PlayerStore.subscribed_topics dedup +
+# server-side validateTopicName) so re-calls on app resume are safe.
+func confirm_club_pick(club_id: String) -> void:
+	if club_id != "":
+		NakamaService.subscribe_to_club_topic(club_id)
+	go_pibe_creator()

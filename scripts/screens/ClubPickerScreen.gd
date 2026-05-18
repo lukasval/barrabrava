@@ -134,4 +134,5 @@ func _on_cta() -> void:
 	if _selected_club_id == "":
 		return
 	PlayerStore.club_id = _selected_club_id
-	FlowRouter.go_pibe_creator()
+	# Phase 2: subscribe device to club FCM topic before navigating.
+	FlowRouter.confirm_club_pick(_selected_club_id)
