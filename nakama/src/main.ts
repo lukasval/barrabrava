@@ -25,6 +25,9 @@ import { rpcAdminForceRepoll } from './rpc/admin_force_repoll';
 import { rpcAdminListWindows } from './rpc/admin_list_windows';
 import { rpcAdminSetClubTeamMapping } from './rpc/admin_set_club_team_mapping';
 import { rpcAdminInjectTestFixture } from './rpc/admin_inject_test_fixture'; // created plan 02-01
+// Phase 2 player RPCs — plan 02-06
+import { rpcRegisterFcmToken } from './rpc/register_fcm_token';
+import { rpcGetCurrentWindow } from './rpc/get_current_window';
 import { COL_CLUBS, COL_META, SYSTEM_USER_ID } from './storage_keys';
 import { ensureSchedulerLeaderboards, onSchedulerLeaderboardReset } from './scheduler/leaderboard_cron';
 
@@ -152,5 +155,9 @@ export function InitModule(
   initializer.registerRpc('admin_set_club_team_mapping', rpcAdminSetClubTeamMapping);
   initializer.registerRpc('admin_inject_test_fixture', rpcAdminInjectTestFixture);
 
-  logger.info('BarraBrava runtime ready: 13 RPCs registered + scheduler armed');
+  // Phase 2 player RPCs — plan 02-06
+  initializer.registerRpc('register_fcm_token', rpcRegisterFcmToken);
+  initializer.registerRpc('get_current_window', rpcGetCurrentWindow);
+
+  logger.info('BarraBrava runtime ready: 15 RPCs registered + scheduler armed');
 }
