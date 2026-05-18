@@ -18,23 +18,20 @@ socket:
 
 runtime:
   js_entrypoint: "build/index.js"
-  env:
-    - "RESEND_API_KEY=${RESEND_API_KEY}"
-    - "RESEND_FROM_EMAIL=${RESEND_FROM_EMAIL}"
-    - "PASSWORD_RESET_BASE_URL=${PASSWORD_RESET_BASE_URL}"
-    # Phase 2: AFA scheduler + FCM + admin plane + Resend feature flag.
-    # IMPORTANT — empty-string vs unset: local.yml uses ${VAR} expansion; if a var
-    # is completely unset in local dev the literal "${VAR}" is emitted, breaking
-    # JSON parsing downstream. If skipping a service (e.g. Resend), set the env
-    # var to an empty string in the local .env rather than omitting it entirely.
-    # On Railway, missing vars are treated as empty string automatically.
-    - "API_FOOTBALL_KEY=${API_FOOTBALL_KEY}"
-    - "FCM_SERVICE_ACCOUNT_B64=${FCM_SERVICE_ACCOUNT_B64}"
-    - "FCM_PROJECT_ID=${FCM_PROJECT_ID}"
-    - "RESEND_ENABLED=${RESEND_ENABLED}"
-    - "RESEND_FROM=${RESEND_FROM}"
-    - "ADMIN_BEARER=${ADMIN_BEARER}"
-    - "ADMIN_TEST_MODE=${ADMIN_TEST_MODE}"
+  # runtime.env intentionally OMITTED here.
+  #
+  # Nakama's server/config.go convertRuntimeEnv reads runtime.env entries as
+  # LITERAL strings — no ${VAR} expansion happens. So configuring env vars
+  # here would put the literal "${ADMIN_TEST_MODE}" into ctx.env instead of
+  # the value of the container env var.
+  #
+  # Instead, the docker/nakama-entrypoint.sh wrapper enumerates a known list
+  # of container env vars and appends them as --runtime.env=KEY=VALUE CLI
+  # flags to the Nakama process at boot. CLI flags ARE expanded by the shell
+  # before reaching Nakama, so the real values land in ctx.env. This is the
+  # canonical Heroic Labs pattern for runtime env injection in cloud deploys.
+  #
+  # To add a new env var: edit RUNTIME_ENV_VARS in docker/nakama-entrypoint.sh.
 
 # Rate limits — baseline TEC-10. Mitigates T-1-RT-05, T-1-RT-06.
 limit:
