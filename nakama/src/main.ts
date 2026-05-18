@@ -18,7 +18,7 @@ import { rpcRequestPasswordReset } from './rpc/request_password_reset';
 import { rpcConfirmPasswordReset } from './rpc/confirm_password_reset';
 import { rpcAdminTestValidateTopic } from './rpc/admin_test_validate_topic'; // plan 02-03
 import { COL_CLUBS, COL_META, SYSTEM_USER_ID } from './storage_keys';
-import { ensureSchedulerLeaderboards, registerSchedulerHooks } from './scheduler/leaderboard_cron';
+import { ensureSchedulerLeaderboards, onSchedulerLeaderboardReset } from './scheduler/leaderboard_cron';
 
 const CLUBS_SEED_VERSION = 'v3';  // v1+v2 marker collision in production left 265 clubs coexisting; bumping to v3 forces the new wipe-then-seed path to run cleanly
 
@@ -122,7 +122,10 @@ export function InitModule(
   seedClubs(nk, logger);
 
   ensureSchedulerLeaderboards(nk, logger);
-  registerSchedulerHooks(initializer);
+  // NOTE: registerLeaderboardReset MUST be invoked directly here as an
+  // ExpressionStatement in InitModule body — Nakama's AST walker does not
+  // descend into helper functions. See scheduler/leaderboard_cron.ts comment.
+  initializer.registerLeaderboardReset(onSchedulerLeaderboardReset);
 
   initializer.registerRpc('get_clubs', rpcGetClubs);
   initializer.registerRpc('create_pibe', rpcCreatePibe);

@@ -50,21 +50,25 @@ export function ensureSchedulerLeaderboards(
   logger.info('Scheduler leaderboards ensured (bb_tick_15m, bb_tick_6h)');
 }
 
-// Nakama extracts the "function key" from the AST at the call site of
-// registerLeaderboardReset — NOT from the runtime function value. So passing
-// a top-level named function by reference fails ("function key could not be
-// extracted: not found"). The callback MUST be a named function expression
-// inline at the registerLeaderboardReset() call.
-export function registerSchedulerHooks(initializer: nkruntime.Initializer): void {
-  initializer.registerLeaderboardReset(function onSchedulerLeaderboardReset(
-    ctx: nkruntime.Context,
-    logger: nkruntime.Logger,
-    nk: nkruntime.Nakama,
-    lb: nkruntime.Leaderboard,
-    _reset: number,
-  ): void {
-    if (lb.id === 'bb_tick_15m' || lb.id === 'bb_tick_6h') {
-      runHeartbeatTick(ctx, logger, nk, lb.id as 'bb_tick_15m' | 'bb_tick_6h');
-    }
-  });
+// Nakama's `getHookFnIdentifier` (server/runtime_javascript_init.go) walks ONLY
+// the top-level statements of InitModule's body — it does NOT descend into
+// helper function calls. So `initializer.registerLeaderboardReset(...)` MUST
+// appear directly as an ExpressionStatement inside InitModule, with the
+// argument being an Identifier referring to a top-level named function
+// declaration. Wrapping it in a `registerSchedulerHooks(initializer)` helper
+// makes the AST walker miss the registration entirely, producing the runtime
+// error "function key could not be extracted: not found".
+//
+// We therefore export the hook function as a top-level declaration here and
+// the registration line itself lives in main.ts inside InitModule.
+export function onSchedulerLeaderboardReset(
+  ctx: nkruntime.Context,
+  logger: nkruntime.Logger,
+  nk: nkruntime.Nakama,
+  lb: nkruntime.Leaderboard,
+  _reset: number,
+): void {
+  if (lb.id === 'bb_tick_15m' || lb.id === 'bb_tick_6h') {
+    runHeartbeatTick(ctx, logger, nk, lb.id as 'bb_tick_15m' | 'bb_tick_6h');
+  }
 }
