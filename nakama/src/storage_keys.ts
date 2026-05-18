@@ -23,3 +23,17 @@ export const KEY_PLAYER_PROFILE = 'profile';
 // store under the conventional nil UUID and rely on permissionRead/Write to
 // gate access.
 export const SYSTEM_USER_ID = '00000000-0000-0000-0000-000000000000';
+
+// Phase 2: AFA scheduler + push + admin.
+export const COL_FIXTURES = 'fixtures';
+export const COL_MATCH_WINDOWS = 'match_windows';
+export const COL_FCM_TOKENS = 'fcm_tokens';
+export const COL_ADMIN_ACTIONS = 'admin_actions';
+
+// COL_RESET_TOKENS already exists at line 14 — Phase 2 starts writing to it.
+// COL_META reused for scheduler/season/oauth/league-id state under keyed entries.
+export const KEY_TICK_LOCK = 'tick_lock';
+export const KEY_SCHEDULER_STATE = 'scheduler_state';
+export const KEY_CURRENT_SEASON = 'current_season';
+export const KEY_API_FOOTBALL_LEAGUE_IDS = 'api_football_league_ids';
+export const KEY_FCM_OAUTH = 'fcm_oauth_token';

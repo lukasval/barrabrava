@@ -18,3 +18,10 @@ const KEY_PLAYER_PROFILE := "profile"
 # Postgres nil UUID — userId for system-owned (public-read) collections like
 # 'clubs'. Matches SYSTEM_USER_ID in nakama/src/storage_keys.ts.
 const SYSTEM_USER_ID := "00000000-0000-0000-0000-000000000000"
+
+# Phase 2 additions — mirror nakama/src/storage_keys.ts.
+# Only collections the CLIENT reads are mirrored (CR-01 lesson: keep mirror tight to avoid drift).
+# Server-internal collections (admin_actions, fcm_oauth_token, tick_lock, etc.) are omitted.
+const COL_MATCH_WINDOWS := "match_windows"
+# COL_FIXTURES — client never reads directly (goes via get_current_window RPC), skip mirror.
+# COL_FCM_TOKENS — client writes via register_fcm_token RPC only, skip mirror.
