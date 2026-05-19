@@ -1,10 +1,11 @@
 ---
 phase: 3
 slug: core-loop-laboral
-status: draft
+status: approved
 design_tool: Godot Theme Resources (.tres)
 component_library: Godot Control node scenes (.tscn)
 created: 2026-05-19
+reviewed_at: 2026-05-19
 extends: .planning/phases/01-foundation/01-UI-SPEC.md
 ---
 
