@@ -22,7 +22,7 @@ extends: .planning/phases/01-foundation/01-UI-SPEC.md
 |---------------|-------------|-------|
 | Spacing scale (xs/sm/md/lg/xl/2xl/3xl) | **Reused verbatim** | Multiples of 4. No new tokens added. |
 | Touch target minimum 44px | **Reused verbatim** | Carries to all new components. |
-| Typography Display 28 / Heading 22 / Body 16 / Label 14 | **Reused verbatim** | One new role added in §3 (Numeric Counter) for resource widgets. |
+| Typography Display 28 / Body 16 / Label 14 | **Reused verbatim** | 22px Heading dropped in Phase 3; replaced by new 20px Heading role (shared with Numeric Counter). See §3b. |
 | Font family Nunito (Regular 400 + Bold 700) | **Reused verbatim** | No new font weights. |
 | Dominant `#1A1A1A`, Secondary `#2D2D2D` | **Reused verbatim** | Surface contract identical. |
 | Accent `#D62828` | **Reused, scope extended** | See §4 — new accent-reserved elements added (Hacer turno CTA, recruit reveal flash, rank-up flash). |
@@ -37,6 +37,8 @@ extends: .planning/phases/01-foundation/01-UI-SPEC.md
 | HomeScreen.tscn | **Extended, not replaced** | New widgets injected; window banner + delete-account preserved. |
 
 **Anti-contradiction rule:** Anything in this doc that conflicts with Phase 1 UI-SPEC is a Phase 3 override and must be explicitly marked `[OVERRIDE Phase 1]`. The checker will flag undeclared overrides.
+
+**[OVERRIDE Phase 1] Typography Heading size:** Phase 1 declared Heading as 22px. Phase 3 drops 22 entirely and introduces a new 20px Heading role (shared with the Numeric Counter usage). Total primary scale stays at 4 sizes: 14 / 16 / 20 / 28. Justification: collapsing 22 + the new 20 Numeric Counter into a single 20 role avoids exceeding the 4-size hard cap that Dimension 4 enforces. 14, 16, 28 continue verbatim from Phase 1.
 
 ---
 
@@ -89,17 +91,18 @@ Identical to Phase 1.
 
 ---
 
-## 3b. Typography — Phase 3 Addition
+## 3b. Typography — Phase 3 Scale (4 sizes, hard cap honored)
 
-Adds one numeric-counter role for ResourceWidget readability. Both font weights already loaded by Phase 1 Theme.tres.
+Phase 3 keeps the 4-size scale. The Heading role moves from 22 (Phase 1) to **20** (Phase 3), and that same 20 also serves as the Numeric Counter for ResourceWidget. Both font weights already loaded by Phase 1 Theme.tres.
 
 | Role | Size | Weight | Line Height | Godot Node | Usage |
 |------|------|--------|-------------|------------|-------|
-| (Display) | 28px | Bold 700 | 1.1 | Label | unchanged — pibe name in PibeDetailScreen hero |
-| (Heading) | 22px | Bold 700 | 1.2 | Label | unchanged — screen titles |
-| (Body) | 16px | Regular 400 | 1.5 | RichTextLabel | unchanged — descriptions, empty states |
-| (Label / Button) | 14px | Bold 700 | 1.2 | Button / Label | unchanged — chip labels, button text |
-| **Numeric Counter (NEW)** | **20px** | **Bold 700** | **1.0** | **Label** | **ResourceWidget numeric value (e.g. "1.250"). Distinguished from Heading 22 to fit 80x60 widget; line-height 1.0 to keep widget compact.** |
+| Display | 28px | Bold 700 | 1.1 | Label | Pibe name in PibeDetailScreen hero; live name preview |
+| **Heading / Numeric Counter** | **20px** | **Bold 700** | **1.2 (Heading) / 1.0 (Numeric)** | **Label** | **Dual role.** Heading: screen titles ("Mis pibes", "Reclutar pibes", "Aguantadero Nv. {N}", "Asignar profesión", "Hacer turno", "Habilidades", "Subir a nivel {N+1}", "Bandera room", "Bienvenido a la barra", tutorial step titles). Numeric Counter: ResourceWidget numeric value (e.g. "1.250"). Same size + weight; line-height differs by context (1.2 for paragraph-style titles, 1.0 for compact numerics inside 80x60 widgets). |
+| Body | 16px | Regular 400 | 1.5 | RichTextLabel | descriptions, empty states |
+| Label / Button | 14px | Bold 700 | 1.2 | Button / Label | chip labels (RankBadge, TraitChip, SortChip), button text, helper labels |
+
+**Total declared sizes: 4 (14 / 16 / 20 / 28).** No widget-only or chip-only typography overrides exist. Every text element on every screen in Phase 3 resolves to exactly one of these four sizes.
 
 Rules carry from Phase 1 (no italic / no underline / no mixed weights inside a Label).
 
@@ -186,6 +189,8 @@ Color shifts at integer thresholds, no interpolation. Bar background track: `#2D
 
 **Aguante shares accent red.** Justified: Aguante is the club's collective resource — the same color as the brand accent reinforces "this is the barra's lifeblood." Plata/Rep/VBC stay off-accent.
 
+**Resource disambiguation (post-typography-fix):** With the ResourceWidget secondary label removed (see §6.3), each resource is identified by (a) its unique icon tint above, and (b) the numeric value rendered in Numeric Counter 20 Bold. While custom icon art is pending, a one-letter glyph in the icon slot (`$` Plata / `A` Aguante / `R` Reputación / `V` VBC) at 16px Bold acts as placeholder. Executor swaps to SVG art when assets land.
+
 ---
 
 ## 5. Per-Screen Wireframe
@@ -201,14 +206,14 @@ All screens inherit Phase 1's full-screen `#1A1A1A` background + `canvas_items` 
 ```
 HomeScreen (Control)
   └─ TopBar (HBoxContainer) [PHASE 1 — extend]
-       └─ PibeName (Label, Heading 22 Bold #F5F5F5) — existing
+       └─ PibeName (Label, Heading 20 Bold #F5F5F5) — existing
        └─ Spacer
        └─ FaccionLabel (Label, 14 Bold #A0A0A0) — NEW: "Zona Sur" / "Zona Norte"
        └─ ClubName (Label, 14 Bold #A0A0A0) — existing
        └─ RankBadge (Control) — NEW: appears next to ClubName, color = §4.2
   └─ ResourceRow (HBoxContainer, height 60, padding lg horizontal, NEW)
        └─ ResourceWidget × 4: [Plata] [Aguante] [Reputación] [VBC]
-       └─ Each = 80x60 with icon (24) + Numeric Counter (20 Bold) + label (14 Bold #A0A0A0)
+       └─ Each = 80x60 with icon (24, tinted §4.6) + Numeric Counter (20 Bold)
   └─ Content (VBoxContainer, spacing lg) [PHASE 1 — extend]
        └─ WindowBanner (Label) — existing Phase 2
        └─ TurnoButton (Button, NEW)
@@ -253,7 +258,7 @@ HomeScreen (Control)
 RosterScreen
   └─ TopBar (HBoxContainer)
        └─ BackButton (Label "‹ Atrás", 14 Bold #A0A0A0)
-       └─ Title (Heading 22 Bold #F5F5F5): "Mis pibes"
+       └─ Title (Heading 20 Bold #F5F5F5): "Mis pibes"
        └─ RosterCount (Label, 14 Bold #A0A0A0): "3/5" (current/cap)
   └─ SortChips (HBoxContainer scrollable, NEW chip pattern)
        └─ ChipButton "Por Rep" (active = #D62828) [default]
@@ -285,6 +290,7 @@ RosterScreen
 ```
 RecruitScreen
   └─ TopBar (BackButton + Title "Reclutar pibes" + RefreshCountdown)
+       └─ Title (Heading 20 Bold #F5F5F5): "Reclutar pibes"
        └─ RefreshCountdown (Label, 14 Bold #A0A0A0): "Próxima ronda en 06:42"
   └─ HeaderInfo (VBoxContainer, padding lg)
        └─ Label (Body 16 Regular #F5F5F5): "3 pibes nuevos por día. Refresca a las 05:00."
@@ -328,7 +334,7 @@ PibeDetailScreen
                  └─ EnergiaBar (horizontal progress, full width, height 16)
                  └─ Label (14 Regular #A0A0A0): "67/100 — Regenera +5/h"
             └─ SkillsSection (VBox)
-                 └─ Label (Heading 22 Bold #F5F5F5): "Habilidades"
+                 └─ Label (Heading 20 Bold #F5F5F5): "Habilidades"
                  └─ SkillRow × N (1 per profession the pibé has touched)
                       └─ HBox: ProfessionIcon + Label name + SkillProgressRing + Label level
             └─ CurrentAssignment (PanelContainer, bg #2D2D2D, padding md)
@@ -362,6 +368,7 @@ PibeDetailScreen
 ```
 ProfessionAssignScreen
   └─ TopBar (BackButton + Title "Asignar profesión")
+       └─ Title (Heading 20 Bold #F5F5F5): "Asignar profesión"
   └─ Header (padding lg)
        └─ Label (Body 16 #F5F5F5): "{nombre} va a laburar de:"
   └─ ScrollContainer
@@ -404,19 +411,19 @@ AguantaderoScreen
        └─ VBoxContainer (padding lg, separation lg)
             └─ HeroBlock (Control, height 240)
                  └─ AguantaderoIllustration (ColorRect placeholder, club primary tint, corner 12)
-                 └─ Overlay HBox: Label (Heading 22) "Aguantadero Nv. {N}" + Label (14 #A0A0A0) "{barrio_name}"
+                 └─ Overlay HBox: Label (Heading 20 Bold #F5F5F5) "Aguantadero Nv. {N}" + Label (14 #A0A0A0) "{barrio_name}"
             └─ StatsRow (HBoxContainer, separation md)
                  └─ MetricCard "Capacidad" "{cap}/20"
                  └─ MetricCard "Aguante pasivo" "+{N}/h"
                  └─ MetricCard "Próx nivel" "{cost} Plata"
             └─ UpgradePanel (PanelContainer bg #2D2D2D padding lg)
-                 └─ Label (Heading 22): "Subir a nivel {N+1}"
+                 └─ Label (Heading 20 Bold #F5F5F5): "Subir a nivel {N+1}"
                  └─ Label (Body 16): "+{cap_delta} pibes / +{aguante_delta} Aguante pasivo/h"
                  └─ Label (14 #F5F5F5): "Costo: {cost} Plata"
                  └─ Button (primary CTA accent): "Upgradear"
                  └─ Disabled state if Plata insufficient: subdued + label "Te faltan {N} Plata"
             └─ BanderaRoomSection (VBox)
-                 └─ Label (Heading 22): "Bandera room"
+                 └─ Label (Heading 20 Bold #F5F5F5): "Bandera room"
                  └─ Grid 3×2 of TrapoSlot (6 empty placeholders)
                  └─ EmptyStateLabel (Body 16 #A0A0A0): "Acá van a colgarse los trapos que robés. Por ahora, vacío."
             └─ RosterCapInfo (Label Body 14 #A0A0A0): "Tu roster máximo es {cap} pibes según tu aguantadero nv. {N}."
@@ -443,7 +450,7 @@ AguantaderoScreen
 ```
 TurnoModal (PanelContainer, bg #2D2D2D, corner 12, padding lg, modal overlay)
   └─ Header
-       └─ Label (Heading 22 Bold #F5F5F5): "Hacer turno"
+       └─ Label (Heading 20 Bold #F5F5F5): "Hacer turno"
        └─ Label (Body 14 #A0A0A0): "Elegí pibes con al menos 30 Energía para sumarle aguante al pozo."
   └─ Body
        └─ ScrollContainer (max height 480)
@@ -480,7 +487,7 @@ TutorialScreen (Control, full-screen #1A1A1A)
        └─ Spacer
        └─ SkipButton (Label "Saltar tutorial" 14 #A0A0A0, tappable)
   └─ Content (VBoxContainer padding xl, centered)
-       └─ StepTitle (Heading 22 Bold #F5F5F5)
+       └─ StepTitle (Heading 20 Bold #F5F5F5)
        └─ StepBody (RichTextLabel Body 16 #F5F5F5, line-height 1.5)
        └─ StepIllustration (Control, height 200, placeholder ColorRect or referenced screenshot)
        └─ StepProgressDots (HBox, 6 dots, active = #D62828, inactive = #3D3D3D)
@@ -562,40 +569,46 @@ RecruitCard (PanelContainer, bg #2D2D2D, corner 12, padding md)
 
 **Layout:**
 ```
-ResourceWidget (VBoxContainer, padding xs, separation 2)
-  └─ HBox separation xs
-       └─ Icon (ColorRect or SVG 16x16, color §4.6)
+ResourceWidget (VBoxContainer, padding xs, separation 2, centered content)
+  └─ HBox separation xs (centered)
+       └─ Icon (ColorRect or SVG 24x24, color §4.6)
+            └─ Pre-art placeholder: one-letter glyph in icon slot — "$" Plata / "A" Aguante / "R" Reputación / "V" VBC — rendered as Label 16px Bold #F5F5F5 inside a 24×24 colored ColorRect tile (color = §4.6 hex per resource). Executor swaps to SVG art when assets land.
        └─ NumericValue (Label, Numeric Counter 20 Bold #F5F5F5)
-  └─ Label name (10 Regular #A0A0A0, all-caps): "PLATA" / "AGUANTE" / "REP" / "VBC"
 ```
 
-**[OVERRIDE Phase 1]:** Introduces a 10px label size — exception below Phase 1's 14px Label minimum. Justification: the widget is 80x60; widget-label-name must be small to fit. Label is informational-only (icon + numeric value carry the meaning). Min size only applies to this widget's secondary label, never to interactive text. Touch target is the entire 80x60 widget if tappable (Phase 3 widgets are read-only — non-tappable).
+**[OVERRIDE Phase 1]:** None. The widget is composed entirely from Phase-1-compatible roles (icon tile + 20px Numeric Counter = the new shared Heading/Numeric role). The secondary text label "PLATA" / "AGUANTE" / "REP" / "VBC" that existed in earlier drafts has been removed entirely — disambiguation is carried by (a) the per-resource icon tint from §4.6 and (b) the placeholder one-letter glyph. No widget-only typography size exists.
+
+**Touch target:** Phase 3 ResourceWidget is read-only (non-tappable). The entire 80×60 box is decorative.
 
 **States:**
 | State | Visual |
 |-------|--------|
-| Default | NumericValue in `#F5F5F5` |
+| Default | NumericValue in `#F5F5F5`, icon at full opacity |
 | Updating (post-RPC, accrual rendered) | NumericValue tween +1 from previous value, 600ms ease-out |
 | Loading | "—" em-dash, `modulate.a = 0.4` |
 | Idle-cap-warning (Plata only, all pibes capped) | NumericValue pulses `#F97316` for 1s every 5s |
+
+**Accessibility note:** Screen-reader semantic label is provided programmatically via Godot's `tooltip_text` on the widget root: "Plata: {N}" / "Aguante: {N}" / "Reputación: {N}" / "Visto Bueno Cana: {N}". The visible glyph + tint provides the same info to sighted users; the tooltip provides it to assistive tech. No on-screen text label is required.
 
 ---
 
 ### 6.4 RankBadge
 
-**Dimensions:** auto-width, height **20px** (mini) or **28px** (regular, used in PibeDetail hero).
+**Dimensions:** auto-width, height **24px** (mini, used in TopBar + PibeCard) or **28px** (regular, used in PibeDetail hero).
 
 **Layout:**
 ```
-RankBadge (PanelContainer corner 10, padding 8 horizontal 2 vertical)
-  └─ Label rank name (Label 12 Bold #F5F5F5, all-caps) — or 14 Bold for regular size
+RankBadge (PanelContainer corner 12, padding 8 horizontal 4 vertical)
+  └─ Label rank name (Label 14 Bold #F5F5F5, all-caps)
 ```
 
 **Background fill:** `§4.2 rank color` (Pibe gray / Soldado blue / Capo purple / Mesa amber / Líder gold). Text always `#F5F5F5`.
 
-**Mini variant:** for TopBar + PibeCard, fixed height 20, font 10 Bold (allowed exception within RankBadge only, same justification as ResourceWidget).
+**Mini variant:** for TopBar + PibeCard, fixed height 24, font **14 Bold** (uses the shared Label role from §3b — no widget-only size override). Padding is 8 horizontal / 4 vertical to keep the chip compact while honoring the 14px label.
 
-**Regular variant:** for PibeDetail hero, height 28, font 14 Bold.
+**Regular variant:** for PibeDetail hero, height 28, font 14 Bold (same Label role; difference is vertical padding bumped to 6 to make the chip read as larger/more prominent in the hero zone).
+
+**[OVERRIDE Phase 1]:** None. Mini RankBadge height grows from earlier draft 20px → 24px (still a multiple of 4) to accommodate 14px label comfortably. No 12px typography is used anywhere.
 
 **Promotion flash state:** 1.2s scale tween 1.0 → 1.15 → 1.0 + accent `#D62828` border 2px during the flash.
 
@@ -633,15 +646,17 @@ RankBadge (PanelContainer corner 10, padding 8 horizontal 2 vertical)
 
 ### 6.7 TraitChip
 
-**Dimensions:** auto-width, height **24px**.
+**Dimensions:** auto-width, height **28px**.
 
 **Layout:**
 ```
-TraitChip (PanelContainer corner 12, border 1px §4.4 sentiment, padding xs+sm horizontal)
-  └─ Label trait name (Label 12 Bold #F5F5F5)
+TraitChip (PanelContainer corner 14, border 1px §4.4 sentiment, padding sm horizontal / xs vertical)
+  └─ Label trait name (Label 14 Bold #F5F5F5)
 ```
 
 **Background fill:** `#2D2D2D` (secondary, always — sentiment is in border).
+
+**[OVERRIDE Phase 1]:** None. Chip height grows from earlier draft 24px → 28px (multiple of 4) to fit the 14px Label role comfortably. Corner radius adjusted to 14 (= height/2) to keep pill shape. No widget-only typography size.
 
 **Variants:**
 - Visible: full opacity, label = trait name
@@ -694,7 +709,7 @@ TraitChip (PanelContainer corner 12, border 1px §4.4 sentiment, padding xs+sm h
 **Layout:**
 ```
 TrapoSlot (PanelContainer, bg #2D2D2D, corner 8, dashed border 1px #3D3D3D)
-  └─ EmptyLabel (Label 12 Regular #A0A0A0, centered): "Vacío"
+  └─ EmptyLabel (Label 14 Regular #A0A0A0, centered): "Vacío"
 ```
 
 **Phase 3 ships only empty variant.** Filled variant ships Phase 4 (trapos robados).
@@ -950,8 +965,8 @@ All interactive elements ≥ 44x44px:
 | PibeCard tap zone | parent width (~344) | 120 |
 | RecruitCard CTA "Reclutar" | ≥ 100 | 44 |
 | ResourceWidget (read-only) | 80 | 60 — N/A (not tappable) |
-| RankBadge (read-only) | auto | 20 / 28 — N/A (not tappable) |
-| TraitChip (read-only) | auto | 24 — N/A (not tappable) |
+| RankBadge (read-only) | auto | 24 / 28 — N/A (not tappable) |
+| TraitChip (read-only) | auto | 28 — N/A (not tappable) |
 | ProfessionIcon (in row, row is tappable) | row = full width × 56 | 56 |
 | TurnoButton | parent width − 48 | 56 |
 | NavButton (Phase 1 carry) | 80 (min 64) | 56 |
@@ -967,13 +982,13 @@ All interactive elements ≥ 44x44px:
 | Requirement | Implementation |
 |-------------|---------------|
 | Min touch target 48×48 (WCAG mobile) | Phase 1 spec used 44 — Phase 3 honors 44 minimum across all new interactive elements. Chips remain 32 (informational). |
-| Color contrast 4.5:1 (text on bg) | All Phase 3 text uses `#F5F5F5` on `#1A1A1A` / `#2D2D2D` → contrast ratio 14.9:1 (`#F5F5F5` vs `#1A1A1A`) — passes AAA. Resource icon tints used as decoration, not as sole carriers of meaning (every resource has a text label). |
-| Color contrast — semantic-domain palettes | Rank, profession, trait, energía colors all paired with text labels. Color is supplementary, never sole signal. |
+| Color contrast 4.5:1 (text on bg) | All Phase 3 text uses `#F5F5F5` on `#1A1A1A` / `#2D2D2D` → contrast ratio 14.9:1 (`#F5F5F5` vs `#1A1A1A`) — passes AAA. Resource icon tints used as decoration, not as sole carriers of meaning (every interactive resource surface has a Numeric Counter, and read-only ResourceWidgets carry a programmatic tooltip label for screen readers). |
+| Color contrast — semantic-domain palettes | Rank, profession, trait, energía colors all paired with text labels (RankBadge label 14, TraitChip label 14, ProfessionIcon row label 16, EnergiaBar companion label 14). Color is supplementary, never sole signal. |
 | No flashing > 3Hz | All animations specified ≤ 1.5Hz (slowest loop is A-08 idle-cap at 1Hz). |
-| Screen reader copy | All buttons + chips have semantic text labels (no icon-only buttons). |
+| Screen reader copy | All buttons + chips have semantic text labels (no icon-only buttons). ResourceWidget exposes screen-reader label via `tooltip_text` ("Plata: {N}" / "Aguante: {N}" / etc.) since its on-screen label was removed in favor of icon+numeric. |
 | Reduce-motion mode | Deferred to Phase 7 (AppConfig.REDUCE_MOTION_ENABLED). |
 | Locale | All copy Argentine Spanish lunfardo. No translation in v1 (locked decision). |
-| Font size | Phase 3 introduces 20px (Numeric Counter) and 10/12px (chip labels, widget secondary labels) — minimum 10px only on supplementary labels paired with primary 16+ content. |
+| Font size | Phase 3 uses exactly the 4-size scale from §3b (14 / 16 / 20 / 28). No widget-only or chip-only overrides exist. Minimum on-screen text is 14px, satisfying mobile readability heuristics. |
 
 ---
 
@@ -981,13 +996,13 @@ All interactive elements ≥ 44x44px:
 
 | Asset | Path target | Type | State | Owner |
 |-------|-------------|------|-------|-------|
-| Plata icon | `res://assets/icons/plata.svg` | Monochrome SVG 24×24 | Placeholder ColorRect, ship art before Phase 6 | Solo dev |
-| Aguante icon | `res://assets/icons/aguante.svg` | SVG 24×24 | Placeholder | Solo dev |
-| Reputación icon | `res://assets/icons/reputacion.svg` | SVG 24×24 | Placeholder | Solo dev |
-| VBC icon | `res://assets/icons/vbc.svg` | SVG 24×24 | Placeholder | Solo dev |
+| Plata icon | `res://assets/icons/plata.svg` | Monochrome SVG 24×24 | Placeholder: "$" glyph 16 Bold on §4.6 gold tile; ship art before Phase 6 | Solo dev |
+| Aguante icon | `res://assets/icons/aguante.svg` | SVG 24×24 | Placeholder: "A" glyph 16 Bold on §4.6 accent-red tile | Solo dev |
+| Reputación icon | `res://assets/icons/reputacion.svg` | SVG 24×24 | Placeholder: "R" glyph 16 Bold on §4.6 purple tile | Solo dev |
+| VBC icon | `res://assets/icons/vbc.svg` | SVG 24×24 | Placeholder: "V" glyph 16 Bold on §4.6 steel tile | Solo dev |
 | Energía icon | `res://assets/icons/energia.svg` | SVG 24×24 | Placeholder | Solo dev |
 | Profession icons (5) | `res://assets/icons/prof/{trapito,vendedor,patovica,remisero,hablar_cana}.svg` | Monochrome SVG 24×24 each | Placeholder ColorRect | Solo dev |
-| Rank badges (5) | `res://assets/badges/{pibe,soldado,capo,mesa,lider}.png` | Optional decorative — Phase 3 ships text-only | Text-only fallback | Solo dev |
+| Rank badges (5) | `res://assets/badges/{pibe,soldado,capo,mesa,lider}.png` | Optional decorative — Phase 3 ships text-only | Text-only fallback (14 Bold label on §4.2 colored chip) | Solo dev |
 | Pibe avatar parts | `res://assets/sprites/pibes/{pelo,remera,accesorio}/*.png` | Composite sprite system | Placeholder solid ColorRect with club tint | Solo dev / commission |
 | Aguantadero illustrations (5 tiers) | `res://assets/illustrations/aguantadero/nv{1..5}.png` | Per-tier illustration | Placeholder ColorRect with club tint | Solo dev / commission |
 | Trapo placeholder | `res://assets/illustrations/trapo_empty.png` | Empty slot decoration | Border-dashed ColorRect | Solo dev |
@@ -1001,24 +1016,28 @@ All interactive elements ≥ 44x44px:
 
 ### HomeScreen
 - [x] ResourceRow renders 4 widgets (Plata / Aguante / Rep / VBC) with correct icon tints
+- [x] ResourceWidget contains only icon + 20 Bold Numeric Counter (no text label below)
 - [x] TurnoButton appears IFF `window.state in ["open", "live"]`
 - [x] TurnoButton disabled with copy "Sin pibes con energía" if no pibé energia ≥ 30
 - [x] BottomNav labels in order: Inicio (active) / Roster / Aguantadero / Reclutar
 - [x] Pull-to-refresh reloads window + resources + roster summary
 - [x] Idle-cap pulse animation triggers when any pibé Plata at 12h cap
 - [x] Rank-up flash triggers when client detects `player.rank` differs from cached
+- [x] PibeName in TopBar renders at Heading 20 Bold (Phase 3 Heading role)
 - [x] Phase 1 WindowBanner + DeleteAccount preserved (regression test)
 
 ### RosterScreen
+- [x] Title "Mis pibes" renders at Heading 20 Bold
 - [x] Sort chip "Por Rep" active by default
-- [x] PibeCards render with rank mini-badge, energia mini-bar, 2 trait chips
+- [x] PibeCards render with rank mini-badge (height 24, label 14 Bold), energia mini-bar, 2 trait chips (height 28, label 14 Bold)
 - [x] Counter "{cur}/{cap}" reflects aguantadero level
 - [x] Empty state visible if roster empty (after onboarding skipped)
 - [x] Tap PibeCard → PibeDetailScreen with correct pibe_id
 
 ### RecruitScreen
+- [x] Title "Reclutar pibes" renders at Heading 20 Bold
 - [x] Exactly 3 RecruitCard rendered (or empty state if pool not ready)
-- [x] 2nd trait shown as "?" chip pre-recruit
+- [x] 2nd trait shown as "?" chip pre-recruit (TraitChip hidden variant — height 28, label 14)
 - [x] Refresh countdown updates every minute, shows time until 05:00 ART
 - [x] Rank gate blocks recruit with copy if cap reached
 - [x] Recruit confirmation modal before RPC
@@ -1026,7 +1045,8 @@ All interactive elements ≥ 44x44px:
 
 ### PibeDetailScreen
 - [x] Hero renders avatar + name (28 Display Bold) + rol
-- [x] Both traits visible (TraitChip with sentiment border)
+- [x] "Habilidades" section header renders at Heading 20 Bold
+- [x] Both traits visible (TraitChip height 28 with sentiment border, label 14 Bold)
 - [x] EnergiaBar reflects current value, color matches §4.5 threshold
 - [x] SkillsSection lists only professions the pibé has touched (>0h)
 - [x] CurrentAssignment shows correct state: working / resting / in-turno with timestamp
@@ -1034,12 +1054,15 @@ All interactive elements ≥ 44x44px:
 - [x] "Enviar a turno" disabled if window closed or energia < 30
 
 ### ProfessionAssignScreen
+- [x] Title "Asignar profesión" renders at Heading 20 Bold
 - [x] 5 profession rows visible (+ Hablar cana if Líder)
 - [x] Each row: icon (tinted §4.3) + name + rate + skill preview
 - [x] Líder-only row visible-but-disabled for non-Líder with gate copy
 - [x] Tap row → confirmation modal → assign RPC → back to PibeDetail with new assignment
 
 ### AguantaderoScreen
+- [x] Hero overlay title "Aguantadero Nv. {N}" renders at Heading 20 Bold
+- [x] UpgradePanel "Subir a nivel {N+1}" + "Bandera room" section headers render at Heading 20 Bold
 - [x] Hero illustration shows current level (1–5) + barrio name
 - [x] UpgradePanel shows next level cost + capacity delta
 - [x] Upgrade button disabled with copy if Plata insufficient
@@ -1048,6 +1071,7 @@ All interactive elements ≥ 44x44px:
 - [x] RosterCapInfo reflects roster cap mapping (5/8/12/16/20 by level)
 
 ### TurnoModal
+- [x] Modal title "Hacer turno" renders at Heading 20 Bold
 - [x] Only eligible pibes (energia ≥ 30) selectable
 - [x] Already-in-turno pibes listed greyed-out below eligible block
 - [x] Aporte estimado updates as user checks pibes
@@ -1055,6 +1079,7 @@ All interactive elements ≥ 44x44px:
 - [x] On confirm: RPC fires, modal closes, A-06 Energía drain plays, A-12 reward toast plays
 
 ### TutorialScreen
+- [x] Step titles render at Heading 20 Bold
 - [x] 6 steps render with correct title + body + CTA
 - [x] StepProgressDots shows current step
 - [x] Back button hidden on step 1, visible on steps 2–6
@@ -1083,7 +1108,7 @@ All interactive elements ≥ 44x44px:
 - [ ] Dimension 1 Copywriting: PASS (all lunfardo register, App-Store-safe whitelist + blacklist declared)
 - [ ] Dimension 2 Visuals: PASS (10 components specified with dimensions + states + variants)
 - [ ] Dimension 3 Color: PASS (60/30/10 preserved; 3 new semantic-domain palettes additively declared; accent reservation list extended explicitly)
-- [ ] Dimension 4 Typography: PASS (4 Phase 1 sizes preserved + 1 new Numeric Counter declared with justification)
+- [ ] Dimension 4 Typography: PASS (exactly 4 sizes — 14 / 16 / 20 / 28 — with 20 serving dual Heading + Numeric Counter role; zero widget-only or chip-only typography overrides; 22 dropped from Phase 1 with explicit override marker)
 - [ ] Dimension 5 Spacing: PASS (Phase 1 scale carried verbatim, no new tokens)
 - [ ] Dimension 6 Registry Safety: PASS (zero third-party dependencies, all assets solo-dev or Phase 1 carry)
 
@@ -1098,10 +1123,10 @@ All interactive elements ≥ 44x44px:
 | CONTEXT.md (D-01..D-16) | 16 | Idle generation, cap 12h, turno mechanic, energía model, plata rates, turno output, VBC source, no daily caps, recruit pool refresh, trait reveal, procedural spawn, rank cost gating, auto-promote thresholds, Mesa Chica top-5, Líder by Rep, facciones label-only |
 | RESEARCH.md | 8 | 4 storage collections, lazy compute pattern, 7 screens inventory, idempotency markers, AI baseline, procedural pibe weights, profession rates, screen list |
 | REQUIREMENTS.md | 11 | AGT-01..05 (aguantadero), PIB-01..07 (pibes/laboral), JER-01..04 (jerarquía), ONB-05..06 (tutorial) |
-| Phase 1 UI-SPEC | All design tokens | Spacing, typography, color base, font, theme, interaction model, ClubCard/NavButton patterns |
+| Phase 1 UI-SPEC | All design tokens | Spacing, color base, font, theme, interaction model, ClubCard/NavButton patterns; typography Display 28 / Body 16 / Label 14 preserved verbatim, Heading 22 dropped and replaced by Heading 20 (override marker in §0) |
 | Orchestrator additional_context | 12 | Component dimensions, animation list, accessibility specs, tone constraints, screen inventory, asset placeholder strategy |
-| User input (this session) | 0 | All design dimensions were resolved from upstream artifacts; no questions asked. |
+| User input (this session) | 0 | All design dimensions were resolved from upstream artifacts; no questions asked. Checker-driven typography revision applied 2026-05-19 (collapse to 4-size scale). |
 
 ---
 
-*Phase 3 UI Design Contract — drafted 2026-05-19. Awaiting gsd-ui-checker validation.*
+*Phase 3 UI Design Contract — drafted 2026-05-19. Typography revision applied 2026-05-19 (collapse to 4-size scale per checker block on Dimension 4). Awaiting gsd-ui-checker validation.*
