@@ -107,3 +107,35 @@ export function isValidEmailShape(raw: unknown): boolean {
   if (email.length < 5 || email.length > 254) return false;
   return EMAIL_RE.test(email);
 }
+
+// ─── Phase 3: Core Loop Laboral ───────────────────────────────────────────────
+
+const VALID_PROFESSIONS = ['trapito', 'vendedor', 'patovica', 'remisero', 'hablar_cana'] as const;
+const VALID_RANKS = ['pibe', 'soldado', 'capo', 'mesa', 'lider'] as const;
+const UUID_RE = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+
+// null means "rest" (unassign profession). Other values must be in the valid list.
+// Used by assign_pibe_profession (plan 03.03).
+export function validateProfession(raw: unknown): ValidationResult {
+  if (raw === null) return { ok: true };  // null = unassign
+  if (typeof raw !== 'string') return { ok: false, error: 'invalid_profession' };
+  if (!(VALID_PROFESSIONS as readonly string[]).includes(raw)) {
+    return { ok: false, error: 'unknown_profession' };
+  }
+  return { ok: true };
+}
+
+// Used by admin_grant_rep + rank transition guards.
+export function validateRank(raw: unknown): ValidationResult {
+  if (typeof raw !== 'string') return { ok: false, error: 'invalid_rank' };
+  if (!(VALID_RANKS as readonly string[]).includes(raw)) {
+    return { ok: false, error: 'unknown_rank' };
+  }
+  return { ok: true };
+}
+
+// Lightweight UUID v4 shape guard (not cryptographic — just prevents junk pibe_ids/pick_ids).
+// T-3-RS-09 mitigation: club_id and pibe_id inputs are validated before storage access.
+export function isUuid(raw: unknown): boolean {
+  return typeof raw === 'string' && UUID_RE.test(raw);
+}
