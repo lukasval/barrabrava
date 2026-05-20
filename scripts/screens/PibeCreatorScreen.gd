@@ -47,16 +47,38 @@ func _on_submit() -> void:
 	cta.disabled = false
 	if resp.is_exception():
 		var msg = str(resp.get_exception().message)
+		push_warning("[PibeCreator] create_pibe exception: %s" % msg)
 		var msg_lower = msg.to_lower()
 		if "ese nombre" in msg_lower or "name" in msg_lower or "máximo" in msg_lower:
 			error_label.text = "Ese nombre no va. Elegí otro."
 		elif "already exists" in msg_lower:
 			error_label.text = "Ya tenés un pibe creado, chabón."
 		else:
-			error_label.text = "Algo salió mal. Probá de nuevo."
+			error_label.text = "Algo salió mal. Probá de nuevo. (debug: %s)" % msg
 		error_label.visible = true
 		return
 	var pibe = JSON.parse_string(resp.payload)
+	# Server may return either {ok:true, pibe:{...}} or the pibe record directly
+	# depending on which validation branch hit. Treat the unwrapped form first.
+	if typeof(pibe) == TYPE_DICTIONARY and pibe.has("ok") and pibe.get("ok") == false:
+		var err = str(pibe.get("error", "unknown_error"))
+		push_warning("[PibeCreator] create_pibe returned ok=false: %s" % err)
+		match err:
+			"invalid_name", "name_too_short", "name_too_long", "name_charset":
+				error_label.text = "Ese nombre no va. Elegí otro."
+			"name_in_deny_list":
+				error_label.text = "Ese nombre no se puede usar. Elegí otro."
+			"club_not_found", "invalid_club_id":
+				error_label.text = "El club no existe. Volvé a elegir."
+			"pibe_already_exists":
+				error_label.text = "Ya tenés un pibe creado, chabón."
+			_:
+				error_label.text = "Algo salió mal. (server: %s)" % err
+		error_label.visible = true
+		return
+	# Unwrap server wrapper {ok:true, pibe:{...}} if present.
+	if typeof(pibe) == TYPE_DICTIONARY and pibe.has("pibe"):
+		pibe = pibe.get("pibe")
 	PlayerStore.pibe_id = str(pibe.get("id", ""))
 	PlayerStore.pibe_name = str(pibe.get("name", ""))
 	PlayerStore.club_id = str(pibe.get("club_id", PlayerStore.club_id))
