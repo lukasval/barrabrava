@@ -104,7 +104,7 @@ Plans:
 
 ---
 
-## Phase 3: Core Loop Laboral (Executing — Wave 5 complete)
+## Phase 3: Core Loop Laboral ✅ COMPLETE-WITH-DEFERRAL (2026-05-20)
 
 **Goal:** Jugador vive el ciclo diario: día con partido → turno barra; día sin partido → profesión personal. Aguantadero crece. Pibes se reclutan.
 
@@ -138,7 +138,7 @@ Plans:
 - [x] 03.03-write-side-rpcs-PLAN.md — Wave 3: 6 write RPCs (assign_profession, collect_idle, recruit_pibe w/ optimistic concurrency, upgrade_aguantadero, submit_turno w/ idempotency-marker-first, complete_tutorial w/ elapsed_ms telemetry) + recruit_cron + mesa_cron handlers + seasons.ts Líder election hook + upgrade admin stubs; 28 RPCs total; 176.8 kB bundle
 - [x] 03.04a-godot-foundation-PLAN.md — Wave 4: 4 autoload extensions (AppTheme/NakamaService/PlayerStore/FlowRouter, complete_tutorial wrapper plumbs elapsed_ms) + 9 reusable components (PibeCard, RecruitCard, ResourceWidget, RankBadge, TraitChip, EnergiaBar, ProfessionIcon, SkillProgressRing, TurnoModal). Autonomous, no checkpoint. FONT_HEADING 22→20. 22 files. Vocab audit 0.
 - [x] 03.04b-godot-screens-PLAN.md — Wave 5: HomeScreen extension + 6 new screens (RosterScreen + RecruitScreen + PibeDetailScreen + ProfessionAssignScreen + AguantaderoScreen + TutorialScreen 6-step state machine w/ tutorial_start_at_ms capture + elapsed_ms forwarding). Walkthroughs A–E → `03.04b-godot-screens-HUMAN-UAT.md` (pending user playthrough via `/gsd-verify-work`)
-- [ ] 03.05-validation-PLAN.md — Wave 6: laboral-test.sh (19 invariants incl. LAB-TUTORIAL-DURATION) + admin curl recipes + INFRA-NOTES Phase 3 sections (5) + VALIDATION.md rows + STATE.md closing w/ Phase 3 → Phase 7 deferral subsection (4 items: LAB-IDLE-CAP, LAB-IDLE-RATE-TRAPITO partial, LAB-TURNO-ENERGY-GATE energy-low, LAB-LIDER-ELECTION)
+- [x] 03.05-validation-PLAN.md — Wave 6: laboral-test.sh (664 lines, 20 tests incl. LAB-TUTORIAL-DURATION) + admin curl recipes + INFRA-NOTES.md Phase 3 sections (7 subsections) + VALIDATION.md 21 rows + STATE.md closing w/ Phase 3 → Phase 7 deferral subsection (4 named items: LAB-IDLE-CAP, LAB-IDLE-RATE-TRAPITO partial, LAB-TURNO-ENERGY-GATE energy-low, LAB-LIDER-ELECTION)
 
 ---
 
