@@ -16,6 +16,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.102, 0.102, 0.102, 1)
 
 [node name="VBox" type="VBoxContainer" parent="."]
@@ -27,23 +29,25 @@ offset_left = 24.0
 offset_top = 48.0
 offset_right = -24.0
 offset_bottom = -48.0
-alignment = 1
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 24
+alignment = 1
 
 [node name="Logo" type="Label" parent="VBox"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.839, 0.157, 0.157, 1)
+theme_override_font_sizes/font_size = 28
 text = "BarraBrava"
 horizontal_alignment = 1
-theme_override_font_sizes/font_size = 28
-theme_override_colors/font_color = Color(0.839, 0.157, 0.157, 1)
 
 [node name="Disclaimer" type="Label" parent="VBox"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.627, 0.627, 0.627, 1)
+theme_override_font_sizes/font_size = 16
 text = "Esto es una parodia de fútbol argentino. Cualquier parecido con personas reales es coincidencia."
 horizontal_alignment = 1
 autowrap_mode = 3
-theme_override_font_sizes/font_size = 16
-theme_override_colors/font_color = Color(0.627, 0.627, 0.627, 1)
 
 [node name="ProgressBar" type="ProgressBar" parent="VBox"]
 custom_minimum_size = Vector2(0, 4)
@@ -53,7 +57,7 @@ show_percentage = false
 
 [node name="LoadingLabel" type="Label" parent="VBox"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.627, 0.627, 0.627, 1)
+theme_override_font_sizes/font_size = 14
 text = "Cargando..."
 horizontal_alignment = 1
-theme_override_font_sizes/font_size = 14
-theme_override_colors/font_color = Color(0.627, 0.627, 0.627, 1)
