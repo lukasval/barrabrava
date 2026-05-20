@@ -94,12 +94,13 @@ func refresh_resources_and_roster() -> void:
 	if agu_resp.get("ok", false):
 		aguantadero = agu_resp.get("data", {}).get("aguantadero", {})
 		aguantadero_updated.emit()
-	# Resources live on profile; load_from_server already reads profile,
-	# but for delta refresh after collect_idle/submit_turno we re-call.
-	# Pattern: caller updates plata/reputacion/vbc directly from RPC response
-	# (collect_idle returns plata_credited; submit_turno returns rep_credited),
-	# then emits resources_updated.
-	resources_updated.emit()
+	# Phase 3 fix: also re-read the profile so the resource widgets always
+	# reflect the latest server-credited plata/reputacion/vbc — not just the
+	# in-memory deltas pushed by individual RPC callers. The tutorial bypass
+	# (collect_idle at step 4, rep credit at step 5) writes the new values to
+	# the profile directly; without this read, HomeScreen renders 0/0/0/0
+	# right after onboarding because the in-memory store never picked them up.
+	await load_from_server()
 
 func load_from_server() -> Dictionary:
 	# Phase 3 fix: refresh expired sessions before reading storage so a
@@ -125,6 +126,23 @@ func load_from_server() -> Dictionary:
 	var profile: Dictionary = profile_raw
 	pibe_id = str(profile.get("pibe_id", ""))
 	club_id = str(profile.get("club_id", ""))
+	# Phase 3 fix: resources (plata/reputacion/vbc) live on profile and are
+	# bumped by server-side tutorial bypass (collect_idle at step 4, rep credit
+	# at step 5). Previously load_from_server only pulled identity fields, so
+	# resources stayed at the in-memory default of 0 even after the server had
+	# credited them — the HomeScreen ResourceRow rendered 0/0/0/0 right after
+	# tutorial completion.
+	plata = int(profile.get("plata", 0))
+	reputacion = int(profile.get("reputacion", 0))
+	vbc = int(profile.get("vbc", 0))
+	aguante_contributed_total = int(profile.get("aguante_contributed_total", 0))
+	rank = str(profile.get("rank", "pibe"))
+	faccion = str(profile.get("faccion", ""))
+	tutorial_done = bool(profile.get("tutorial_done", false))
+	tutorial_step = int(profile.get("tutorial_step", 0))
+	cantico_unlocked = str(profile.get("cantico_unlocked", ""))
+	# Emit so any already-listening UI re-renders with the fresh resource values.
+	resources_updated.emit()
 	var pibe_resp = await NakamaService.client.read_storage_objects_async(session, [
 		{"collection": StorageKeys.COL_PIBES, "key": StorageKeys.KEY_PIBE_MAIN, "user_id": session.user_id},
 	])
