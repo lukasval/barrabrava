@@ -63,7 +63,12 @@ export function rpcGetClubs(
   let filtered = all;
   if (input.division && typeof input.division === 'string') {
     const div = input.division.trim().toLowerCase();
-    filtered = filtered.filter((c) => typeof c.division === 'string' && c.division.toLowerCase() === div);
+    // "Todos" / "all" / "" are UI sentinels meaning "no filter" — skip the filter
+    // pass instead of literally filtering for a club whose division equals "Todos"
+    // (no such club exists, so the filter would return zero).
+    if (div !== '' && div !== 'todos' && div !== 'all') {
+      filtered = filtered.filter((c) => typeof c.division === 'string' && c.division.toLowerCase() === div);
+    }
   }
   if (input.search && typeof input.search === 'string') {
     const q = input.search.trim().toLowerCase();

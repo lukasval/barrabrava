@@ -64,9 +64,13 @@ func _process(delta: float) -> void:
 			set_process(false)
 
 func _load_clubs() -> void:
+	# Fetch ALL clubs (no division filter on server). "Todos" is a UI sentinel
+	# meaning "no filter" — passing it as the server `division` field would make
+	# the server filter literally by division="Todos" and return zero rows.
+	# Filtering by division/search is applied client-side in _render_clubs.
 	var session = AuthManager.session
 	var page_size := 100
-	var payload = JSON.stringify({"division": "Todos", "page": 1, "page_size": page_size})
+	var payload = JSON.stringify({"page": 1, "page_size": page_size})
 	var resp = await NakamaService.client.rpc_async(session, "get_clubs", payload)
 	if resp.is_exception():
 		push_error("[ClubPicker] get_clubs failed: %s" % resp.get_exception().message)
@@ -76,7 +80,7 @@ func _load_clubs() -> void:
 	var total: int = int(data.get("total", _all_clubs.size()))
 	var page := 2
 	while _all_clubs.size() < total and page < 10:
-		var p = JSON.stringify({"division": "Todos", "page": page, "page_size": page_size})
+		var p = JSON.stringify({"page": page, "page_size": page_size})
 		var r = await NakamaService.client.rpc_async(session, "get_clubs", p)
 		if r.is_exception():
 			break
