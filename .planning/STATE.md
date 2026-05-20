@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: milestone
 status: executing
-last_updated: "2026-05-20T12:00:00.000Z"
+last_updated: "2026-05-20T18:00:00.000Z"
 progress:
   total_phases: 7
   completed_phases: 1
   total_plans: 20
-  completed_plans: 14
-  percent: 70
+  completed_plans: 15
+  percent: 75
 ---
 
 # State: BarraBrava
@@ -20,13 +20,13 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 
 **Core value:** La realidad del fútbol argentino afecta el juego en tiempo real, y cada jugador es un personaje real dentro de la barra de su club.
 
-**Current focus:** Phase 3 — Core Loop Laboral. Wave 1 (plan 03.01 foundations) complete. Next: plan 03.02 read-side RPCs.
+**Current focus:** Phase 3 — Core Loop Laboral. Wave 2 (plan 03.02 read-side RPCs) complete. Next: plan 03.03 write-side RPCs.
 
 ## Current Phase
 
 **Phase:** 3 — Core Loop Laboral
-**Status:** Executing — Wave 1 complete (1/6 plans)
-**Next action:** Execute plan 03.02 read-side RPCs (idle_accrual, rank helpers, get_roster, get_aguantadero, get_barra_state, get_recruit_pool).
+**Status:** Executing — Wave 2 complete (2/6 plans)
+**Next action:** Execute plan 03.03 write-side RPCs (assign_profession, collect_idle, recruit_pibe, upgrade_aguantadero, submit_turno, cron handlers, Líder election hook).
 
 **Phase 1:** ✅ COMPLETE (2026-05-17). All 5 plans executed end-to-end.
 
@@ -35,7 +35,7 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 | Plan | Wave | Status | Live artifact |
 |------|------|--------|---------------|
 | 03.01 | 1 | ✅ | storage_keys Phase 3 block + StorageKeys.gd mirror + ai_baseline.ts + ai_seed.ts + leaderboard_cron Phase 3 + 3 admin RPCs wired; 18 RPCs registered |
-| 03.02 | 2 | ⏳ | read-side RPCs (get_roster, get_aguantadero, get_barra_state, get_recruit_pool + helpers) |
+| 03.02 | 2 | ✅ | idle_accrual.ts + rank.ts + pibe_factory.ts + validation ext + 4 read RPCs; 22 RPCs registered; 139.6 kB bundle |
 | 03.03 | 3 | ⏳ | write-side RPCs + real cron handlers + Líder election hook |
 | 03.04a | 4 | ⏳ | Godot foundation (autoload extensions + 9 components) |
 | 03.04b | 5 | ⏳ | Godot screens (HomeScreen + 6 new screens + tutorial) |
@@ -97,6 +97,7 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 
 ## Recent Activity (Phase 3 execution)
 
+- 2026-05-20 — Plan 03.02 (W2) committed: 7 new TS files (idle_accrual.ts, rank.ts, pibe_factory.ts, 4 read RPCs) + 2 modified (validation.ts, main.ts). Build: 22 RPCs, 139.6 kB IIFE, 0 build errors. D-10 trait redaction, D-01 projection-only accrual, Phase-1 migration, auto-bootstrap aguantadero all implemented per spec.
 - 2026-05-20 — Plan 03.01 (W1) committed: Phase 3 storage constants + client mirror + AI baseline module + seeder + 2 cron leaderboards + 3 admin RPCs. Build: 18 RPCs, 4 cron leaderboards, 121.6 kB IIFE. No Goja AST boot crashes (Phase 2 lesson applied). ADMIN_BEARER rotation still pending.
 
 ## Prior Activity (Phase 2 execution)
@@ -137,4 +138,4 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 - 5-6 months target to v1 soft launch
 
 ---
-*Last updated: 2026-05-18 19:32 ART — Phase 2 complete-with-deferral. 02-07 Android FCM plugin deferred to Phase 7 device-build work.*
+*Last updated: 2026-05-20 — Phase 3 Wave 2 complete. Plan 03.02 read-side RPCs done. 22 RPCs registered. Next: 03.03 write-side RPCs.*
