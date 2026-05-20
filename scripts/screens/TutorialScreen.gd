@@ -72,7 +72,19 @@ func _ready() -> void:
 	skip_button.pressed.connect(_on_skip)
 	back_button.pressed.connect(_on_back)
 	cta_button.pressed.connect(_on_cta)
+	# Surface tutorial_advance failures (network error, server validation) so the
+	# user does not silently get stuck on a step with a dead CTA.
+	FlowRouter.tutorial_advance_failed.connect(_on_tutorial_advance_failed)
 	_render_step()
+
+func _on_tutorial_advance_failed(step: int, err: String) -> void:
+	push_warning("[TutorialScreen] step=%d failed: %s" % [step, err])
+	cta_button.disabled = false
+	var dlg := AcceptDialog.new()
+	dlg.title = "No se pudo avanzar"
+	dlg.dialog_text = "Algo salió mal al avanzar el tutorial.\nPaso %d — error: %s\nProbá de nuevo." % [step, err]
+	add_child(dlg)
+	dlg.popup_centered()
 
 func _elapsed_ms() -> int:
 	return int(Time.get_unix_time_from_system() * 1000) - tutorial_start_at_ms

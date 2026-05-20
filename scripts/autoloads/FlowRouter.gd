@@ -89,15 +89,28 @@ func go_post_pibe_create() -> void:
 # elapsed_ms is the tutorial duration captured by TutorialScreen on step 1,
 # forwarded to NakamaService.complete_tutorial for the LAB-TUTORIAL-DURATION
 # server-side telemetry log line.
+signal tutorial_advance_failed(step: int, error: String)
+
 func tutorial_advance(step: int, elapsed_ms: int = 0) -> void:
 	var resp = await NakamaService.complete_tutorial(step, elapsed_ms)
-	if resp.get("ok", false):
-		var data = resp.get("data", {})
-		PlayerStore.tutorial_step = int(data.get("step", step))
-		PlayerStore.tutorial_done = bool(data.get("tutorial_done", false))
-		if data.has("reward"):
-			var reward = data.get("reward", {})
-			PlayerStore.cantico_unlocked = str(reward.get("cantico", ""))
-		PlayerStore.tutorial_advanced.emit()
-		if PlayerStore.tutorial_done:
-			go_home()
+	if not resp.get("ok", false):
+		var err = str(resp.get("error", "unknown_error"))
+		push_warning("[FlowRouter] tutorial_advance step=%d failed: %s" % [step, err])
+		tutorial_advance_failed.emit(step, err)
+		return
+	var data = resp.get("data", {})
+	# Server returned ok:false in the payload itself (HTTP 200 but business error).
+	if typeof(data) == TYPE_DICTIONARY and data.has("ok") and data.get("ok") == false:
+		var err2 = str(data.get("error", "unknown_error"))
+		push_warning("[FlowRouter] tutorial_advance step=%d server payload ok=false: %s" % [step, err2])
+		tutorial_advance_failed.emit(step, err2)
+		return
+	PlayerStore.tutorial_step = int(data.get("step", step))
+	PlayerStore.tutorial_done = bool(data.get("tutorial_done", false))
+	if data.has("reward"):
+		var reward = data.get("reward", {})
+		PlayerStore.cantico_unlocked = str(reward.get("cantico", ""))
+	PlayerStore.tutorial_advanced.emit()
+	print("[FlowRouter] tutorial_advance step=%d ok done=%s" % [step, str(PlayerStore.tutorial_done)])
+	if PlayerStore.tutorial_done:
+		go_home()
