@@ -28,7 +28,7 @@
 
 ### Aguantadero & Recursos
 
-- [ ] **AGT-01**: Cada player tiene aguantadero (HQ) ubicado en barrio real del club elegido
+- [x] **AGT-01**: Cada player tiene aguantadero (HQ) ubicado en barrio real del club elegido
 - [x] **AGT-02**: Aguantadero tiene niveles upgradeables: capacidad de pibes, almacén de recursos, bandera room (display trapos), defensa
 - [x] **AGT-03**: Recursos del juego: Plata (personal), Aguante (grupal de barra), Reputación (política), Visto Bueno Cana (anti-heat)
 - [x] **AGT-04**: Generación pasiva de Aguante según nivel de aguantadero + turnos de barra

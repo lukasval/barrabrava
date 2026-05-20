@@ -12,7 +12,7 @@
 |---|-------|------|----------|---------------------|
 | 1 | **Foundation** | Backend, auth, club selection, primer pibe creado. End state: jugador puede crear cuenta, elegir club, ver su pibe. | 2-3 semanas | TEC-01..10, ONB-01..04, CLB-01..02, PRV-01..05 |
 | 2 | **Heartbeat AFA** | Fixture feed live, ventanas de partido se abren/cierran automáticamente, push notifications funcionando. End state: jugador recibe push "ventana abierta" cuando juega su club. | 2-3 semanas | CLB-03..05, SEA-01..02, CMB-01, DAY-03 |
-| 3 | **Core Loop Laboral** | Sistema de carrera, aguantadero, recursos, trabajos diarios. End state: jugador puede laburar día sin partido, ganar plata, hacer turno en día de partido para pozo barra. | 3-4 semanas | AGT-01..05, PIB-01..07, JER-01..04, ONB-05..06 |
+| 3 | **Core Loop Laboral** | Sistema laboral completo + pibes + jerarquía + tutorial. End state: jugador puede laburar día sin partido, hacer turno en día de partido, reclutar pibes, subir jerarquía. ✅ COMPLETE-WITH-DEFERRAL (2026-05-20) | 3-4 semanas | AGT-01..05, PIB-01..07, JER-01..04, ONB-05..06 |
 | 4 | **Combate Estratégico** | Sistema de combate completo (6 decisiones + loadout + intel + resolución determinística). End state: jugador planifica ambush, ataca, gana/pierde con stakes reales. | 4-5 semanas | CMB-01..10, PIB-08, HEA-01..05, AIB-01..05 |
 | 5 | **Mundo Social** | Mapa territorial, feed con cronista LLM, facciones, replays, daily mini-puzzle. End state: jugador ve estado del mundo, lee narrativa, juega daily, participa en facción. | 3-4 semanas | MAP-01..05, SOC-01..06, DAY-01..02, JER-05..07, MOD-01..06 |
 | 6 | **Monetización + Seasons** | Battle pass, shop, IAP, seasonal modifiers, end-of-season ritual. End state: jugador puede comprar Fichas, completar battle pass, vivir transición de temporada. | 3-4 semanas | MON-01..07, SEA-03..07 |
@@ -130,7 +130,7 @@ Plans:
 - Hierarchy logic (promotion, voting)
 - Aguantadero upgrade UI
 
-**Plans:** 6 plans
+**Plans:** 6/6 plans complete
 
 Plans:
 - [x] 03.01-foundations-PLAN.md — Wave 1: storage_keys + StorageKeys.gd mirror + AI baseline seeder + 2 cron leaderboards (bb_recruit_05_art, bb_mesa_recompute_1h) + 3 admin RPCs (force_recruit_refresh, grant_rep, seed_ai_baseline)

@@ -2,8 +2,8 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: milestone
-status: executing
-last_updated: "2026-05-20T19:00:00.000Z"
+status: completed
+last_updated: "2026-05-20T19:00:10.103Z"
 progress:
   total_phases: 7
   completed_phases: 2
@@ -148,6 +148,7 @@ deferred to Phase 7 (Hardening) where a comprehensive admin test toolkit will be
 | **LAB-LIDER-ELECTION** | Requires simulated season-end clock advancement (admin-flip of season state + verify `barra_state.lider.season_id` updated). Deferred to Phase 7 (Hardening) — admin season-flip RPC exists (Phase 2), but wiring election verification into the harness needs the full election flow tested atomically. | Wire `admin_set_season_window` → verify `barra_state.lider.season_id == 2026` in `laboral-test.sh`. |
 
 Additionally carried forward:
+
 - `release_pibe` RPC → Phase 4 (permadeath handles pibé loss; no release mechanic in v1).
 
 ## Phase 2 — Closing Checklist
