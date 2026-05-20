@@ -14,6 +14,13 @@ extends Node
 signal profile_loaded
 signal profile_cleared
 
+# Phase 3 signals
+signal roster_updated
+signal resources_updated
+signal aguantadero_updated
+signal recruit_pool_updated
+signal tutorial_advanced
+
 var pibe_id: String = ""
 var pibe_name: String = ""
 var club_id: String = ""
@@ -23,6 +30,27 @@ var club_division: String = ""           # Phase 2: needed for "Coming soon" low
 # Phase 2: push + heartbeat state.
 var subscribed_topics: Array[String] = []   # e.g. ["club_xeneizes", ...] — set after subscribe_to_club_topic.
 var current_window: Dictionary = {}          # latest get_current_window response; {} if none.
+
+# Phase 3 resources + rank
+var rank: String = "pibe"
+var plata: int = 0
+var reputacion: int = 0
+var vbc: int = 0
+var aguante_contributed_total: int = 0
+
+# Phase 3 tutorial
+var tutorial_done: bool = false
+var tutorial_step: int = 0
+var cantico_unlocked: String = ""
+
+# Phase 3 roster + aguantadero
+var pibes: Array = []
+var aguantadero: Dictionary = {}
+var recruit_pool: Dictionary = {}
+var roster_cap: int = 5
+
+# Phase 3 faccion (D-16 label only)
+var faccion: String = ""
 
 func has_profile() -> bool:
 	return pibe_id != ""
@@ -35,7 +63,43 @@ func clear() -> void:
 	club_division = ""
 	subscribed_topics.clear()
 	current_window = {}
+	# Phase 3 reset
+	rank = "pibe"
+	plata = 0
+	reputacion = 0
+	vbc = 0
+	aguante_contributed_total = 0
+	tutorial_done = false
+	tutorial_step = 0
+	cantico_unlocked = ""
+	pibes.clear()
+	aguantadero.clear()
+	recruit_pool.clear()
+	roster_cap = 5
+	faccion = ""
 	profile_cleared.emit()
+
+# Phase 3 — Refresh roster + aguantadero from server. Called after collect_idle,
+# recruit_pibe, or on app resume. Resources (plata/rep/vbc) are updated by callers
+# directly from RPC response data, then callers emit resources_updated.
+func refresh_resources_and_roster() -> void:
+	var roster_resp = await NakamaService.get_roster()
+	if roster_resp.get("ok", false):
+		var d = roster_resp.get("data", {})
+		pibes = d.get("pibes", [])
+		roster_cap = int(d.get("roster_cap", 5))
+		rank = str(d.get("rank", "pibe"))
+		roster_updated.emit()
+	var agu_resp = await NakamaService.get_aguantadero()
+	if agu_resp.get("ok", false):
+		aguantadero = agu_resp.get("data", {}).get("aguantadero", {})
+		aguantadero_updated.emit()
+	# Resources live on profile; load_from_server already reads profile,
+	# but for delta refresh after collect_idle/submit_turno we re-call.
+	# Pattern: caller updates plata/reputacion/vbc directly from RPC response
+	# (collect_idle returns plata_credited; submit_turno returns rep_credited),
+	# then emits resources_updated.
+	resources_updated.emit()
 
 func load_from_server() -> Dictionary:
 	if not AuthManager.is_authenticated():

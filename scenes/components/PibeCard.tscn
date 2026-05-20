@@ -1,0 +1,90 @@
+[gd_scene load_steps=8 format=3 uid="uid://pibecard01"]
+
+[ext_resource type="Script" path="res://scripts/components/PibeCard.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/components/RankBadge.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/components/TraitChip.gd" id="3"]
+
+[node name="PibeCard" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 120)
+mouse_filter = 1
+script = ExtResource("1")
+
+[node name="TurnoStripe" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_right = 4
+color = Color(0.839, 0.157, 0.157, 1)
+visible = false
+
+[node name="H" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Avatar" type="ColorRect" parent="H"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(0.533, 0.533, 0.533, 1)
+
+[node name="V" type="VBoxContainer" parent="H"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 4
+
+[node name="NameRow" type="HBoxContainer" parent="H/V"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="PibeName" type="Label" parent="H/V/NameRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Nombre"
+theme_override_font_sizes/font_size = 16
+
+[node name="RankBadge" type="PanelContainer" parent="H/V/NameRow"]
+layout_mode = 2
+size_flags_vertical = 4
+script = ExtResource("2")
+
+[node name="RankLabel" type="Label" parent="H/V/NameRow/RankBadge"]
+layout_mode = 2
+text = "PIBE"
+theme_override_font_sizes/font_size = 14
+
+[node name="RolLabel" type="Label" parent="H/V"]
+layout_mode = 2
+text = "Sin laburo"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.627, 0.627, 0.627, 1)
+
+[node name="EnergiaBar" type="ProgressBar" parent="H/V"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 8)
+max_value = 100.0
+value = 100.0
+show_percentage = false
+
+[node name="Traits" type="HBoxContainer" parent="H/V"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Trait1" type="PanelContainer" parent="H/V/Traits"]
+layout_mode = 2
+script = ExtResource("3")
+
+[node name="TraitLabel" type="Label" parent="H/V/Traits/Trait1"]
+layout_mode = 2
+text = "Trait"
+theme_override_font_sizes/font_size = 14
+
+[node name="Trait2" type="PanelContainer" parent="H/V/Traits"]
+layout_mode = 2
+script = ExtResource("3")
+
+[node name="TraitLabel" type="Label" parent="H/V/Traits/Trait2"]
+layout_mode = 2
+text = "Trait"
+theme_override_font_sizes/font_size = 14

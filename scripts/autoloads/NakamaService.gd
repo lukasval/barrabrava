@@ -109,3 +109,135 @@ func get_current_window() -> Dictionary:
 	if typeof(data) != TYPE_DICTIONARY:
 		return {"ok": false, "error": "invalid_response"}
 	return {"ok": true, "data": data}
+
+# Phase 3 — Read-side RPCs (plan 03.02). WR-09 dict-guard pattern on every wrapper.
+
+func get_roster() -> Dictionary:
+	if not AuthManager.is_authenticated():
+		return {"ok": false, "error": "not_authenticated"}
+	var resp = await client.rpc_async(AuthManager.session, "get_roster", "")
+	if resp.is_exception():
+		return {"ok": false, "error": str(resp.get_exception().message)}
+	var data = JSON.parse_string(resp.payload)
+	if typeof(data) != TYPE_DICTIONARY:
+		return {"ok": false, "error": "invalid_response"}
+	return {"ok": true, "data": data}
+
+func get_aguantadero() -> Dictionary:
+	if not AuthManager.is_authenticated():
+		return {"ok": false, "error": "not_authenticated"}
+	var resp = await client.rpc_async(AuthManager.session, "get_aguantadero", "")
+	if resp.is_exception():
+		return {"ok": false, "error": str(resp.get_exception().message)}
+	var data = JSON.parse_string(resp.payload)
+	if typeof(data) != TYPE_DICTIONARY:
+		return {"ok": false, "error": "invalid_response"}
+	return {"ok": true, "data": data}
+
+func get_barra_state(club_id: String = "") -> Dictionary:
+	if not AuthManager.is_authenticated():
+		return {"ok": false, "error": "not_authenticated"}
+	var payload = JSON.stringify({"club_id": club_id}) if club_id != "" else ""
+	var resp = await client.rpc_async(AuthManager.session, "get_barra_state", payload)
+	if resp.is_exception():
+		return {"ok": false, "error": str(resp.get_exception().message)}
+	var data = JSON.parse_string(resp.payload)
+	if typeof(data) != TYPE_DICTIONARY:
+		return {"ok": false, "error": "invalid_response"}
+	return {"ok": true, "data": data}
+
+func get_recruit_pool() -> Dictionary:
+	if not AuthManager.is_authenticated():
+		return {"ok": false, "error": "not_authenticated"}
+	var resp = await client.rpc_async(AuthManager.session, "get_recruit_pool", "")
+	if resp.is_exception():
+		return {"ok": false, "error": str(resp.get_exception().message)}
+	var data = JSON.parse_string(resp.payload)
+	if typeof(data) != TYPE_DICTIONARY:
+		return {"ok": false, "error": "invalid_response"}
+	return {"ok": true, "data": data}
+
+# Phase 3 — Write-side RPCs (plan 03.03). WR-09 dict-guard pattern on every wrapper.
+
+func assign_profession(pibe_id: String, profession) -> Dictionary:
+	# profession may be String or null (rest mode — descanso)
+	if not AuthManager.is_authenticated():
+		return {"ok": false, "error": "not_authenticated"}
+	var payload = JSON.stringify({"pibe_id": pibe_id, "profession": profession})
+	var resp = await client.rpc_async(AuthManager.session, "assign_profession", payload)
+	if resp.is_exception():
+		return {"ok": false, "error": str(resp.get_exception().message)}
+	var data = JSON.parse_string(resp.payload)
+	if typeof(data) != TYPE_DICTIONARY:
+		return {"ok": false, "error": "invalid_response"}
+	return {"ok": true, "data": data}
+
+func collect_idle(pibe_id: String = "") -> Dictionary:
+	if not AuthManager.is_authenticated():
+		return {"ok": false, "error": "not_authenticated"}
+	var payload_dict := {}
+	if pibe_id != "": payload_dict["pibe_id"] = pibe_id
+	var payload = JSON.stringify(payload_dict)
+	var resp = await client.rpc_async(AuthManager.session, "collect_idle", payload)
+	if resp.is_exception():
+		return {"ok": false, "error": str(resp.get_exception().message)}
+	var data = JSON.parse_string(resp.payload)
+	if typeof(data) != TYPE_DICTIONARY:
+		return {"ok": false, "error": "invalid_response"}
+	return {"ok": true, "data": data}
+
+func recruit_pibe(pick_id: String, tutorial: bool = false) -> Dictionary:
+	if not AuthManager.is_authenticated():
+		return {"ok": false, "error": "not_authenticated"}
+	var payload_dict := {"pick_id": pick_id}
+	if tutorial: payload_dict["tutorial"] = true
+	var payload = JSON.stringify(payload_dict)
+	var resp = await client.rpc_async(AuthManager.session, "recruit_pibe", payload)
+	if resp.is_exception():
+		return {"ok": false, "error": str(resp.get_exception().message)}
+	var data = JSON.parse_string(resp.payload)
+	if typeof(data) != TYPE_DICTIONARY:
+		return {"ok": false, "error": "invalid_response"}
+	return {"ok": true, "data": data}
+
+func upgrade_aguantadero(target_level: int) -> Dictionary:
+	if not AuthManager.is_authenticated():
+		return {"ok": false, "error": "not_authenticated"}
+	var payload = JSON.stringify({"target_level": target_level})
+	var resp = await client.rpc_async(AuthManager.session, "upgrade_aguantadero", payload)
+	if resp.is_exception():
+		return {"ok": false, "error": str(resp.get_exception().message)}
+	var data = JSON.parse_string(resp.payload)
+	if typeof(data) != TYPE_DICTIONARY:
+		return {"ok": false, "error": "invalid_response"}
+	return {"ok": true, "data": data}
+
+func submit_turno(fixture_id: String, pibe_ids: Array) -> Dictionary:
+	if not AuthManager.is_authenticated():
+		return {"ok": false, "error": "not_authenticated"}
+	var payload = JSON.stringify({"fixture_id": fixture_id, "pibe_ids": pibe_ids})
+	var resp = await client.rpc_async(AuthManager.session, "submit_turno", payload)
+	if resp.is_exception():
+		return {"ok": false, "error": str(resp.get_exception().message)}
+	var data = JSON.parse_string(resp.payload)
+	if typeof(data) != TYPE_DICTIONARY:
+		return {"ok": false, "error": "invalid_response"}
+	return {"ok": true, "data": data}
+
+func complete_tutorial(step: int, elapsed_ms: int = 0) -> Dictionary:
+	# elapsed_ms is total tutorial duration captured by TutorialScreen on step 1;
+	# passed unmodified on every step so the server logs the final value at step 6.
+	# Server uses elapsed_ms only for telemetry (LAB-TUTORIAL-DURATION invariant).
+	if not AuthManager.is_authenticated():
+		return {"ok": false, "error": "not_authenticated"}
+	var payload_dict := {"step": step}
+	if elapsed_ms > 0:
+		payload_dict["elapsed_ms"] = elapsed_ms
+	var payload = JSON.stringify(payload_dict)
+	var resp = await client.rpc_async(AuthManager.session, "complete_tutorial", payload)
+	if resp.is_exception():
+		return {"ok": false, "error": str(resp.get_exception().message)}
+	var data = JSON.parse_string(resp.payload)
+	if typeof(data) != TYPE_DICTIONARY:
+		return {"ok": false, "error": "invalid_response"}
+	return {"ok": true, "data": data}

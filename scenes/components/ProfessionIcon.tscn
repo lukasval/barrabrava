@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://proficon01"]
+
+[ext_resource type="Script" path="res://scripts/components/ProfessionIcon.gd" id="1"]
+
+[node name="ProfessionIcon" type="PanelContainer"]
+custom_minimum_size = Vector2(24, 24)
+mouse_filter = 2
+script = ExtResource("1")
+
+[node name="IconRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(1, 1, 1, 0.3)

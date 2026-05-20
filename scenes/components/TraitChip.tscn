@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://traitchip01"]
+
+[ext_resource type="Script" path="res://scripts/components/TraitChip.gd" id="1"]
+
+[node name="TraitChip" type="PanelContainer"]
+mouse_filter = 2
+script = ExtResource("1")
+
+[node name="TraitLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Trait"
+theme_override_font_sizes/font_size = 14

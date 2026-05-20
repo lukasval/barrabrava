@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=3 uid="uid://recruitcard01"]
+
+[ext_resource type="Script" path="res://scripts/components/RecruitCard.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/components/TraitChip.gd" id="2"]
+
+[node name="RecruitCard" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 180)
+script = ExtResource("1")
+
+[node name="H" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="AvatarLarge" type="ColorRect" parent="H"]
+custom_minimum_size = Vector2(120, 140)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(0.333, 0.333, 0.333, 1)
+
+[node name="V" type="VBoxContainer" parent="H"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+
+[node name="PibeName" type="Label" parent="H/V"]
+layout_mode = 2
+text = "Nombre"
+theme_override_font_sizes/font_size = 28
+
+[node name="RolLabel" type="Label" parent="H/V"]
+layout_mode = 2
+text = "Rol"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.627, 0.627, 0.627, 1)
+
+[node name="Traits" type="HBoxContainer" parent="H/V"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Trait1" type="PanelContainer" parent="H/V/Traits"]
+layout_mode = 2
+script = ExtResource("2")
+
+[node name="TraitLabel" type="Label" parent="H/V/Traits/Trait1"]
+layout_mode = 2
+text = "Trait"
+theme_override_font_sizes/font_size = 14
+
+[node name="Trait2Hidden" type="PanelContainer" parent="H/V/Traits"]
+layout_mode = 2
+script = ExtResource("2")
+
+[node name="TraitLabel" type="Label" parent="H/V/Traits/Trait2Hidden"]
+layout_mode = 2
+text = "?"
+theme_override_font_sizes/font_size = 14
+
+[node name="CostLabel" type="Label" parent="H/V"]
+layout_mode = 2
+text = "Costo: $500 Plata"
+theme_override_font_sizes/font_size = 14
+
+[node name="GateLabel" type="Label" parent="H/V"]
+layout_mode = 2
+visible = false
+text = "Requiere rango"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.976, 0.451, 0.086, 1)
+
+[node name="RecruitBtn" type="Button" parent="H/V"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 44)
+text = "Reclutar"
+theme_override_font_sizes/font_size = 14

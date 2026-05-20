@@ -62,3 +62,42 @@ func confirm_club_pick(club_id: String) -> void:
 	if club_id != "":
 		NakamaService.subscribe_to_club_topic(club_id)
 	go_pibe_creator()
+
+# Phase 3 — New screen navigation helpers.
+func go_roster() -> void: go_to("res://scenes/RosterScreen.tscn")
+func go_recruit() -> void: go_to("res://scenes/RecruitScreen.tscn")
+func go_aguantadero() -> void: go_to("res://scenes/AguantaderoScreen.tscn")
+
+func go_pibe_detail(pibe_id: String) -> void:
+	# Pass pibe_id via singleton meta (Godot scene-args limitation workaround).
+	# Target screen reads via PlayerStore.get_meta("nav_pibe_id").
+	PlayerStore.set_meta("nav_pibe_id", pibe_id)
+	go_to("res://scenes/PibeDetailScreen.tscn")
+
+func go_profession_assign(pibe_id: String) -> void:
+	PlayerStore.set_meta("nav_pibe_id", pibe_id)
+	go_to("res://scenes/ProfessionAssignScreen.tscn")
+
+# Post-pibe-create gate (ONB-05 tutorial entry point).
+func go_post_pibe_create() -> void:
+	if PlayerStore.tutorial_done:
+		go_home()
+	else:
+		go_tutorial()
+
+# Tutorial step orchestrator — called by TutorialScreen step CTAs.
+# elapsed_ms is the tutorial duration captured by TutorialScreen on step 1,
+# forwarded to NakamaService.complete_tutorial for the LAB-TUTORIAL-DURATION
+# server-side telemetry log line.
+func tutorial_advance(step: int, elapsed_ms: int = 0) -> void:
+	var resp = await NakamaService.complete_tutorial(step, elapsed_ms)
+	if resp.get("ok", false):
+		var data = resp.get("data", {})
+		PlayerStore.tutorial_step = int(data.get("step", step))
+		PlayerStore.tutorial_done = bool(data.get("tutorial_done", false))
+		if data.has("reward"):
+			var reward = data.get("reward", {})
+			PlayerStore.cantico_unlocked = str(reward.get("cantico", ""))
+		PlayerStore.tutorial_advanced.emit()
+		if PlayerStore.tutorial_done:
+			go_home()
