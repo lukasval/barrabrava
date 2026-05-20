@@ -37,3 +37,14 @@ export const KEY_SCHEDULER_STATE = 'scheduler_state';
 export const KEY_CURRENT_SEASON = 'current_season';
 export const KEY_API_FOOTBALL_LEAGUE_IDS = 'api_football_league_ids';
 export const KEY_FCM_OAUTH = 'fcm_oauth_token';
+
+// Phase 3: Core Loop Laboral
+export const COL_AGUANTADEROS = 'aguantaderos';     // per-user singleton
+export const COL_BARRA_STATE = 'barra_state';       // system-owned per club
+export const COL_RECRUIT_POOL = 'recruit_pool';     // system-owned per club
+export const COL_TURNOS = 'turnos';                 // per-user append-only (key = fixture_id)
+
+export const KEY_AGUANTADERO_MAIN = 'main';                  // singleton per user
+export const KEY_RECRUIT_LOCK = 'recruit_lock';              // meta — cron mutex (5min TTL)
+export const KEY_MESA_DEBOUNCE_PREFIX = 'mesa_debounce_';    // meta — per-club debounce stamp
+export const KEY_AI_SEED_VERSION = 'ai_seed_version';        // meta — idempotent AI seed marker

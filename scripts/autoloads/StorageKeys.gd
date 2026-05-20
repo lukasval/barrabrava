@@ -25,3 +25,11 @@ const SYSTEM_USER_ID := "00000000-0000-0000-0000-000000000000"
 const COL_MATCH_WINDOWS := "match_windows"
 # COL_FIXTURES — client never reads directly (goes via get_current_window RPC), skip mirror.
 # COL_FCM_TOKENS — client writes via register_fcm_token RPC only, skip mirror.
+
+# Phase 3: Core Loop Laboral — client mirror.
+# COL_TURNOS intentionally omitted: client never reads directly (writes via submit_turno,
+# reads back via get_roster). COL_META keys also omitted (server-internal).
+const COL_AGUANTADEROS := "aguantaderos"
+const COL_BARRA_STATE := "barra_state"
+const COL_RECRUIT_POOL := "recruit_pool"
+const KEY_AGUANTADERO_MAIN := "main"
