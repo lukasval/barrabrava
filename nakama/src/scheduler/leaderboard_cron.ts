@@ -70,5 +70,31 @@ export function onSchedulerLeaderboardReset(
 ): void {
   if (lb.id === 'bb_tick_15m' || lb.id === 'bb_tick_6h') {
     runHeartbeatTick(ctx, logger, nk, lb.id as 'bb_tick_15m' | 'bb_tick_6h');
+  } else if (lb.id === 'bb_recruit_05_art') {
+    logger.info('[recruit_cron] fired (handler stub — Wave 2 lands body)');
+  } else if (lb.id === 'bb_mesa_recompute_1h') {
+    logger.info('[mesa_cron] fired (handler stub — Wave 2 lands body)');
   }
+}
+
+// Phase 3: Core Loop Laboral — two new cron-carrier leaderboards.
+//
+//   bb_recruit_05_art  → cron "0 8 * * *"  (UTC = 05:00 ART, no DST — RESEARCH Q4/A9)
+//   bb_mesa_recompute_1h → cron "0 * * * *"  (every hour on the hour)
+//
+// IMPORTANT: Do NOT add a second cron registration call. The single Phase 2
+// registration in main.ts dispatches ALL leaderboards via lb.id (RESEARCH §569).
+// Only the onSchedulerLeaderboardReset body above needs extending with else-if branches.
+export function ensureLaboralLeaderboards(
+  nk: nkruntime.Nakama, logger: nkruntime.Logger,
+): void {
+  try {
+    nk.leaderboardCreate('bb_recruit_05_art', true, undefined, undefined,
+      '0 8 * * *', { purpose: 'recruit_pool_refresh' });
+  } catch (e) { /* already exists */ }
+  try {
+    nk.leaderboardCreate('bb_mesa_recompute_1h', true, undefined, undefined,
+      '0 * * * *', { purpose: 'mesa_chica_recompute' });
+  } catch (e) { /* already exists */ }
+  logger.info('Laboral leaderboards ensured (bb_recruit_05_art, bb_mesa_recompute_1h)');
 }
