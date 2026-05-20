@@ -40,6 +40,13 @@ import { rpcGetRoster } from './rpc/get_roster';
 import { rpcGetAguantadero } from './rpc/get_aguantadero';
 import { rpcGetBarraState } from './rpc/get_barra_state';
 import { rpcGetRecruitPool } from './rpc/get_recruit_pool';
+// Phase 3: Core Loop Laboral — plan 03-03 (write-side RPCs)
+import { rpcAssignProfession } from './rpc/assign_profession';
+import { rpcCollectIdle } from './rpc/collect_idle';
+import { rpcRecruitPibe } from './rpc/recruit_pibe';
+import { rpcUpgradeAguantadero } from './rpc/upgrade_aguantadero';
+import { rpcSubmitTurno } from './rpc/submit_turno';
+import { rpcCompleteTutorial } from './rpc/complete_tutorial';
 
 const CLUBS_SEED_VERSION = 'v3';  // v1+v2 marker collision in production left 265 clubs coexisting; bumping to v3 forces the new wipe-then-seed path to run cleanly
 
@@ -185,5 +192,15 @@ export function InitModule(
   initializer.registerRpc('get_barra_state', rpcGetBarraState);
   initializer.registerRpc('get_recruit_pool', rpcGetRecruitPool);
 
-  logger.info('BarraBrava runtime ready: 22 RPCs registered + scheduler armed (4 cron leaderboards)');
+  // Phase 3: Core Loop Laboral — plan 03-03 (write-side player RPCs)
+  // CRITICAL: direct ExpressionStatements — Goja AST walker only sees top-level statements
+  // in InitModule body. NO wrappers. Phase 2 paid 3x for this lesson; Phase 3 must not.
+  initializer.registerRpc('assign_profession', rpcAssignProfession);
+  initializer.registerRpc('collect_idle', rpcCollectIdle);
+  initializer.registerRpc('recruit_pibe', rpcRecruitPibe);
+  initializer.registerRpc('upgrade_aguantadero', rpcUpgradeAguantadero);
+  initializer.registerRpc('submit_turno', rpcSubmitTurno);
+  initializer.registerRpc('complete_tutorial', rpcCompleteTutorial);
+
+  logger.info('BarraBrava runtime ready: 28 RPCs registered + scheduler armed (4 cron leaderboards)');
 }

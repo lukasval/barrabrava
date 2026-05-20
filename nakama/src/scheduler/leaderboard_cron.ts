@@ -14,6 +14,8 @@
 // the only supported way to schedule recurring server-side work.
 
 import { runHeartbeatTick } from './tick';
+import { runRecruitRefresh } from './recruit_cron';
+import { runMesaRecomputeAll } from './mesa_cron';
 
 export function ensureSchedulerLeaderboards(
   nk: nkruntime.Nakama,
@@ -71,9 +73,9 @@ export function onSchedulerLeaderboardReset(
   if (lb.id === 'bb_tick_15m' || lb.id === 'bb_tick_6h') {
     runHeartbeatTick(ctx, logger, nk, lb.id as 'bb_tick_15m' | 'bb_tick_6h');
   } else if (lb.id === 'bb_recruit_05_art') {
-    logger.info('[recruit_cron] fired (handler stub — Wave 2 lands body)');
+    runRecruitRefresh(ctx, logger, nk);
   } else if (lb.id === 'bb_mesa_recompute_1h') {
-    logger.info('[mesa_cron] fired (handler stub — Wave 2 lands body)');
+    runMesaRecomputeAll(ctx, logger, nk);
   }
 }
 

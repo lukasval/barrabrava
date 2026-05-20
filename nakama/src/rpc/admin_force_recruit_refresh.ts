@@ -1,10 +1,10 @@
 // RPC: admin_force_recruit_refresh
 //
-// Wave 1 STUB — Wave 2 (plan 03.03) fills the real runRecruitRefresh body.
-// Wave 1 purpose: register the RPC endpoint, gate with bearer auth, audit the call.
+// Forces a recruit pool refresh for one club (or all clubs).
+// Wave 3 (plan 03.03): stub replaced with real runRecruitRefresh call.
 //
-// Input:  { club_id?: string }  — omit to refresh ALL clubs (Wave 2 behavior)
-// Output: { ok: true, stub: true, club_id: string | null }
+// Input:  { club_id?: string }  — omit to refresh ALL clubs
+// Output: { ok: true, regenerated: true, club_id: string | null }
 //       | { ok: false, error: string }
 //
 // Security: T-3-AS-01 — requireAdmin constant-time bearer compare.
@@ -12,6 +12,7 @@
 
 import { requireAdmin } from '../util/admin_auth';
 import { COL_ADMIN_ACTIONS, SYSTEM_USER_ID } from '../storage_keys';
+import { runRecruitRefresh } from '../scheduler/recruit_cron';
 
 export function rpcAdminForceRecruitRefresh(
   ctx: nkruntime.Context, logger: nkruntime.Logger,
@@ -25,17 +26,21 @@ export function rpcAdminForceRecruitRefresh(
   catch (e) { return JSON.stringify({ ok: false, error: 'invalid_payload' }); }
 
   const clubId = typeof input.club_id === 'string' ? input.club_id : null;
-  // Wave 2 (plan 03.03) replaces this stub with runRecruitRefresh(ctx, logger, nk, clubId).
-  logger.info('[admin] force_recruit_refresh stub fired club=%s by ip=%s',
-    clubId ?? 'ALL', auth.callerIp);
+
+  // Audit first (before potentially throwing in runRecruitRefresh).
   nk.storageWrite([{
     collection: COL_ADMIN_ACTIONS, key: nk.uuidv4(), userId: SYSTEM_USER_ID,
     value: {
       action: 'admin_force_recruit_refresh',
       club_id: clubId, caller_ip: auth.callerIp, at: Date.now(),
-      note: 'stub — Wave 2 03.03 wires real refresh',
     },
     permissionRead: 0, permissionWrite: 0,
   }]);
-  return JSON.stringify({ ok: true, stub: true, club_id: clubId });
+
+  // Wave 3: real runRecruitRefresh (forClubId bypasses generated_date_art short-circuit
+  // for targeted refresh; undefined = all clubs).
+  runRecruitRefresh(ctx, logger, nk, clubId ?? undefined);
+
+  logger.info('[admin] force_recruit_refresh club=%s by ip=%s', clubId ?? 'ALL', auth.callerIp);
+  return JSON.stringify({ ok: true, regenerated: true, club_id: clubId });
 }

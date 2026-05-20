@@ -15,6 +15,8 @@
 import {
   COL_FIXTURES,
   COL_META,
+  COL_BARRA_STATE,
+  COL_PLAYERS,
   SYSTEM_USER_ID,
   KEY_CURRENT_SEASON,
 } from '../storage_keys';
@@ -115,5 +117,127 @@ export function detectSeasonState(
       },
     ]);
     logger.info('[season] status=%s season=%d', newStatus, maxSeason);
+
+    // D-15: on active→ended transition, elect Líder per club from Mesa Chica top entry.
+    if (existing.status === 'active' && newStatus === 'ended') {
+      electLideresForAllClubs(nk, logger, maxSeason);
+    }
   }
+}
+
+// electLideresForAllClubs — walks all barra_state records and elects the highest-Rep
+// player as Líder for each club at season end (D-15). Triggered once per season transition.
+// T-3-WS-12: cost is O(1) per club (just reads mesa_chica[0]); one-shot per season.
+function electLideresForAllClubs(
+  nk: nkruntime.Nakama, logger: nkruntime.Logger, seasonId: number,
+): void {
+  const now = Date.now();
+  let cursor = '';
+  let elected = 0;
+  for (let pg = 0; pg < 50; pg++) {
+    const page = nk.storageList(SYSTEM_USER_ID, COL_BARRA_STATE, 100, cursor);
+    for (const obj of page.objects || []) {
+      const clubId = obj.key;
+      const bs = obj.value as {
+        mesa_chica: Array<{
+          kind: 'human' | 'ai';
+          player_id?: string;
+          ai_id?: string;
+          display_name?: string | null;
+          reputacion: number;
+        }>;
+        lider?: {
+          kind: string;
+          ai_id?: string;
+          player_id?: string;
+          reputacion: number;
+          season_id?: number;
+        };
+        [k: string]: unknown;
+      };
+
+      // Pick highest-Rep entry from Mesa (already sorted DESC by recomputeMesa).
+      const top = bs.mesa_chica && bs.mesa_chica.length > 0 ? bs.mesa_chica[0] : null;
+      if (!top) continue;
+
+      const newLider = top.kind === 'human'
+        ? {
+            kind: 'human' as const,
+            player_id: top.player_id,
+            display_name: top.display_name ?? null,
+            reputacion: top.reputacion,
+            elected_at: now,
+            season_id: seasonId,
+          }
+        : {
+            kind: 'ai' as const,
+            ai_id: top.ai_id,
+            display_name: null,  // AI display label rendered at UI layer (D-14)
+            reputacion: top.reputacion,
+            elected_at: now,
+            season_id: seasonId,
+          };
+
+      // Promote/demote human ranks if Líder changed.
+      const prevLider = bs.lider;
+      const writes: nkruntime.StorageWriteRequest[] = [];
+
+      if (prevLider && prevLider.kind === 'human' &&
+          prevLider.player_id !== (newLider as { player_id?: string }).player_id) {
+        // Previous human Líder → demote to mesa (still top 5 — mesa cron will sync next hour).
+        const r = nk.storageRead([{
+          collection: COL_PLAYERS, key: 'profile', userId: prevLider.player_id!,
+        }]);
+        if (r.length > 0) {
+          const p = r[0].value as { [k: string]: unknown };
+          p.rank = 'mesa';
+          p.rank_changed_at = now;
+          writes.push({
+            collection: COL_PLAYERS, key: 'profile', userId: prevLider.player_id!,
+            value: p, version: r[0].version,
+            permissionRead: 2, permissionWrite: 0,
+          });
+        }
+      }
+
+      if (newLider.kind === 'human' && (newLider as { player_id?: string }).player_id) {
+        // New human Líder → promote to lider rank.
+        const r = nk.storageRead([{
+          collection: COL_PLAYERS, key: 'profile',
+          userId: (newLider as { player_id: string }).player_id,
+        }]);
+        if (r.length > 0) {
+          const p = r[0].value as { [k: string]: unknown };
+          p.rank = 'lider';
+          p.rank_changed_at = now;
+          writes.push({
+            collection: COL_PLAYERS, key: 'profile',
+            userId: (newLider as { player_id: string }).player_id,
+            value: p, version: r[0].version,
+            permissionRead: 2, permissionWrite: 0,
+          });
+        }
+      }
+
+      bs.lider = newLider;
+      writes.push({
+        collection: COL_BARRA_STATE, key: clubId, userId: SYSTEM_USER_ID,
+        value: bs, version: obj.version,
+        permissionRead: 2, permissionWrite: 0,
+      });
+
+      try {
+        nk.storageWrite(writes);
+        elected++;
+        logger.info('[season] lider_elected club=%s kind=%s season=%d',
+          clubId, newLider.kind, seasonId);
+      } catch (e) {
+        // Optimistic concurrency conflict — next season end will correct (T-3-WS-12 accept).
+        logger.warn('[season] lider election conflict club=%s', clubId);
+      }
+    }
+    if (!page.cursor) break;
+    cursor = page.cursor;
+  }
+  logger.info('[season] lider election complete season=%d clubs_processed=%d', seasonId, elected);
 }
