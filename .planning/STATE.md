@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: milestone
 status: executing
-last_updated: "2026-05-20T14:59:00.000Z"
+last_updated: "2026-05-20T15:12:00.000Z"
 progress:
   total_phases: 7
   completed_phases: 1
   total_plans: 20
-  completed_plans: 16
-  percent: 80
+  completed_plans: 17
+  percent: 85
 ---
 
 # State: BarraBrava
@@ -20,13 +20,13 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 
 **Core value:** La realidad del fútbol argentino afecta el juego en tiempo real, y cada jugador es un personaje real dentro de la barra de su club.
 
-**Current focus:** Phase 3 — Core Loop Laboral. Wave 3 (plan 03.03 write-side RPCs) complete. Next: plan 03.04a Godot foundation.
+**Current focus:** Phase 3 — Core Loop Laboral. Wave 4 (plan 03.04a Godot foundation) complete. Next: plan 03.04b Godot screens (HomeScreen + 6 new screens + tutorial state machine).
 
 ## Current Phase
 
 **Phase:** 3 — Core Loop Laboral
-**Status:** Executing — Wave 3 complete (3/6 plans)
-**Next action:** Execute plan 03.04a Godot foundation (autoload extensions + 9 components).
+**Status:** Executing — Wave 4 complete (4/6 plans)
+**Next action:** Execute plan 03.04b Godot screens (HomeScreen extension + 6 screens + tutorial + human-verify checkpoint).
 
 **Phase 1:** ✅ COMPLETE (2026-05-17). All 5 plans executed end-to-end.
 
@@ -37,7 +37,7 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 | 03.01 | 1 | ✅ | storage_keys Phase 3 block + StorageKeys.gd mirror + ai_baseline.ts + ai_seed.ts + leaderboard_cron Phase 3 + 3 admin RPCs wired; 18 RPCs registered |
 | 03.02 | 2 | ✅ | idle_accrual.ts + rank.ts + pibe_factory.ts + validation ext + 4 read RPCs; 22 RPCs registered; 139.6 kB bundle |
 | 03.03 | 3 | ✅ | 6 write RPCs + recruit_cron + mesa_cron + seasons Líder election + 28 RPCs total; 176.8 kB bundle |
-| 03.04a | 4 | ⏳ | Godot foundation (autoload extensions + 9 components) |
+| 03.04a | 4 | ✅ | AppTheme Phase 3 tokens + 10 NakamaService RPC wrappers + PlayerStore Phase 3 state + FlowRouter 8 helpers + 9 component pairs; FONT_HEADING 22→20; 22 files; commit 6f7b963 |
 | 03.04b | 5 | ⏳ | Godot screens (HomeScreen + 6 new screens + tutorial) |
 | 03.05 | 6 | ⏳ | validation test suite + runbook + INFRA-NOTES Phase 3 |
 
@@ -71,7 +71,7 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 |-------|--------|
 | 1. Foundation | ✅ Complete (2026-05-17) |
 | 2. Heartbeat AFA | ✅ Complete-with-deferral (2026-05-18) — 8/9 plans, 02-07 deferred |
-| 3. Core Loop Laboral | 🔄 Executing — Wave 1 complete (1/6 plans) |
+| 3. Core Loop Laboral | 🔄 Executing — Wave 4 complete (4/6 plans) |
 | 4. Combate Estratégico | ⏳ Pending |
 | 5. Mundo Social | ⏳ Pending |
 | 6. Monetización + Seasons | ⏳ Pending |
@@ -97,6 +97,7 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 
 ## Recent Activity (Phase 3 execution)
 
+- 2026-05-20 — Plan 03.04a (W4) committed: 4 autoload extensions (AppTheme Phase 3 tokens + FONT_HEADING 22→20, 10 NakamaService RPC wrappers WR-09, PlayerStore 5 signals + 13 fields + refresh_resources_and_roster, FlowRouter 7 go_ helpers + tutorial_advance) + 9 component pairs (PibeCard, RecruitCard, ResourceWidget, RankBadge, TraitChip, EnergiaBar, ProfessionIcon, SkillProgressRing, TurnoModal). 22 files. Vocabulary audit: 0 banned terms.
 - 2026-05-20 — Plan 03.02 (W2) committed: 7 new TS files (idle_accrual.ts, rank.ts, pibe_factory.ts, 4 read RPCs) + 2 modified (validation.ts, main.ts). Build: 22 RPCs, 139.6 kB IIFE, 0 build errors. D-10 trait redaction, D-01 projection-only accrual, Phase-1 migration, auto-bootstrap aguantadero all implemented per spec.
 - 2026-05-20 — Plan 03.01 (W1) committed: Phase 3 storage constants + client mirror + AI baseline module + seeder + 2 cron leaderboards + 3 admin RPCs. Build: 18 RPCs, 4 cron leaderboards, 121.6 kB IIFE. No Goja AST boot crashes (Phase 2 lesson applied). ADMIN_BEARER rotation still pending.
 
@@ -138,4 +139,4 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 - 5-6 months target to v1 soft launch
 
 ---
-*Last updated: 2026-05-20 — Phase 3 Wave 2 complete. Plan 03.02 read-side RPCs done. 22 RPCs registered. Next: 03.03 write-side RPCs.*
+*Last updated: 2026-05-20 — Phase 3 Wave 4 complete. Plan 03.04a Godot foundation done. 22 files: 4 autoloads + 9 component pairs. Next: 03.04b Godot screens + tutorial.*
