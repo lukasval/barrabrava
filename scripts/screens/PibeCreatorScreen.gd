@@ -61,4 +61,6 @@ func _on_submit() -> void:
 	PlayerStore.pibe_name = str(pibe.get("name", ""))
 	PlayerStore.club_id = str(pibe.get("club_id", PlayerStore.club_id))
 	await PlayerStore.load_from_server()
-	FlowRouter.go_tutorial()
+	# Rule 2 fix: route via go_post_pibe_create() so returning users (tutorial_done=true)
+	# skip directly to HomeScreen. go_tutorial() bypasses the tutorial_done gate.
+	FlowRouter.go_post_pibe_create()

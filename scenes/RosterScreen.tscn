@@ -1,0 +1,195 @@
+[gd_scene load_steps=3 format=3 uid="uid://rosterscreen01"]
+
+[ext_resource type="Script" path="res://scripts/screens/RosterScreen.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/components/NavButton.tscn" id="2"]
+
+[node name="RosterScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.102, 0.102, 0.102, 1)
+
+[node name="TopBar" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 60.0
+theme_override_constants/separation = 8
+
+[node name="BackButton" type="Button" parent="TopBar"]
+custom_minimum_size = Vector2(80, 44)
+layout_mode = 2
+text = "‹ Atrás"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.627, 0.627, 0.627, 1)
+
+[node name="Title" type="Label" parent="TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mis pibes"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 20
+
+[node name="RosterCount" type="Label" parent="TopBar"]
+layout_mode = 2
+text = "0/5"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.627, 0.627, 0.627, 1)
+
+[node name="SortChips" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 64.0
+offset_right = -16.0
+offset_bottom = 100.0
+theme_override_constants/separation = 8
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 104.0
+offset_right = 0.0
+offset_bottom = -90.0
+
+[node name="VBox" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+offset_left = 16.0
+offset_right = -16.0
+
+[node name="EmptyState" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 200.0
+offset_right = -32.0
+offset_bottom = -200.0
+visible = false
+alignment = 1
+theme_override_constants/separation = 12
+
+[node name="Heading" type="Label" parent="EmptyState"]
+layout_mode = 2
+text = "Sin pibes todavía."
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 20
+
+[node name="Body" type="Label" parent="EmptyState"]
+layout_mode = 2
+text = "Andá a Reclutar para sumar tu primer pibé."
+horizontal_alignment = 1
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.627, 0.627, 0.627, 1)
+
+[node name="RecruitBtn" type="Button" parent="EmptyState"]
+custom_minimum_size = Vector2(180, 44)
+layout_mode = 2
+text = "Ir a Reclutar"
+theme_override_font_sizes/font_size = 14
+
+[node name="LoadingState" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 104.0
+offset_right = -16.0
+offset_bottom = -90.0
+visible = false
+theme_override_constants/separation = 8
+
+[node name="Skeleton1" type="ColorRect" parent="LoadingState"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+color = Color(0.176, 0.176, 0.176, 0.4)
+
+[node name="Skeleton2" type="ColorRect" parent="LoadingState"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+color = Color(0.176, 0.176, 0.176, 0.4)
+
+[node name="Skeleton3" type="ColorRect" parent="LoadingState"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+color = Color(0.176, 0.176, 0.176, 0.4)
+
+[node name="ErrorState" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 200.0
+offset_right = -32.0
+offset_bottom = -200.0
+visible = false
+alignment = 1
+theme_override_constants/separation = 12
+
+[node name="ErrorLabel" type="Label" parent="ErrorState"]
+layout_mode = 2
+text = "No pudimos cargar tu roster. Probá de nuevo."
+horizontal_alignment = 1
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.976, 0.451, 0.086, 1)
+
+[node name="RetryButton" type="Button" parent="ErrorState"]
+custom_minimum_size = Vector2(120, 44)
+layout_mode = 2
+text = "Reintentar"
+theme_override_font_sizes/font_size = 14
+
+[node name="BottomNavBackground" type="ColorRect" parent="."]
+layout_mode = 1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -90.0
+color = Color(0.176, 0.176, 0.176, 1)
+
+[node name="BottomNav" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -90.0
+offset_right = -16.0
+offset_bottom = -34.0
+alignment = 1
+theme_override_constants/separation = 8
+
+[node name="NavInicio" parent="BottomNav" instance=ExtResource("2")]
+layout_mode = 2
+label_text = "Inicio"
+
+[node name="NavRoster" parent="BottomNav" instance=ExtResource("2")]
+layout_mode = 2
+label_text = "Roster"
+is_active = true
+
+[node name="NavAguantadero" parent="BottomNav" instance=ExtResource("2")]
+layout_mode = 2
+label_text = "Aguantadero"
+
+[node name="NavReclutar" parent="BottomNav" instance=ExtResource("2")]
+layout_mode = 2
+label_text = "Reclutar"

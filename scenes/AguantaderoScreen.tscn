@@ -1,0 +1,270 @@
+[gd_scene load_steps=3 format=3 uid="uid://aguantadero01"]
+
+[ext_resource type="Script" path="res://scripts/screens/AguantaderoScreen.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/components/NavButton.tscn" id="2"]
+
+[node name="AguantaderoScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.102, 0.102, 0.102, 1)
+
+[node name="TopBar" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 60.0
+theme_override_constants/separation = 8
+
+[node name="BackButton" type="Button" parent="TopBar"]
+custom_minimum_size = Vector2(80, 44)
+layout_mode = 2
+text = "‹ Atrás"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.627, 0.627, 0.627, 1)
+
+[node name="Spacer" type="Control" parent="TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="TopBar"]
+layout_mode = 2
+text = "Aguantadero"
+theme_override_font_sizes/font_size = 20
+
+[node name="ErrorBanner" type="Label" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 60.0
+offset_right = -16.0
+offset_bottom = 96.0
+visible = false
+text = ""
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.976, 0.451, 0.086, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 60.0
+offset_right = 0.0
+offset_bottom = -90.0
+
+[node name="VBox" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 24
+offset_left = 16.0
+offset_right = -16.0
+
+[node name="HeroBlock" type="Control" parent="ScrollContainer/VBox"]
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+
+[node name="AguantaderoIllustration" type="ColorRect" parent="ScrollContainer/VBox/HeroBlock"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.839, 0.157, 0.157, 0.3)
+
+[node name="Overlay" type="HBoxContainer" parent="ScrollContainer/VBox/HeroBlock"]
+layout_mode = 1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -56.0
+offset_bottom = 0.0
+offset_left = 16.0
+offset_right = -16.0
+theme_override_constants/separation = 8
+
+[node name="HeroTitle" type="Label" parent="ScrollContainer/VBox/HeroBlock/Overlay"]
+layout_mode = 2
+text = "Aguantadero Nv. 1"
+theme_override_font_sizes/font_size = 20
+
+[node name="HeroBarrio" type="Label" parent="ScrollContainer/VBox/HeroBlock/Overlay"]
+layout_mode = 2
+text = "—"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.627, 0.627, 0.627, 1)
+
+[node name="StatsRow" type="HBoxContainer" parent="ScrollContainer/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="CapCard" type="PanelContainer" parent="ScrollContainer/VBox/StatsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBox" type="VBoxContainer" parent="ScrollContainer/VBox/StatsRow/CapCard"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="ScrollContainer/VBox/StatsRow/CapCard/VBox"]
+layout_mode = 2
+text = "Capacidad"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.627, 0.627, 0.627, 1)
+
+[node name="Value" type="Label" parent="ScrollContainer/VBox/StatsRow/CapCard/VBox"]
+layout_mode = 2
+text = "5/20"
+theme_override_font_sizes/font_size = 20
+
+[node name="AguanteCard" type="PanelContainer" parent="ScrollContainer/VBox/StatsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBox" type="VBoxContainer" parent="ScrollContainer/VBox/StatsRow/AguanteCard"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="ScrollContainer/VBox/StatsRow/AguanteCard/VBox"]
+layout_mode = 2
+text = "Aguante pasivo"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.627, 0.627, 0.627, 1)
+
+[node name="Value" type="Label" parent="ScrollContainer/VBox/StatsRow/AguanteCard/VBox"]
+layout_mode = 2
+text = "+0/h"
+theme_override_font_sizes/font_size = 20
+
+[node name="ProxNivelCard" type="PanelContainer" parent="ScrollContainer/VBox/StatsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBox" type="VBoxContainer" parent="ScrollContainer/VBox/StatsRow/ProxNivelCard"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="ScrollContainer/VBox/StatsRow/ProxNivelCard/VBox"]
+layout_mode = 2
+text = "Próx nivel"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.627, 0.627, 0.627, 1)
+
+[node name="Value" type="Label" parent="ScrollContainer/VBox/StatsRow/ProxNivelCard/VBox"]
+layout_mode = 2
+text = "5000 Plata"
+theme_override_font_sizes/font_size = 20
+
+[node name="UpgradePanel" type="PanelContainer" parent="ScrollContainer/VBox"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="ScrollContainer/VBox/UpgradePanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="UpgradeTitle" type="Label" parent="ScrollContainer/VBox/UpgradePanel/VBox"]
+layout_mode = 2
+text = "Subir a nivel 2"
+theme_override_font_sizes/font_size = 20
+
+[node name="UpgradeBody" type="Label" parent="ScrollContainer/VBox/UpgradePanel/VBox"]
+layout_mode = 2
+text = "+3 pibes / +0 Aguante pasivo/h"
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 16
+
+[node name="UpgradeCost" type="Label" parent="ScrollContainer/VBox/UpgradePanel/VBox"]
+layout_mode = 2
+text = "Costo: 5000 Plata"
+theme_override_font_sizes/font_size = 14
+
+[node name="UpgradeBtn" type="Button" parent="ScrollContainer/VBox/UpgradePanel/VBox"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "Upgradear"
+theme_override_font_sizes/font_size = 14
+
+[node name="InsufficientLabel" type="Label" parent="ScrollContainer/VBox/UpgradePanel/VBox"]
+layout_mode = 2
+visible = false
+text = "Te faltan X Plata."
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.976, 0.451, 0.086, 1)
+
+[node name="BanderaRoomSection" type="VBoxContainer" parent="ScrollContainer/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="BanderaHeading" type="Label" parent="ScrollContainer/VBox/BanderaRoomSection"]
+layout_mode = 2
+text = "Bandera room"
+theme_override_font_sizes/font_size = 20
+
+[node name="BanderaGrid" type="GridContainer" parent="ScrollContainer/VBox/BanderaRoomSection"]
+layout_mode = 2
+columns = 3
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+
+[node name="BanderaEmptyLabel" type="Label" parent="ScrollContainer/VBox/BanderaRoomSection"]
+layout_mode = 2
+text = "Acá van a colgarse los trapos que robés. Por ahora, vacío."
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.627, 0.627, 0.627, 1)
+
+[node name="RosterCapInfo" type="Label" parent="ScrollContainer/VBox"]
+layout_mode = 2
+text = "Tu roster máximo es 5 pibes según tu aguantadero nv. 1."
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.627, 0.627, 0.627, 1)
+
+[node name="BottomNavBackground" type="ColorRect" parent="."]
+layout_mode = 1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -90.0
+color = Color(0.176, 0.176, 0.176, 1)
+
+[node name="BottomNav" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -90.0
+offset_right = -16.0
+offset_bottom = -34.0
+alignment = 1
+theme_override_constants/separation = 8
+
+[node name="NavInicio" parent="BottomNav" instance=ExtResource("2")]
+layout_mode = 2
+label_text = "Inicio"
+
+[node name="NavRoster" parent="BottomNav" instance=ExtResource("2")]
+layout_mode = 2
+label_text = "Roster"
+
+[node name="NavAguantadero" parent="BottomNav" instance=ExtResource("2")]
+layout_mode = 2
+label_text = "Aguantadero"
+is_active = true
+
+[node name="NavReclutar" parent="BottomNav" instance=ExtResource("2")]
+layout_mode = 2
+label_text = "Reclutar"

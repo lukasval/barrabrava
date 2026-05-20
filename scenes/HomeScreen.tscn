@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://homescreen01"]
+[gd_scene load_steps=5 format=3 uid="uid://homescreen01"]
 
 [ext_resource type="Script" path="res://scripts/screens/HomeScreen.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/components/NavButton.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/components/ResourceWidget.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/components/RankBadge.tscn" id="4"]
 
 [node name="HomeScreen" type="Control"]
 layout_mode = 3
@@ -31,7 +33,14 @@ theme_override_constants/separation = 8
 [node name="PibeName" type="Label" parent="TopBar"]
 layout_mode = 2
 text = "Pibe"
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 20
+
+[node name="FaccionLabel" type="Label" parent="TopBar"]
+layout_mode = 2
+size_flags_vertical = 4
+text = ""
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.627, 0.627, 0.627, 1)
 
 [node name="Spacer" type="Control" parent="TopBar"]
 layout_mode = 2
@@ -44,19 +53,53 @@ text = "—"
 theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.627, 0.627, 0.627, 1)
 
+[node name="RankBadge" parent="TopBar" instance=ExtResource("4")]
+layout_mode = 2
+
+[node name="OverflowBtn" type="Button" parent="TopBar"]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+text = "⋮"
+theme_override_font_sizes/font_size = 20
+
+[node name="ResourceRow" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 68.0
+offset_right = -16.0
+offset_bottom = 136.0
+alignment = 1
+theme_override_constants/separation = 8
+
+[node name="PlataWidget" parent="ResourceRow" instance=ExtResource("3")]
+layout_mode = 2
+resource_name = "plata"
+
+[node name="AguanteWidget" parent="ResourceRow" instance=ExtResource("3")]
+layout_mode = 2
+resource_name = "aguante"
+
+[node name="ReputacionWidget" parent="ResourceRow" instance=ExtResource("3")]
+layout_mode = 2
+resource_name = "reputacion"
+
+[node name="VBCWidget" parent="ResourceRow" instance=ExtResource("3")]
+layout_mode = 2
+resource_name = "vbc"
+
 [node name="Content" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 16.0
-offset_top = 80.0
+offset_top = 144.0
 offset_right = -16.0
 offset_bottom = -90.0
-theme_override_constants/separation = 24
+theme_override_constants/separation = 16
 
 [node name="Empty" type="VBoxContainer" parent="Content"]
 layout_mode = 2
-size_flags_vertical = 3
 alignment = 1
 theme_override_constants/separation = 8
 
@@ -64,11 +107,11 @@ theme_override_constants/separation = 8
 layout_mode = 2
 text = "Tu barra te espera."
 horizontal_alignment = 1
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 20
 
 [node name="Body" type="Label" parent="Content/Empty"]
 layout_mode = 2
-text = "Empezá a laburar."
+text = "Reclutá tu primer pibe para arrancar."
 horizontal_alignment = 1
 theme_override_font_sizes/font_size = 16
 theme_override_colors/font_color = Color(0.627, 0.627, 0.627, 1)
@@ -81,10 +124,44 @@ horizontal_alignment = 1
 vertical_alignment = 1
 theme_override_font_sizes/font_size = 16
 
-[node name="DeleteAccount" type="Button" parent="Content"]
-custom_minimum_size = Vector2(0, 44)
+[node name="TurnoButton" type="Button" parent="Content"]
+custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
-text = "Borrar mi cuenta"
+visible = false
+text = "Hacer turno"
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.961, 0.961, 0.961, 1)
+
+[node name="QuickActions" type="HBoxContainer" parent="Content"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Laburar" type="Button" parent="Content/QuickActions"]
+custom_minimum_size = Vector2(100, 44)
+layout_mode = 2
+text = "Laburar"
+theme_override_font_sizes/font_size = 14
+
+[node name="Reclutar" type="Button" parent="Content/QuickActions"]
+custom_minimum_size = Vector2(100, 44)
+layout_mode = 2
+text = "Reclutar"
+theme_override_font_sizes/font_size = 14
+
+[node name="Aguantadero" type="Button" parent="Content/QuickActions"]
+custom_minimum_size = Vector2(100, 44)
+layout_mode = 2
+text = "Aguantadero"
+theme_override_font_sizes/font_size = 14
+
+[node name="IdleNotice" type="Label" parent="Content"]
+layout_mode = 2
+visible = false
+text = ""
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.627, 0.627, 0.627, 1)
 
 [node name="BottomNavBackground" type="ColorRect" parent="."]
 layout_mode = 1
@@ -111,14 +188,14 @@ layout_mode = 2
 label_text = "Inicio"
 is_active = true
 
-[node name="NavBarra" parent="BottomNav" instance=ExtResource("2")]
+[node name="NavRoster" parent="BottomNav" instance=ExtResource("2")]
 layout_mode = 2
-label_text = "Barra"
+label_text = "Roster"
 
-[node name="NavPartidos" parent="BottomNav" instance=ExtResource("2")]
+[node name="NavAguantadero" parent="BottomNav" instance=ExtResource("2")]
 layout_mode = 2
-label_text = "Partidos"
+label_text = "Aguantadero"
 
-[node name="NavPerfil" parent="BottomNav" instance=ExtResource("2")]
+[node name="NavReclutar" parent="BottomNav" instance=ExtResource("2")]
 layout_mode = 2
-label_text = "Perfil"
+label_text = "Reclutar"

@@ -18,36 +18,140 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0.102, 0.102, 0.102, 1)
 
-[node name="VBox" type="VBoxContainer" parent="."]
+[node name="TopBar" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 56.0
+theme_override_constants/separation = 8
+
+[node name="StepIndicator" type="Label" parent="TopBar"]
+layout_mode = 2
+text = "Paso 1 de 6"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.627, 0.627, 0.627, 1)
+
+[node name="Spacer" type="Control" parent="TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Skip" type="Button" parent="TopBar"]
+custom_minimum_size = Vector2(120, 44)
+layout_mode = 2
+text = "Saltar tutorial"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.627, 0.627, 0.627, 1)
+
+[node name="Content" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 64.0
+offset_right = -32.0
+offset_bottom = -120.0
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="Title" type="Label" parent="Content"]
+layout_mode = 2
+text = "Bienvenido a la barra"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 20
+
+[node name="Body" type="RichTextLabel" parent="Content"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 3
+text = "Tu pibé llegó al barrio. Te vamos a mostrar el laburo en 5 pasos."
+theme_override_font_sizes/normal_font_size = 16
+
+[node name="Illustration" type="Control" parent="Content"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="IllustrationRect" type="ColorRect" parent="Content/Illustration"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 32.0
-offset_top = 32.0
-offset_right = -32.0
-offset_bottom = -32.0
-theme_override_constants/separation = 24
+color = Color(0.176, 0.176, 0.176, 0.6)
 
-[node name="Title" type="Label" parent="VBox"]
+[node name="IllustrationLabel" type="Label" parent="Content/Illustration"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "★"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(0.627, 0.627, 0.627, 1)
+
+[node name="Dots" type="HBoxContainer" parent="Content"]
 layout_mode = 2
-text = "Bienvenido a la barra"
-theme_override_font_sizes/font_size = 22
+size_flags_horizontal = 4
+alignment = 1
+theme_override_constants/separation = 8
 
-[node name="Body" type="RichTextLabel" parent="VBox"]
+[node name="Dot1" type="ColorRect" parent="Content/Dots"]
+custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
-bbcode_enabled = true
-fit_content = true
-autowrap_mode = 3
-text = "Tu pibe acaba de llegar al barrio. Laburá duro, ganate el respeto de la hinchada, y llevá a tu club a lo más alto.
+color = Color(0.839, 0.157, 0.157, 1)
 
-Acá manda quien más se la banca."
-
-[node name="Spacer" type="Control" parent="VBox"]
+[node name="Dot2" type="ColorRect" parent="Content/Dots"]
+custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
-size_flags_vertical = 3
+color = Color(0.239, 0.239, 0.239, 1)
 
-[node name="CTA" type="Button" parent="VBox"]
-custom_minimum_size = Vector2(0, 44)
+[node name="Dot3" type="ColorRect" parent="Content/Dots"]
+custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
-text = "Dale, empezamos"
+color = Color(0.239, 0.239, 0.239, 1)
+
+[node name="Dot4" type="ColorRect" parent="Content/Dots"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+color = Color(0.239, 0.239, 0.239, 1)
+
+[node name="Dot5" type="ColorRect" parent="Content/Dots"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+color = Color(0.239, 0.239, 0.239, 1)
+
+[node name="Dot6" type="ColorRect" parent="Content/Dots"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+color = Color(0.239, 0.239, 0.239, 1)
+
+[node name="Footer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -100.0
+offset_right = -16.0
+offset_bottom = -34.0
+theme_override_constants/separation = 8
+
+[node name="Back" type="Button" parent="Footer"]
+custom_minimum_size = Vector2(100, 44)
+layout_mode = 2
+visible = false
+text = "Atrás"
+theme_override_font_sizes/font_size = 14
+
+[node name="FooterSpacer" type="Control" parent="Footer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CTA" type="Button" parent="Footer"]
+custom_minimum_size = Vector2(180, 44)
+layout_mode = 2
+text = "Dale, vamos"
+theme_override_font_sizes/font_size = 14
