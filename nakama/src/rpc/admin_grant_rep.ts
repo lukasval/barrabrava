@@ -1,11 +1,11 @@
 // RPC: admin_grant_rep
 //
 // Grants (or deducts) Reputación delta to a player's profile.
-// Wave 1: profile write + audit log. Wave 2 (plan 03.03) attaches checkRankTransition
-// + atomic rank write after the reputacion mutation.
+// Wave 1: profile write + audit log.
+// Wave 3 (plan 03.03): attaches checkRankTransition + atomic rank write after reputacion mutation.
 //
 // Input:  { user_id: string, delta_rep: number, reason?: string }
-// Output: { ok: true, before: number, after: number }
+// Output: { ok: true, before: number, after: number, new_rank: string | null }
 //       | { ok: false, error: string }
 //
 // Security: T-3-AS-01 — requireAdmin constant-time bearer compare.
@@ -14,6 +14,7 @@
 
 import { requireAdmin } from '../util/admin_auth';
 import { COL_ADMIN_ACTIONS, COL_PLAYERS, SYSTEM_USER_ID } from '../storage_keys';
+import { checkRankTransition } from '../laboral/rank';
 
 export function rpcAdminGrantRep(
   ctx: nkruntime.Context, logger: nkruntime.Logger,
@@ -35,12 +36,21 @@ export function rpcAdminGrantRep(
     collection: COL_PLAYERS, key: 'profile', userId: input.user_id,
   }]);
   if (r.length === 0) return JSON.stringify({ ok: false, error: 'no_profile' });
-  const profile = r[0].value as { reputacion?: number; [k: string]: unknown };
+  const profile = r[0].value as {
+    reputacion?: number; rank?: string; club_id?: string;
+    rank_changed_at?: number; [k: string]: unknown;
+  };
   const before = typeof profile.reputacion === 'number' ? profile.reputacion : 0;
   const after = before + (input.delta_rep as number);
   profile.reputacion = after;
+
+  // Wave 3 (plan 03.03): trigger rank check + write rank atomically in same profile write.
+  const transition = checkRankTransition(nk, logger, profile as {
+    rank: string; reputacion: number; rank_changed_at?: number; club_id: string;
+  });
+
   nk.storageWrite([{
-    collection: COL_PLAYERS, key: 'profile', userId: input.user_id,
+    collection: COL_PLAYERS, key: 'profile', userId: input.user_id as string,
     value: profile as { [k: string]: unknown },
     version: r[0].version,
     permissionRead: 2, permissionWrite: 0,
@@ -57,6 +67,5 @@ export function rpcAdminGrantRep(
   }]);
   logger.info('[admin] grant_rep user=%s delta=%d before=%d after=%d by ip=%s',
     input.user_id, input.delta_rep, before, after, auth.callerIp);
-  // Wave 2 plan 03.03: also call checkRankTransition + write rank atomically here.
-  return JSON.stringify({ ok: true, before, after });
+  return JSON.stringify({ ok: true, before, after, new_rank: transition.new_rank ?? null });
 }
