@@ -274,6 +274,15 @@ func _on_delete() -> void:
 func _perform_delete() -> void:
 	# WR-05 fix: deshabilita el botón mientras el RPC está in-flight.
 	overflow_button.disabled = true
+	# Phase 3 fix: refresh session if expired so a stale token doesn't make
+	# delete_account fail silently after the user already confirmed.
+	if not await AuthManager.ensure_fresh_session():
+		overflow_button.disabled = false
+		var err_dlg = AcceptDialog.new()
+		err_dlg.dialog_text = "Tu sesión venció. Volvé a entrar para borrar la cuenta."
+		add_child(err_dlg)
+		err_dlg.popup_centered()
+		return
 	var session = AuthManager.session
 	var resp = await NakamaService.client.rpc_async(session, "delete_account", "")
 	if resp.is_exception():

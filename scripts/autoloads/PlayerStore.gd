@@ -102,7 +102,9 @@ func refresh_resources_and_roster() -> void:
 	resources_updated.emit()
 
 func load_from_server() -> Dictionary:
-	if not AuthManager.is_authenticated():
+	# Phase 3 fix: refresh expired sessions before reading storage so a
+	# slow user clicking through onboarding doesn't get spuriously logged out.
+	if not await AuthManager.ensure_fresh_session():
 		return {"ok": false, "error": "Not authenticated"}
 	var session = AuthManager.session
 	var read_req = [

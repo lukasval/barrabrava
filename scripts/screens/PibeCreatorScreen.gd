@@ -37,6 +37,13 @@ func _on_text_changed(t: String) -> void:
 func _on_submit() -> void:
 	error_label.visible = false
 	cta.disabled = true
+	# Phase 3 fix: ensure session is fresh (refresh if expired) so we don't
+	# silently fail with 401 mid-onboarding.
+	if not await AuthManager.ensure_fresh_session():
+		error_label.text = "Tu sesión venció. Volvé a entrar."
+		error_label.visible = true
+		cta.disabled = false
+		return
 	var session = AuthManager.session
 	# T-1-UI-01: ONLY name + club_id — never stats.
 	var payload = JSON.stringify({

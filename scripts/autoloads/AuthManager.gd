@@ -46,6 +46,32 @@ func logout() -> void:
 func is_authenticated() -> bool:
 	return session != null and not session.expired
 
+# Phase 3 fix: refresh the session in-place when expired. Call this from any
+# RPC wrapper BEFORE `is_authenticated()` so an expired-but-refreshable token
+# does not appear as "not_authenticated" to the user. Returns true if the
+# session is fresh (either was already, or was refreshed successfully).
+# Returns false if no session, no refresh token, or refresh itself failed.
+func ensure_fresh_session() -> bool:
+	if session == null:
+		return false
+	if not session.expired:
+		return true
+	# Session expired — try refresh via the persisted refresh_token (also
+	# accessible from the in-memory session object).
+	var refresh_token := str(session.refresh_token) if session.refresh_token != null else ""
+	if refresh_token == "":
+		print("[AuthManager] session expired, no refresh token available — must re-login")
+		return false
+	print("[AuthManager] session expired, refreshing...")
+	var refreshed = await NakamaService.client.session_refresh_async(session, refresh_token)
+	if refreshed.is_exception():
+		push_warning("[AuthManager] refresh failed: %s" % refreshed.get_exception().message)
+		return false
+	session = refreshed
+	_save_session()
+	print("[AuthManager] session refreshed ok, new expiry in %d seconds" % int(session.expire_time - Time.get_unix_time_from_system()))
+	return true
+
 func _save_session() -> void:
 	var cfg = ConfigFile.new()
 	cfg.set_value("auth", "token", session.token)

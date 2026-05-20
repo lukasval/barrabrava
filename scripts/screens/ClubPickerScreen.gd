@@ -68,6 +68,10 @@ func _load_clubs() -> void:
 	# meaning "no filter" — passing it as the server `division` field would make
 	# the server filter literally by division="Todos" and return zero rows.
 	# Filtering by division/search is applied client-side in _render_clubs.
+	# Phase 3 fix: ensure session fresh before making RPCs.
+	if not await AuthManager.ensure_fresh_session():
+		push_warning("[ClubPicker] session expired and refresh failed — user must re-login")
+		return
 	var session = AuthManager.session
 	var page_size := 100
 	var payload = JSON.stringify({"page": 1, "page_size": page_size})

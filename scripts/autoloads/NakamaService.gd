@@ -64,7 +64,7 @@ func _on_fcm_token_received(token: String) -> void:
 # Phase 2 — Persist this device's FCM registration token on the server.
 # Server stores it singleton-per-user in COL_FCM_TOKENS (plan 02-06).
 func register_fcm_token(token: String, platform: String) -> Dictionary:
-	if not AuthManager.is_authenticated():
+	if not await AuthManager.ensure_fresh_session():
 		return {"ok": false, "error": "not_authenticated"}
 	var session = AuthManager.session
 	var payload = JSON.stringify({"token": token, "platform": platform})
@@ -99,7 +99,7 @@ func subscribe_to_club_topic(club_id: String) -> Dictionary:
 # Phase 2 — Server returns the next/current active match window for the
 # authenticated player's club. HomeScreen calls this on _ready + on app resume.
 func get_current_window() -> Dictionary:
-	if not AuthManager.is_authenticated():
+	if not await AuthManager.ensure_fresh_session():
 		return {"ok": false, "error": "not_authenticated"}
 	var session = AuthManager.session
 	var resp = await client.rpc_async(session, "get_current_window", "{}")
@@ -113,7 +113,7 @@ func get_current_window() -> Dictionary:
 # Phase 3 — Read-side RPCs (plan 03.02). WR-09 dict-guard pattern on every wrapper.
 
 func get_roster() -> Dictionary:
-	if not AuthManager.is_authenticated():
+	if not await AuthManager.ensure_fresh_session():
 		return {"ok": false, "error": "not_authenticated"}
 	var resp = await client.rpc_async(AuthManager.session, "get_roster", "")
 	if resp.is_exception():
@@ -124,7 +124,7 @@ func get_roster() -> Dictionary:
 	return {"ok": true, "data": data}
 
 func get_aguantadero() -> Dictionary:
-	if not AuthManager.is_authenticated():
+	if not await AuthManager.ensure_fresh_session():
 		return {"ok": false, "error": "not_authenticated"}
 	var resp = await client.rpc_async(AuthManager.session, "get_aguantadero", "")
 	if resp.is_exception():
@@ -135,7 +135,7 @@ func get_aguantadero() -> Dictionary:
 	return {"ok": true, "data": data}
 
 func get_barra_state(club_id: String = "") -> Dictionary:
-	if not AuthManager.is_authenticated():
+	if not await AuthManager.ensure_fresh_session():
 		return {"ok": false, "error": "not_authenticated"}
 	var payload = JSON.stringify({"club_id": club_id}) if club_id != "" else ""
 	var resp = await client.rpc_async(AuthManager.session, "get_barra_state", payload)
@@ -147,7 +147,7 @@ func get_barra_state(club_id: String = "") -> Dictionary:
 	return {"ok": true, "data": data}
 
 func get_recruit_pool() -> Dictionary:
-	if not AuthManager.is_authenticated():
+	if not await AuthManager.ensure_fresh_session():
 		return {"ok": false, "error": "not_authenticated"}
 	var resp = await client.rpc_async(AuthManager.session, "get_recruit_pool", "")
 	if resp.is_exception():
@@ -161,7 +161,7 @@ func get_recruit_pool() -> Dictionary:
 
 func assign_profession(pibe_id: String, profession) -> Dictionary:
 	# profession may be String or null (rest mode — descanso)
-	if not AuthManager.is_authenticated():
+	if not await AuthManager.ensure_fresh_session():
 		return {"ok": false, "error": "not_authenticated"}
 	var payload = JSON.stringify({"pibe_id": pibe_id, "profession": profession})
 	var resp = await client.rpc_async(AuthManager.session, "assign_profession", payload)
@@ -173,7 +173,7 @@ func assign_profession(pibe_id: String, profession) -> Dictionary:
 	return {"ok": true, "data": data}
 
 func collect_idle(pibe_id: String = "") -> Dictionary:
-	if not AuthManager.is_authenticated():
+	if not await AuthManager.ensure_fresh_session():
 		return {"ok": false, "error": "not_authenticated"}
 	var payload_dict := {}
 	if pibe_id != "": payload_dict["pibe_id"] = pibe_id
@@ -187,7 +187,7 @@ func collect_idle(pibe_id: String = "") -> Dictionary:
 	return {"ok": true, "data": data}
 
 func recruit_pibe(pick_id: String, tutorial: bool = false) -> Dictionary:
-	if not AuthManager.is_authenticated():
+	if not await AuthManager.ensure_fresh_session():
 		return {"ok": false, "error": "not_authenticated"}
 	var payload_dict := {"pick_id": pick_id}
 	if tutorial: payload_dict["tutorial"] = true
@@ -201,7 +201,7 @@ func recruit_pibe(pick_id: String, tutorial: bool = false) -> Dictionary:
 	return {"ok": true, "data": data}
 
 func upgrade_aguantadero(target_level: int) -> Dictionary:
-	if not AuthManager.is_authenticated():
+	if not await AuthManager.ensure_fresh_session():
 		return {"ok": false, "error": "not_authenticated"}
 	var payload = JSON.stringify({"target_level": target_level})
 	var resp = await client.rpc_async(AuthManager.session, "upgrade_aguantadero", payload)
@@ -213,7 +213,7 @@ func upgrade_aguantadero(target_level: int) -> Dictionary:
 	return {"ok": true, "data": data}
 
 func submit_turno(fixture_id: String, pibe_ids: Array) -> Dictionary:
-	if not AuthManager.is_authenticated():
+	if not await AuthManager.ensure_fresh_session():
 		return {"ok": false, "error": "not_authenticated"}
 	var payload = JSON.stringify({"fixture_id": fixture_id, "pibe_ids": pibe_ids})
 	var resp = await client.rpc_async(AuthManager.session, "submit_turno", payload)
@@ -228,7 +228,7 @@ func complete_tutorial(step: int, elapsed_ms: int = 0) -> Dictionary:
 	# elapsed_ms is total tutorial duration captured by TutorialScreen on step 1;
 	# passed unmodified on every step so the server logs the final value at step 6.
 	# Server uses elapsed_ms only for telemetry (LAB-TUTORIAL-DURATION invariant).
-	if not AuthManager.is_authenticated():
+	if not await AuthManager.ensure_fresh_session():
 		return {"ok": false, "error": "not_authenticated"}
 	var payload_dict := {"step": step}
 	if elapsed_ms > 0:
