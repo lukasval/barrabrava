@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: milestone
 status: executing
-last_updated: "2026-05-20T18:00:00.000Z"
+last_updated: "2026-05-20T14:59:00.000Z"
 progress:
   total_phases: 7
   completed_phases: 1
   total_plans: 20
-  completed_plans: 15
-  percent: 75
+  completed_plans: 16
+  percent: 80
 ---
 
 # State: BarraBrava
@@ -20,13 +20,13 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 
 **Core value:** La realidad del fútbol argentino afecta el juego en tiempo real, y cada jugador es un personaje real dentro de la barra de su club.
 
-**Current focus:** Phase 3 — Core Loop Laboral. Wave 2 (plan 03.02 read-side RPCs) complete. Next: plan 03.03 write-side RPCs.
+**Current focus:** Phase 3 — Core Loop Laboral. Wave 3 (plan 03.03 write-side RPCs) complete. Next: plan 03.04a Godot foundation.
 
 ## Current Phase
 
 **Phase:** 3 — Core Loop Laboral
-**Status:** Executing — Wave 2 complete (2/6 plans)
-**Next action:** Execute plan 03.03 write-side RPCs (assign_profession, collect_idle, recruit_pibe, upgrade_aguantadero, submit_turno, cron handlers, Líder election hook).
+**Status:** Executing — Wave 3 complete (3/6 plans)
+**Next action:** Execute plan 03.04a Godot foundation (autoload extensions + 9 components).
 
 **Phase 1:** ✅ COMPLETE (2026-05-17). All 5 plans executed end-to-end.
 
@@ -36,7 +36,7 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 |------|------|--------|---------------|
 | 03.01 | 1 | ✅ | storage_keys Phase 3 block + StorageKeys.gd mirror + ai_baseline.ts + ai_seed.ts + leaderboard_cron Phase 3 + 3 admin RPCs wired; 18 RPCs registered |
 | 03.02 | 2 | ✅ | idle_accrual.ts + rank.ts + pibe_factory.ts + validation ext + 4 read RPCs; 22 RPCs registered; 139.6 kB bundle |
-| 03.03 | 3 | ⏳ | write-side RPCs + real cron handlers + Líder election hook |
+| 03.03 | 3 | ✅ | 6 write RPCs + recruit_cron + mesa_cron + seasons Líder election + 28 RPCs total; 176.8 kB bundle |
 | 03.04a | 4 | ⏳ | Godot foundation (autoload extensions + 9 components) |
 | 03.04b | 5 | ⏳ | Godot screens (HomeScreen + 6 new screens + tutorial) |
 | 03.05 | 6 | ⏳ | validation test suite + runbook + INFRA-NOTES Phase 3 |

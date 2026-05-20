@@ -15,8 +15,8 @@
 - [ ] **ONB-02**: Player selecciona club entre ~130 clubes (Primera, Nacional, B Metro, Federal A, C Metro)
 - [ ] **ONB-03**: Player elige facción interna inicial dentro de su club (ej. "Zona Sur", "Zona Norte", "Bajo", etc. — 2-4 por club)
 - [ ] **ONB-04**: Player crea su pibe — nombre, apariencia base, asignación de stats iniciales desde pool compartido
-- [ ] **ONB-05**: Tutorial guiado primera salida (<10 min): reclutar primer pibe, primer turno, primer ataque scripted contra IA
-- [ ] **ONB-06**: Recompensa primera sesión: primer trapo de barra + primer cántico desbloqueado
+- [x] **ONB-05**: Tutorial guiado primera salida (<10 min): reclutar primer pibe, primer turno, primer ataque scripted contra IA
+- [x] **ONB-06**: Recompensa primera sesión: primer trapo de barra + primer cántico desbloqueado
 
 ### Clubes & Datos AFA
 
@@ -29,28 +29,28 @@
 ### Aguantadero & Recursos
 
 - [ ] **AGT-01**: Cada player tiene aguantadero (HQ) ubicado en barrio real del club elegido
-- [ ] **AGT-02**: Aguantadero tiene niveles upgradeables: capacidad de pibes, almacén de recursos, bandera room (display trapos), defensa
-- [ ] **AGT-03**: Recursos del juego: Plata (personal), Aguante (grupal de barra), Reputación (política), Visto Bueno Cana (anti-heat)
-- [ ] **AGT-04**: Generación pasiva de Aguante según nivel de aguantadero + turnos de barra
-- [ ] **AGT-05**: Bandera room muestra trapos robados públicamente (humillación visual)
+- [x] **AGT-02**: Aguantadero tiene niveles upgradeables: capacidad de pibes, almacén de recursos, bandera room (display trapos), defensa
+- [x] **AGT-03**: Recursos del juego: Plata (personal), Aguante (grupal de barra), Reputación (política), Visto Bueno Cana (anti-heat)
+- [x] **AGT-04**: Generación pasiva de Aguante según nivel de aguantadero + turnos de barra
+- [x] **AGT-05**: Bandera room muestra trapos robados públicamente (humillación visual)
 
 ### Pibes & Sistema Laboral (Eje 1)
 
-- [ ] **PIB-01**: Roster de pibes reclutables (max 5 inicial, escala con rango hasta 20)
-- [ ] **PIB-02**: Cada pibe tiene roles tácticos: trompada, aguantador, corredor, vigía, líder, pirotécnico, abogado, viejo
-- [ ] **PIB-03**: Cada pibe tiene 1-2 traits de personalidad aleatorios (Cabezón, Pies de plomo, Camorrero, Buchón, Pichón, Cordobés, Porteño, etc.)
-- [ ] **PIB-04**: Sistema laboral: profesiones disponibles (trapito, vendedor chori/paty/entradas/merch/bengalas, patovica, remisero) — el líder tiene tareas propias (negociar dirigentes, conseguir entradas, hablar cana)
-- [ ] **PIB-05**: Trabajo en día sin partido genera Plata personal (cosméticos)
-- [ ] **PIB-06**: Turno de Barra en día de partido consume Energía → genera Aguante grupal + Reputación personal
-- [ ] **PIB-07**: Skills de profesión desbloqueables por horas trabajadas
+- [x] **PIB-01**: Roster de pibes reclutables (max 5 inicial, escala con rango hasta 20)
+- [x] **PIB-02**: Cada pibe tiene roles tácticos: trompada, aguantador, corredor, vigía, líder, pirotécnico, abogado, viejo
+- [x] **PIB-03**: Cada pibe tiene 1-2 traits de personalidad aleatorios (Cabezón, Pies de plomo, Camorrero, Buchón, Pichón, Cordobés, Porteño, etc.)
+- [x] **PIB-04**: Sistema laboral: profesiones disponibles (trapito, vendedor chori/paty/entradas/merch/bengalas, patovica, remisero) — el líder tiene tareas propias (negociar dirigentes, conseguir entradas, hablar cana)
+- [x] **PIB-05**: Trabajo en día sin partido genera Plata personal (cosméticos)
+- [x] **PIB-06**: Turno de Barra en día de partido consume Energía → genera Aguante grupal + Reputación personal
+- [x] **PIB-07**: Skills de profesión desbloqueables por horas trabajadas
 - [ ] **PIB-08**: Pibes pueden caer permadeath si arrestados sin abogado dentro de 24h reales (cana)
 
 ### Jerarquía Política (Eje 2) & Facciones (Eje 3)
 
-- [ ] **JER-01**: Niveles jerárquicos: Pibe → Soldado → Capo de Facción → Mesa Chica → Líder de Barra
-- [ ] **JER-02**: Promoción por Reputación acumulada + votación de Mesa Chica
-- [ ] **JER-03**: Mesa Chica = top jugadores de la barra (5-10), vota uso del pozo grupal y targets
-- [ ] **JER-04**: Líder elegido cada season AFA por voto + Reputación; puede ser desafiado por challenge directo
+- [x] **JER-01**: Niveles jerárquicos: Pibe → Soldado → Capo de Facción → Mesa Chica → Líder de Barra
+- [x] **JER-02**: Promoción por Reputación acumulada + votación de Mesa Chica
+- [x] **JER-03**: Mesa Chica = top jugadores de la barra (5-10), vota uso del pozo grupal y targets
+- [x] **JER-04**: Líder elegido cada season AFA por voto + Reputación; puede ser desafiado por challenge directo
 - [ ] **JER-05**: Facciones internas (2-4 por club) con líderes propios (capo de facción)
 - [ ] **JER-06**: Líder inactivo 5+ días = Mesa Chica puede llamar voto emergencia
 - [ ] **JER-07**: Drama emergente: voto de censura al líder, golpe de estado, traición (sin mecánica completa v1, solo eventos de feed)
