@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: milestone
-status: in_progress
-last_updated: "2026-05-18T19:32:00.000Z"
+status: executing
+last_updated: "2026-05-20T00:29:35.576Z"
 progress:
   total_phases: 7
-  completed_phases: 2
-  total_plans: 14
+  completed_phases: 1
+  total_plans: 20
   completed_plans: 13
-  percent: 93
+  percent: 65
 ---
 
 # State: BarraBrava
@@ -25,7 +25,7 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 ## Current Phase
 
 **Phase:** 2 — Heartbeat AFA
-**Status:** ✅ COMPLETE-WITH-DEFERRAL (2026-05-18). 8/9 plans shipped + deployed to Railway. Plan 02-07 (Android FCM plugin, autonomous:false) deferred — handed off to user / Phase 7 device-build work.
+**Status:** Ready to execute
 **Next action:** Begin Phase 3 planning via `/gsd-plan-phase 3` (Core Loop Laboral) OR finish 02-07 if Android plugin work is on the table.
 
 **Phase 1:** ✅ COMPLETE (2026-05-17). All 5 plans executed end-to-end.

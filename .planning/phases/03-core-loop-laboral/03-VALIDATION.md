@@ -55,7 +55,7 @@ Auxiliary: Godot client tests stay manual (UI flows). Server-side invariants exh
 - [ ] `scripts/autoloads/StorageKeys.gd` — client mirror of above (CR-01 lesson)
 - [ ] `nakama/src/util/validation.ts` — extend with rank/profession/role validators
 
-*Per RESEARCH.md §Validation Architecture: 18 invariants enumerated, harness mirrors Phase 2's `heartbeat-test.sh` pattern.*
+*Per RESEARCH.md §Validation Architecture: 19 invariants enumerated (18 game-logic + LAB-TUTORIAL-DURATION added in plan revision), harness mirrors Phase 2's `heartbeat-test.sh` pattern. LAB-COPY-VOCABULARY gate counted separately = 20 tests total.*
 
 ---
 
@@ -81,6 +81,7 @@ Auxiliary: Godot client tests stay manual (UI flows). Server-side invariants exh
 | 16 | VBC source restriction: only `players.profile.rank == "lider"` can assign pibé to "hablar cana". |  TBD |
 | 17 | Líder election fires once on season `active → ended` transition (no double-trigger). | TBD |
 | 18 | Aguantadero upgrade cost ladder + level cap (max 5) enforced server-side. | TBD |
+| 19 | Tutorial duration <10 min (ONB-05 ceiling): `complete_tutorial` server log line contains `tutorial_duration_ms=<n>` with `n < 600000`. | 03.05 |
 
 ---
 
