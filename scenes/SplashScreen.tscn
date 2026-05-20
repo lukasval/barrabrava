@@ -42,6 +42,7 @@ text = "BarraBrava"
 horizontal_alignment = 1
 
 [node name="Disclaimer" type="Label" parent="VBox"]
+custom_minimum_size = Vector2(280, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.627, 0.627, 0.627, 1)
 theme_override_font_sizes/font_size = 16
