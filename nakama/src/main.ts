@@ -35,6 +35,11 @@ import { seedAiBaseline } from './laboral/ai_seed';
 import { rpcAdminForceRecruitRefresh } from './rpc/admin_force_recruit_refresh';
 import { rpcAdminGrantRep } from './rpc/admin_grant_rep';
 import { rpcAdminSeedAiBaseline } from './rpc/admin_seed_ai_baseline';
+// Phase 3: Core Loop Laboral — plan 03-02 (read-side RPCs)
+import { rpcGetRoster } from './rpc/get_roster';
+import { rpcGetAguantadero } from './rpc/get_aguantadero';
+import { rpcGetBarraState } from './rpc/get_barra_state';
+import { rpcGetRecruitPool } from './rpc/get_recruit_pool';
 
 const CLUBS_SEED_VERSION = 'v3';  // v1+v2 marker collision in production left 265 clubs coexisting; bumping to v3 forces the new wipe-then-seed path to run cleanly
 
@@ -173,5 +178,12 @@ export function InitModule(
   initializer.registerRpc('admin_grant_rep', rpcAdminGrantRep);
   initializer.registerRpc('admin_seed_ai_baseline', rpcAdminSeedAiBaseline);
 
-  logger.info('BarraBrava runtime ready: 18 RPCs registered + scheduler armed (4 cron leaderboards)');
+  // Phase 3: Core Loop Laboral — plan 03-02 (read-side player RPCs)
+  // Same Goja AST rule: direct ExpressionStatements only, no helper wrappers.
+  initializer.registerRpc('get_roster', rpcGetRoster);
+  initializer.registerRpc('get_aguantadero', rpcGetAguantadero);
+  initializer.registerRpc('get_barra_state', rpcGetBarraState);
+  initializer.registerRpc('get_recruit_pool', rpcGetRecruitPool);
+
+  logger.info('BarraBrava runtime ready: 22 RPCs registered + scheduler armed (4 cron leaderboards)');
 }
