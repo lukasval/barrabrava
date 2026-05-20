@@ -104,7 +104,7 @@ Plans:
 
 ---
 
-## Phase 3: Core Loop Laboral (Executing — Wave 4 complete)
+## Phase 3: Core Loop Laboral (Executing — Wave 5 complete)
 
 **Goal:** Jugador vive el ciclo diario: día con partido → turno barra; día sin partido → profesión personal. Aguantadero crece. Pibes se reclutan.
 
@@ -137,7 +137,7 @@ Plans:
 - [x] 03.02-read-side-rpcs-PLAN.md — Wave 2: pure helpers (idle_accrual, rank, pibe_factory) + validation extensions + 4 read RPCs (get_roster w/ Phase 1 migration, get_aguantadero w/ auto-bootstrap, get_barra_state w/ debounced Mesa recompute, get_recruit_pool w/ trait_2 redaction)
 - [x] 03.03-write-side-rpcs-PLAN.md — Wave 3: 6 write RPCs (assign_profession, collect_idle, recruit_pibe w/ optimistic concurrency, upgrade_aguantadero, submit_turno w/ idempotency-marker-first, complete_tutorial w/ elapsed_ms telemetry) + recruit_cron + mesa_cron handlers + seasons.ts Líder election hook + upgrade admin stubs; 28 RPCs total; 176.8 kB bundle
 - [x] 03.04a-godot-foundation-PLAN.md — Wave 4: 4 autoload extensions (AppTheme/NakamaService/PlayerStore/FlowRouter, complete_tutorial wrapper plumbs elapsed_ms) + 9 reusable components (PibeCard, RecruitCard, ResourceWidget, RankBadge, TraitChip, EnergiaBar, ProfessionIcon, SkillProgressRing, TurnoModal). Autonomous, no checkpoint. FONT_HEADING 22→20. 22 files. Vocab audit 0.
-- [ ] 03.04b-godot-screens-PLAN.md — Wave 5: HomeScreen extension + 6 new screens (RosterScreen + RecruitScreen + PibeDetailScreen + ProfessionAssignScreen + AguantaderoScreen + TutorialScreen 6-step state machine w/ tutorial_start_at_ms capture + elapsed_ms forwarding) + human-verify checkpoint (5 walkthroughs incl. tutorial duration telemetry verification)
+- [x] 03.04b-godot-screens-PLAN.md — Wave 5: HomeScreen extension + 6 new screens (RosterScreen + RecruitScreen + PibeDetailScreen + ProfessionAssignScreen + AguantaderoScreen + TutorialScreen 6-step state machine w/ tutorial_start_at_ms capture + elapsed_ms forwarding). Walkthroughs A–E → `03.04b-godot-screens-HUMAN-UAT.md` (pending user playthrough via `/gsd-verify-work`)
 - [ ] 03.05-validation-PLAN.md — Wave 6: laboral-test.sh (19 invariants incl. LAB-TUTORIAL-DURATION) + admin curl recipes + INFRA-NOTES Phase 3 sections (5) + VALIDATION.md rows + STATE.md closing w/ Phase 3 → Phase 7 deferral subsection (4 items: LAB-IDLE-CAP, LAB-IDLE-RATE-TRAPITO partial, LAB-TURNO-ENERGY-GATE energy-low, LAB-LIDER-ELECTION)
 
 ---
