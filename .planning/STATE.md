@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: milestone
 status: executing
-last_updated: "2026-05-20T00:29:35.576Z"
+last_updated: "2026-05-20T12:00:00.000Z"
 progress:
   total_phases: 7
   completed_phases: 1
   total_plans: 20
-  completed_plans: 13
-  percent: 65
+  completed_plans: 14
+  percent: 70
 ---
 
 # State: BarraBrava
@@ -20,15 +20,26 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 
 **Core value:** La realidad del fútbol argentino afecta el juego en tiempo real, y cada jugador es un personaje real dentro de la barra de su club.
 
-**Current focus:** Phase 2 — Heartbeat AFA. 8/9 plans deployed to Railway. Plan 02-07 (Android FCM plugin) deferred — requires user-side Android Studio + Firebase SDK setup.
+**Current focus:** Phase 3 — Core Loop Laboral. Wave 1 (plan 03.01 foundations) complete. Next: plan 03.02 read-side RPCs.
 
 ## Current Phase
 
-**Phase:** 2 — Heartbeat AFA
-**Status:** Ready to execute
-**Next action:** Begin Phase 3 planning via `/gsd-plan-phase 3` (Core Loop Laboral) OR finish 02-07 if Android plugin work is on the table.
+**Phase:** 3 — Core Loop Laboral
+**Status:** Executing — Wave 1 complete (1/6 plans)
+**Next action:** Execute plan 03.02 read-side RPCs (idle_accrual, rank helpers, get_roster, get_aguantadero, get_barra_state, get_recruit_pool).
 
 **Phase 1:** ✅ COMPLETE (2026-05-17). All 5 plans executed end-to-end.
+
+### Phase 3 Plans — Current Status
+
+| Plan | Wave | Status | Live artifact |
+|------|------|--------|---------------|
+| 03.01 | 1 | ✅ | storage_keys Phase 3 block + StorageKeys.gd mirror + ai_baseline.ts + ai_seed.ts + leaderboard_cron Phase 3 + 3 admin RPCs wired; 18 RPCs registered |
+| 03.02 | 2 | ⏳ | read-side RPCs (get_roster, get_aguantadero, get_barra_state, get_recruit_pool + helpers) |
+| 03.03 | 3 | ⏳ | write-side RPCs + real cron handlers + Líder election hook |
+| 03.04a | 4 | ⏳ | Godot foundation (autoload extensions + 9 components) |
+| 03.04b | 5 | ⏳ | Godot screens (HomeScreen + 6 new screens + tutorial) |
+| 03.05 | 6 | ⏳ | validation test suite + runbook + INFRA-NOTES Phase 3 |
 
 ### Phase 2 Plans — Final Status
 
@@ -60,7 +71,7 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 |-------|--------|
 | 1. Foundation | ✅ Complete (2026-05-17) |
 | 2. Heartbeat AFA | ✅ Complete-with-deferral (2026-05-18) — 8/9 plans, 02-07 deferred |
-| 3. Core Loop Laboral | ⏳ Pending |
+| 3. Core Loop Laboral | 🔄 Executing — Wave 1 complete (1/6 plans) |
 | 4. Combate Estratégico | ⏳ Pending |
 | 5. Mundo Social | ⏳ Pending |
 | 6. Monetización + Seasons | ⏳ Pending |
@@ -84,7 +95,11 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 | Cross-user `storageList` token scan in `confirm_password_reset` | Phase 6+ | Acceptable at Phase 2 scale; add secondary index when >1000 pending tokens |
 | Stack-trace redaction in `admin_force_repoll` error path | Phase 6/7 | Tolerable for dev; redact `detail` when `ADMIN_TEST_MODE!=true` for prod |
 
-## Recent Activity (Phase 2 execution)
+## Recent Activity (Phase 3 execution)
+
+- 2026-05-20 — Plan 03.01 (W1) committed: Phase 3 storage constants + client mirror + AI baseline module + seeder + 2 cron leaderboards + 3 admin RPCs. Build: 18 RPCs, 4 cron leaderboards, 121.6 kB IIFE. No Goja AST boot crashes (Phase 2 lesson applied). ADMIN_BEARER rotation still pending.
+
+## Prior Activity (Phase 2 execution)
 
 - 2026-05-18 13:18 — `/gsd-execute-phase 2` started Wave 0.
 - 2026-05-18 ~13:20 — Plan 02-01 (W0) committed: storage_keys + admin_auth + admin_inject_test_fixture. User provisioned Railway env vars (API_FOOTBALL_KEY, FCM_SERVICE_ACCOUNT_B64, FCM_PROJECT_ID, ADMIN_BEARER, RESEND_*, ADMIN_TEST_MODE).

@@ -104,7 +104,7 @@ Plans:
 
 ---
 
-## Phase 3: Core Loop Laboral
+## Phase 3: Core Loop Laboral (Executing — Wave 1 complete)
 
 **Goal:** Jugador vive el ciclo diario: día con partido → turno barra; día sin partido → profesión personal. Aguantadero crece. Pibes se reclutan.
 
@@ -133,7 +133,7 @@ Plans:
 **Plans:** 6 plans
 
 Plans:
-- [ ] 03.01-foundations-PLAN.md — Wave 1: storage_keys + StorageKeys.gd mirror + AI baseline seeder + 2 cron leaderboards (bb_recruit_05_art, bb_mesa_recompute_1h) + 3 admin RPCs (force_recruit_refresh, grant_rep, seed_ai_baseline)
+- [x] 03.01-foundations-PLAN.md — Wave 1: storage_keys + StorageKeys.gd mirror + AI baseline seeder + 2 cron leaderboards (bb_recruit_05_art, bb_mesa_recompute_1h) + 3 admin RPCs (force_recruit_refresh, grant_rep, seed_ai_baseline)
 - [ ] 03.02-read-side-rpcs-PLAN.md — Wave 2: pure helpers (idle_accrual, rank, pibe_factory) + validation extensions + 4 read RPCs (get_roster w/ Phase 1 migration, get_aguantadero w/ auto-bootstrap, get_barra_state w/ debounced Mesa recompute, get_recruit_pool w/ trait_2 redaction)
 - [ ] 03.03-write-side-rpcs-PLAN.md — Wave 3: 6 write RPCs (assign_profession, collect_idle, recruit_pibe w/ optimistic concurrency, upgrade_aguantadero, submit_turno w/ idempotency-marker-first, complete_tutorial w/ elapsed_ms telemetry) + recruit_cron + mesa_cron handlers + seasons.ts Líder election hook + upgrade admin stubs
 - [ ] 03.04a-godot-foundation-PLAN.md — Wave 4: 4 autoload extensions (AppTheme/NakamaService/PlayerStore/FlowRouter, complete_tutorial wrapper plumbs elapsed_ms) + 9 reusable components (PibeCard, RecruitCard, ResourceWidget, RankBadge, TraitChip, EnergiaBar, ProfessionIcon, SkillProgressRing, TurnoModal). Autonomous, no checkpoint.
