@@ -29,7 +29,12 @@ import { rpcAdminInjectTestFixture } from './rpc/admin_inject_test_fixture'; // 
 import { rpcRegisterFcmToken } from './rpc/register_fcm_token';
 import { rpcGetCurrentWindow } from './rpc/get_current_window';
 import { COL_CLUBS, COL_META, SYSTEM_USER_ID } from './storage_keys';
-import { ensureSchedulerLeaderboards, onSchedulerLeaderboardReset } from './scheduler/leaderboard_cron';
+import { ensureSchedulerLeaderboards, onSchedulerLeaderboardReset, ensureLaboralLeaderboards } from './scheduler/leaderboard_cron';
+// Phase 3: Core Loop Laboral — plan 03-01
+import { seedAiBaseline } from './laboral/ai_seed';
+import { rpcAdminForceRecruitRefresh } from './rpc/admin_force_recruit_refresh';
+import { rpcAdminGrantRep } from './rpc/admin_grant_rep';
+import { rpcAdminSeedAiBaseline } from './rpc/admin_seed_ai_baseline';
 
 const CLUBS_SEED_VERSION = 'v3';  // v1+v2 marker collision in production left 265 clubs coexisting; bumping to v3 forces the new wipe-then-seed path to run cleanly
 
@@ -159,5 +164,14 @@ export function InitModule(
   initializer.registerRpc('register_fcm_token', rpcRegisterFcmToken);
   initializer.registerRpc('get_current_window', rpcGetCurrentWindow);
 
-  logger.info('BarraBrava runtime ready: 15 RPCs registered + scheduler armed');
+  // Phase 3: Core Loop Laboral — plan 03-01
+  // CRITICAL: these 5 statements are direct ExpressionStatements in InitModule body.
+  // Do NOT wrap in helpers — Goja AST walker only sees top-level statements (Phase 2 lesson).
+  seedAiBaseline(nk, logger);
+  ensureLaboralLeaderboards(nk, logger);
+  initializer.registerRpc('admin_force_recruit_refresh', rpcAdminForceRecruitRefresh);
+  initializer.registerRpc('admin_grant_rep', rpcAdminGrantRep);
+  initializer.registerRpc('admin_seed_ai_baseline', rpcAdminSeedAiBaseline);
+
+  logger.info('BarraBrava runtime ready: 18 RPCs registered + scheduler armed (4 cron leaderboards)');
 }
